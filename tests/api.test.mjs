@@ -361,6 +361,10 @@ test('VoltAI with a model provider (local fake of the Gemini API): tools run, us
     const c = await boot({ ai: { provider: 'gemini', key: 'k', model: 'broken-model', base, dailyLimit: 50 } });
     r = (await c.call('POST', '/api/ai/chat', { token: (await c.guest()).token, body: { message: 'best phone under 25000' } })).json;
     assert.equal(r.mode, 'demo'); assert.match(r.reply, /Nothing Phone/); assert.ok(r.products.length >= 1, 'a provider failure still gets a useful offline answer');
+    // after a failure the model is skipped for a while, so the next shopper is answered instantly without another provider call
+    const hitsBefore = seen.length;
+    r = (await c.call('POST', '/api/ai/chat', { token: (await c.guest()).token, body: { message: 'best phone under 25000' } })).json;
+    assert.equal(r.mode, 'demo'); assert.match(r.reply, /busy/); assert.equal(seen.length, hitsBefore, 'no provider request while the model is paused');
   } finally { fake.close(); fake.closeAllConnections?.(); }
 });
 
