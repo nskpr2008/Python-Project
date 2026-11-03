@@ -110,7 +110,7 @@
       '<p class="sku">Answers reused from the cache today (no quota spent): ' + (AI.cacheHits || 0) + '.</p><p class="sku">Each shopper may use ' + AI.userDaily + ' AI answers a day. When a limit is reached VoltAI keeps answering from the offline assistant.</p>' +
       '<p><button class="btn' + (AI.ai_enabled ? '' : ' alt') + '" id="ai-kill">' + (AI.ai_enabled ? 'Switch VoltAI off' : 'Switch VoltAI on') + '</button></p></div>' +
       '<div class="panel"><h2 style="font-size:18px;margin-bottom:6px">Tools VoltAI may use</h2>' + TOOLS.map(function (t) {
-        return '<div class="ln"><span><b>' + esc(t.name) + '</b> <small class="sku">' + (t.approval ? 'needs shopper confirmation' : t.level >= 3 ? 'admin only' : 'read only') + '</small></span><button class="chip" data-tool="' + esc(t.name) + '" aria-pressed="' + t.enabled + '">' + (t.enabled ? 'On' : 'Off') + '</button></div>';
+        return '<div class="ln"><span><b>' + esc(t.name) + '</b> <small class="sku">' + (t.approval ? 'needs shopper confirmation' : t.memory ? 'saves a shopper preference' : t.level >= 3 ? 'admin only' : 'read only') + '</small></span><button class="chip" data-tool="' + esc(t.name) + '" aria-pressed="' + t.enabled + '">' + (t.enabled ? 'On' : 'Off') + '</button></div>';
       }).join('') + '</div>';
   }
   document.addEventListener('click', function (e) {

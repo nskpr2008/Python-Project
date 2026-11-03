@@ -30,7 +30,7 @@ Settings live in a private `.env` file next to `server.mjs` (the server loads it
 - **Usage caps, so the key is never used up.** `AI_DAILY_LIMIT` (default 200 model requests a day for the whole store) and `AI_USER_DAILY` (default 25 AI answers per shopper per day). When a cap is reached, or the provider fails, VoltAI answers from the offline assistant instead. The admin panel shows today's usage.
 - **Admin account.** `ADMIN_EMAIL` and `ADMIN_PASSWORD` create (and keep in sync) the admin account. The demo values are `admin@example.com` / `12345`, which only works while `HOST=127.0.0.1`: with any other host the server refuses to start unless the password has 12 or more characters. Change it before using the site anywhere but this computer.
 ```bash
-npm test      # 19 automated API tests (sessions, carts, recommendations, AI and the model provider, checkout and pricing, reviews, admin, security)
+npm test      # 20 automated API tests (sessions, carts, recommendations, AI and the model provider, checkout and pricing, reviews, admin, security)
 npm run test:e2e  # 9 browser tests: a real headless Chrome or Edge drives the page (cart, checkout, gaming page, admin gate, reviews, VoltAI, mobile); set BROWSER_PATH if no browser is found
 npm run images  # re-download product photos from Wikimedia Commons (only needed if you change the catalogue)
 npm run bundle  # refresh the "Project files" tab inside the page after editing source files

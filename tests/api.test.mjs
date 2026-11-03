@@ -461,4 +461,19 @@ test('repairs: bookings are stored on the server, tracking is private, and only 
   const u = (await a.call('GET', `/api/repairs/${r.json.ref}`, { token: g })).json; assert.equal(u.status, 'Estimate provided'); assert.equal(u.step, 4); assert.equal(u.est, 3500); assert.equal(u.note, 'Panel ordered');
 });
 
+test('set_budget tool: validated, remembered, listed in the admin AI tools and offered to the model', async () => {
+  const a = await boot();
+  const g = (await a.guest()).token, adm = (await a.call('POST', '/api/login', { body: { email: 'admin@example.com', password: 'correct-horse-battery' } })).json.token;
+  const tool = (await a.call('GET', '/api/admin/tools', { token: adm })).json.find(t => t.name === 'set_budget');
+  assert.ok(tool && tool.memory && tool.enabled, 'listed for the admin AI control tab');
+  await a.call('POST', '/api/ai/chat', { token: g, body: { message: 'my budget is 35000' } });
+  assert.deepEqual((await a.call('GET', '/api/memory', { token: g })).json.find(m => m.k === 'budget'), { k: 'budget', v: '35000' });
+  const rec = (await a.call('GET', '/api/recommendations?limit=6', { token: g })).json.items, price = new Map((await a.call('GET', '/api/products')).json.map(p => [p.id, p.price]));
+  assert.ok(rec.every(i => price.get(i.id) <= 35000), 'recommendations respect the saved budget');
+  // the tool can be switched off in the admin panel
+  await a.call('POST', '/api/admin/tools/set_budget', { token: adm, body: { enabled: false } });
+  await a.call('POST', '/api/ai/chat', { token: g, body: { message: 'my budget is 90000' } });
+  assert.equal((await a.call('GET', '/api/memory', { token: g })).json.find(m => m.k === 'budget').v, '35000', 'a switched-off tool changes nothing');
+});
+
 test('cleanup', () => { try { fs.rmSync(tmp, { recursive: true, force: true }); } catch { /* temp dir; the OS clears it eventually */ } });

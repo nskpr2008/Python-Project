@@ -343,7 +343,7 @@ export function createApp(opts = {}) {
         if (!LEVEL[body.profile]) fail(400, 'profile not allowed');
         run('update users set profile=? where id=?', body.profile, u.id); return send(req, res, 200, { profile: body.profile });
       }
-      if (p === '/api/admin/tools' && M === 'GET') { need(1); return send(req, res, 200, Object.entries(TOOLS).map(([n, t]) => ({ name: n, level: t.level, approval: !!t.approval, enabled: one('select enabled from tools where name=?', n)?.enabled !== 0 }))); }
+      if (p === '/api/admin/tools' && M === 'GET') { need(1); return send(req, res, 200, Object.entries(TOOLS).map(([n, t]) => ({ name: n, level: t.level, approval: !!t.approval, memory: !!t.memory, enabled: one('select enabled from tools where name=?', n)?.enabled !== 0 }))); }
       if ((m = p.match(/^\/api\/admin\/tools\/(\w+)$/)) && M === 'POST') {
         need(1); if (!TOOLS[m[1]]) fail(404, 'unknown tool');
         run('insert or replace into tools values(?,?)', m[1], body.enabled ? 1 : 0);
