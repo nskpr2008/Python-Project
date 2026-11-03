@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VoltBay – Smart Electronics Store</title>
+<meta name="theme-color" content="#050505">
+<meta name="color-scheme" content="dark">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f5f4;--panel:#fff;--ink:#14181c;--mute:#5d6872;--line:#d9e0de;--teal:#0e7c6b;--teal-ink:#fff;--amber:#f2a900;--red:#c0392b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1417;--panel:#182025;--ink:#e8eeee;--mute:#92a0a8;--line:#2a353c;--teal:#2bc4a8;--teal-ink:#06201b;--amber:#f5b82e;--red:#ff7b6b}}
+:root[data-theme="dark"]{--bg:#0f1417;--panel:#182025;--ink:#e8eeee;--mute:#92a0a8;--line:#2a353c;--teal:#2bc4a8;--teal-ink:#06201b;--amber:#f5b82e;--red:#ff7b6b}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "IBM Plex Sans",system-ui,sans-serif}
+h1,h2,h3,.brand{font-family:Sora,"Segoe UI",sans-serif;letter-spacing:-.01em;margin:0}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;padding:10px 20px;flex-wrap:wrap}
+.brand{font-size:22px;font-weight:700}.brand span{color:var(--teal)}
+nav{display:flex;gap:4px;margin-left:auto}
+nav button,.chip{border:1px solid var(--line);background:transparent;padding:7px 14px;border-radius:999px}
+nav button[aria-pressed=true],.chip[aria-pressed=true]{background:var(--teal);color:var(--teal-ink);border-color:var(--teal)}
+.cartbtn{background:var(--ink);color:var(--bg);border:0;padding:8px 14px;border-radius:8px;font-weight:500}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+.hero{display:grid;gap:12px;margin-bottom:24px}
+.hero h1{font-size:clamp(28px,5vw,46px);line-height:1.08;max-width:18ch}
+.search{display:flex;gap:8px;max-width:560px}
+.search input{flex:1;padding:12px 14px;border:2px solid var(--ink);border-radius:8px;background:var(--panel)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.card .pic{position:relative;color:var(--teal);height:128px;display:grid;place-items:center;background:var(--bg);border-radius:6px}
+.card h3{font-size:16px}.sku{color:var(--mute);font-size:13px}
+.price{font-weight:500;font-size:18px}
+.tag{font-size:13px;font-weight:500}.ok{color:var(--teal)}.low{color:var(--amber)}.out{color:var(--red)}
+.btn{background:var(--teal);color:var(--teal-ink);border:0;border-radius:8px;padding:9px 14px;font-weight:500}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.stat b{display:block;font:700 26px Sora,sans-serif}.stat span{color:var(--mute);font-size:14px}
+.stat.warn{border-color:var(--amber);border-width:2px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:16px}
+.tbl{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:620px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);font-size:15px}th{color:var(--mute);font-weight:500}
+td input,td select{width:78px;padding:5px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+td select{width:auto}
+.bar{display:grid;grid-template-columns:120px 1fr 80px;gap:10px;align-items:center;margin:8px 0;font-size:14px}
+.bar i{display:block;height:14px;background:var(--teal);border-radius:3px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
+.row label{display:grid;gap:3px;font-size:13px;color:var(--mute)}
+.row input,.row select{padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+aside{position:fixed;right:0;top:0;bottom:0;width:min(380px,100%);background:var(--panel);border-left:1px solid var(--line);z-index:10;padding:20px;transform:translateX(100%);transition:transform .2s;overflow:auto}
+aside.open{transform:none}
+.ln{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.q button{width:26px;height:26px;border-radius:6px;border:1px solid var(--line);background:transparent}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:20;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+.sub{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.hide{display:none}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-top:6px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 6px;color:var(--teal);display:grid;justify-items:center;gap:4px}
+.tile svg{width:64px;height:64px}.tile span{color:var(--ink);font-size:14px}
+.card .pic svg{width:96px;height:96px}
+.lw{display:flex;gap:10px;align-items:center}.th{display:grid;place-items:center;width:46px;height:46px;border-radius:8px;flex:none;font-style:normal}.th svg{width:36px;height:36px}
+.heart{position:absolute;top:4px;right:4px;border:0;background:transparent;font-size:22px;color:var(--red);line-height:1}
+.banner{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:center;background:linear-gradient(135deg,#0b2f33,#0e7c6b);color:#fff;border-radius:16px;padding:28px 32px;overflow:hidden}
+.banner h1{color:#fff;margin-bottom:10px}.banner p{margin:0;color:#cfeee8;max-width:40ch}.banner svg{width:100%;max-height:240px}
+.promos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:26px}
+.promo{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+.promo svg{width:96px;height:96px;flex:none}.promo b{display:block;font:700 20px Sora,sans-serif;color:var(--ink);margin-bottom:4px}.promo small{display:block;color:var(--mute);font-size:14px}
+.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+.perk{display:flex;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+.perk svg{width:30px;height:30px;color:var(--teal);flex:none}.perk b{display:block;font-weight:500}.perk span{color:var(--mute);font-size:14px}
+footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--mute);font-size:14px}
+@media (max-width:700px){.banner{grid-template-columns:1fr;padding:20px}}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:30;display:none;align-items:center;justify-content:center;padding:16px}#modal.open{display:flex}
+.mbox{background:var(--panel);border-radius:14px;max-width:640px;width:100%;max-height:90vh;overflow:auto;padding:22px;display:grid;grid-template-columns:200px 1fr;gap:18px}
+.big{border-radius:12px;display:grid;place-items:center;min-height:200px}.big svg{width:150px;height:150px}
+@media (max-width:560px){.mbox{grid-template-columns:1fr}}
+.stars{color:var(--amber);letter-spacing:2px;font-size:14px;margin:0}
+.badge{position:absolute;left:8px;top:8px;background:var(--amber);color:#14181c;font-size:12px;font-weight:500;padding:2px 8px;border-radius:999px}
+.prog{height:8px;background:var(--bg);border-radius:99px;overflow:hidden;margin:6px 0 2px}.prog i{display:block;height:100%;background:var(--teal)}
+.themebtn{border:1px solid var(--line);background:transparent;border-radius:8px;padding:7px 10px}
+.card{transition:box-shadow .15s}[hidden]{display:none!important}.perk[aria-pressed]{cursor:pointer;font:inherit;color:inherit}
+:root:not([data-theme="light"]),:root[data-theme="dark"]{--bg:#070d1a;--panel:#0f1b30;--ink:#e9f1fb;--mute:#8fa3bd;--line:#1c2e4a;--teal:#19e6c1;--teal-ink:#041a16;--amber:#ffbe3d;--red:#ff6b7d}
+body{background:radial-gradient(1000px 500px at 80% -10%,rgba(25,230,193,.10),transparent),var(--bg)}
+header{backdrop-filter:blur(10px)}
+.btn{transition:transform .12s,box-shadow .2s}.btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 18px rgba(25,230,193,.28)}.btn:active{transform:scale(.97)}
+.card:hover{border-color:var(--teal)}.card .pic svg{transition:transform .25s}.card:hover .pic svg{transform:scale(1.08)}
+.banner{background:linear-gradient(135deg,#06112a,#0b3b46 60%,#0e7c6b)}.banner .btn.alt{color:#fff;border-color:#ffffff66}
+.btns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.sec{margin-top:26px}.sec h2{font-size:22px;margin-bottom:10px}.hrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.mini{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:4px;align-content:start}.mini .pic{height:90px;display:grid;place-items:center;border-radius:8px;cursor:pointer}.mini svg{width:64px;height:64px}
+.cd{font:700 16px Sora,sans-serif;color:var(--amber);margin-left:8px}.off{color:var(--teal);font-weight:500}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px;margin-bottom:18px}.cols button{display:block;background:none;border:0;padding:3px 0;color:var(--mute);text-align:left}.cols button:hover{color:var(--teal)}
+footer{border-top:1px solid var(--line);padding-top:26px}
+@media (prefers-reduced-motion:reduce){.btn,.card .pic svg{transition:none}}
+.aib{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:9;border:0;border-radius:999px;padding:14px 18px;background:linear-gradient(135deg,var(--teal),#3b82f6);color:#041a16;font-weight:500;box-shadow:0 8px 24px rgba(25,230,193,.35)}
+.aip{position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:9;width:min(380px,calc(100vw - 36px));height:min(540px,70vh);background:var(--panel);border:1px solid var(--line);border-radius:16px;display:none;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.45)}.aip.open{display:flex}
+.aih{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-family:Sora,sans-serif;font-weight:700}
+#ailog{flex:1;overflow:auto;padding:12px;display:grid;gap:8px;align-content:start}
+.m{padding:9px 12px;border-radius:12px;max-width:92%;font-size:15px}.m.b{background:var(--bg);border:1px solid var(--line)}.m.u{background:var(--teal);color:var(--teal-ink);justify-self:end}.m p{margin:6px 0 0}.typing{opacity:.6}
+.pl{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:6px;font-size:14px}.pl .btn,.pl .chip{padding:4px 10px}
+.aichips{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}.aichips .chip{font-size:13px;padding:4px 10px}
+.aif{display:flex;gap:6px;padding:10px;border-top:1px solid var(--line)}.aif input{flex:1;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+:root:not([data-theme="light"]),:root[data-theme="dark"]{--bg:#050505;--panel:#111318;--ink:#fff;--mute:#a8b0be;--line:#252a35;--teal:#1a6fff;--teal-ink:#fff}
+:root[data-theme="light"]{--bg:#050505;--panel:#111318;--ink:#fff;--mute:#a8b0be;--line:#252a35;--elev:#171b24;--bg2:#0b0d12;--faint:#737d8c;--teal:#1a6fff;--teal-ink:#fff;--amber:#ffbe3d;--red:#ff6b7d}
+body{background:radial-gradient(1000px 520px at 80% -10%,rgba(0,102,255,.18),transparent),var(--bg)}
+.banner{background:linear-gradient(135deg,#050505,#0a1a3d 55%,#0057e0)}
+.btn{background:linear-gradient(135deg,#0057e0,#1a6fff);color:#fff}.btn:hover:not(:disabled){box-shadow:0 6px 18px rgba(0,102,255,.4)}
+.aib{background:linear-gradient(135deg,#0057e0,#00a3ff);color:#fff;box-shadow:0 8px 24px rgba(0,102,255,.4)}
+:root:not([data-theme="light"]),:root[data-theme="dark"]{--elev:#171b24;--bg2:#0b0d12;--faint:#737d8c}
+header{background:var(--bg2)}
+aside,.mbox,.aip{background:var(--elev)}
+.sku{color:var(--faint)}
+.btn{background:linear-gradient(135deg,#0059e6,#0066ff 60%,#0a7aff)}
+.cartbtn{background:linear-gradient(135deg,#0059e6,#0066ff);color:#fff}
+.banner p{color:#c9d6ea}
+.banner svg [fill="#0b2f33"]{fill:#0b1530}.banner svg [fill="#2bc4a844"]{fill:#008cff55}.banner svg [stroke="#f2a900"]{stroke:#00a3ff}.banner svg rect[fill="#f2a900"]{fill:#008cff}.banner svg [fill="#f2a90033"]{fill:#00a3ff33}.banner svg circle[fill="#f2a900"]{fill:#6cc6ff}
+.card:hover,.mini:hover{border-color:#008cff;box-shadow:0 0 0 1px rgba(0,140,255,.5),0 10px 28px rgba(0,102,255,.25)}
+.tile span{font-size:12.5px;line-height:1.25;text-align:center}.tile svg{width:44px;height:44px}
+.tile:hover,.promo:hover{box-shadow:0 0 0 1px #008cff,0 8px 22px rgba(0,102,255,.25)}
+.stat:hover{border-color:#0066ff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#008cff;box-shadow:0 0 0 3px rgba(0,140,255,.3)}
+:focus-visible{outline:3px solid #00a3ff;outline-offset:2px}
+nav button[aria-pressed=true],.chip[aria-pressed=true]{background:linear-gradient(135deg,#0059e6,#0066ff);color:#fff;border-color:#008cff;box-shadow:0 0 12px rgba(0,163,255,.4)}
+.bar i,.prog i{background:linear-gradient(90deg,#0066ff,#00a3ff);box-shadow:0 0 10px rgba(0,163,255,.35)}
+aside{box-shadow:-10px 0 40px rgba(0,102,255,.18)}
+.mbox,.aip{border:1px solid var(--line);box-shadow:0 0 0 1px rgba(0,140,255,.25),0 24px 60px rgba(0,0,0,.6)}
+#toast{background:var(--elev);color:var(--ink);border:1px solid #008cff;box-shadow:0 0 18px rgba(0,140,255,.35)}
+::selection{background:#0066ff;color:#fff}
+*{scrollbar-color:#252a35 transparent}.card:hover{box-shadow:0 6px 18px rgba(0,0,0,.12)}
+@media (prefers-reduced-motion:reduce){aside,#toast{transition:none}}
+.adm[hidden]{display:none!important}.stars{color:var(--amber,#f5a623);font-size:14px;margin:2px 0}.stars b{color:var(--ink)}.stars small{color:var(--mute)}.plimg{width:44px;height:44px;object-fit:contain;background:#fff;border-radius:8px;flex:none}.rev{border-top:1px solid var(--line);padding:8px 0}.rev h4{margin:0 0 2px;font-size:15px}.rev small{color:var(--mute)}.revform{display:grid;gap:6px;margin-top:8px}.revform input,.revform textarea,.revform select{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}.revbar{display:grid;grid-template-columns:28px 1fr 28px;gap:6px;align-items:center;font-size:12px}.revbar i{display:block;height:6px;border-radius:3px;background:var(--amber,#f5a623)}</style>
+
+<style id="gaming1">
+:root{--acc:#0066ff;--acc2:#008cff;--acc3:#00a3ff}
+.eyebrow{letter-spacing:.2em;color:var(--acc3);font:500 12px Sora,sans-serif}
+.banner h1{max-width:16ch;text-transform:uppercase}
+.banner .btns{display:flex;flex-wrap:wrap;gap:8px}
+.banner{background:radial-gradient(600px 300px at 85% 40%,color-mix(in srgb,var(--acc) 55%,transparent),transparent),linear-gradient(135deg,#050505,#0b0d12)}
+.btn,.cartbtn,nav button[aria-pressed=true],.chip[aria-pressed=true],.aib{background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 85%,#000),var(--acc) 60%,var(--acc2))!important;color:#fff!important}
+.btn.alt{background:transparent!important;border:1px solid var(--acc2)}
+.bar i,.prog i{background:linear-gradient(90deg,var(--acc),var(--acc3))!important}
+.card:hover,.mini:hover,.tile:hover{border-color:var(--acc2)!important}
+.brand span{color:var(--acc2)}
+.themes{display:flex;gap:6px;align-items:center}
+.themes button{width:20px;height:20px;border-radius:50%;border:2px solid #252a35;padding:0}
+.themes button[aria-pressed=true]{border-color:#fff;box-shadow:0 0 8px var(--acc)}
+.adm{position:relative}.adm summary{cursor:pointer;border:1px solid var(--line);padding:7px 14px;border-radius:999px;list-style:none}
+.adm div{position:absolute;right:0;top:110%;background:var(--elev);border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:6px;min-width:210px;z-index:8}
+</style>
+<style id="cu">.cu{display:grid;grid-template-columns:1.1fr 1fr;gap:20px}.cu2{margin-top:20px}.cuv{border:1px solid var(--line);border-radius:14px;overflow:hidden}.cuv svg{display:block;width:100%}.cu .row{display:flex;flex-wrap:wrap;gap:8px}.cu label{display:grid;gap:2px;font-size:14px}.cu .ln label{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.cu input,.cu select{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px}.cu input[type=checkbox]{padding:0}
+.cu-rb{animation:cuh 5s linear infinite}.cu-br{animation:cub 2.4s ease-in-out infinite}@keyframes cuh{to{filter:hue-rotate(360deg)}}@keyframes cub{50%{opacity:.5}}@media(max-width:820px){.cu{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.cu-rb,.cu-br{animation:none}}</style>
+<style id="ar">.ar-hero{border:1px solid var(--line);border-radius:16px;padding:32px 24px;margin-bottom:20px;background:radial-gradient(600px 260px at 85% 30%,color-mix(in srgb,var(--acc) 50%,transparent),transparent),linear-gradient(135deg,#050505,#0b0d12)}.ar-hero h1{font-size:clamp(32px,6vw,56px)}.ar-hero p{max-width:58ch;color:#c9d6ea}.ar-hero .btns{display:flex;flex-wrap:wrap;gap:8px}#arena h2{font-size:22px;margin:26px 0 10px}.ar-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}.ar-cat{text-align:left;display:grid;gap:4px;cursor:pointer}.ar-cat em{font-style:normal;color:var(--acc3);font-size:14px}.ar-cat:hover,.ar-cat[aria-pressed=true]{border-color:var(--acc2)}.ar-feat{display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center}.ar-feat .pic{height:120px;border-radius:12px;display:grid;place-items:center}.ar-feat svg{width:70px;height:70px}#vbsel label,.cu label{min-width:0;max-width:100%}#vbsel select,.cu select{max-width:100%;width:100%}
+.ar-setup ul{margin:8px 0;padding-left:18px}.ar-setup li{margin:4px 0}.ar-setup a{color:inherit}.ar-setup .btn{margin-left:8px}.ar-cat{cursor:pointer}
+@media(max-width:820px){header nav{flex-wrap:wrap;margin-left:0;width:100%}.adm div{right:auto;left:0}.themes{width:100%}}
+/* product photos, details and recommendation reasons */
+.pic:has(>img){padding:0;overflow:hidden;background:#fff!important}
+.pic>img,.th>img,.big>img{width:100%;height:100%;object-fit:contain;display:block;background:#fff}
+.pic:has(>img),.th:has(>img){position:relative}.pic>img,.th>img{position:absolute;inset:0}
+.pic:has(>img) .badge,.pic:has(>img) .heart{z-index:1}
+.th:has(>img){background:#fff!important;overflow:hidden}.th>img{object-fit:cover}
+.big:has(>img){background:#fff!important;padding:8px;overflow:hidden}.big>img{max-height:340px}
+.card:hover .pic>img,.mini:hover .pic>img{transform:scale(1.04)}.pic>img{transition:transform .25s}
+.sum{color:var(--mute);font-size:13px;line-height:1.35;min-height:2.7em}
+.why{color:var(--teal);font-size:12px;line-height:1.3}
+.mini .why{min-height:2.6em}
+.mbox{max-width:760px}.mbox>div{min-width:0}.mbox p,.mbox li,.mbox td{overflow-wrap:anywhere}
+.spec{width:100%;min-width:0!important;border-collapse:collapse;font-size:13px;margin:6px 0;table-layout:fixed}.spec th{text-align:left;width:38%;color:var(--mute);font-weight:400;padding:3px 8px 3px 0;vertical-align:top}.spec td{padding:3px 0}
+.hl{margin:6px 0 8px 18px;padding:0;font-size:13px}
+.credit{color:var(--mute);font-size:11px;margin-top:6px}.credit a{color:inherit}
+.acct label{display:grid;gap:4px;font-size:13px;margin:8px 0}.acct input{padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.acct .err{color:#d33;font-size:13px;min-height:1.2em}
+.pl img{width:38px;height:38px;object-fit:cover;border-radius:6px;margin-right:8px;vertical-align:middle;background:#fff}
+.pl .why{margin-top:2px}
+#acctbtn{white-space:nowrap}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Volt<span>Bay</span></div>
+  <nav aria-label="Mode">
+    <button id="m-shop" aria-pressed="true">Home</button>
+    <button id="m-vb" aria-pressed="false">VoltBuild</button>
+    <button id="m-cust" aria-pressed="false">VoltCustom</button>
+    <button id="m-gear" aria-pressed="false">Gaming</button>
+    <button id="m-deals" aria-pressed="false">Deals</button>
+    <button id="m-rep" aria-pressed="false">Book a Repair</button>
+    <details class="adm" hidden><summary>Admin</summary><div><button id="m-mgr" aria-pressed="false">Manage store</button><button id="m-files" aria-pressed="false">Project files</button></div></details>
+  </nav>
+  <div class="themes" role="group" aria-label="Accent theme"></div>
+  
+  <button class="chip" id="acctbtn" aria-haspopup="dialog">Sign in</button>
+  <button class="cartbtn" id="cartbtn">Cart (0)</button>
+</header>
+
+<main>
+<section id="shop">
+  <div class="hero">
+    <div class="banner"><div><small class="eyebrow">GAMING &amp; CUSTOM PC</small><h1>BUILD YOUR DREAM. DOMINATE EVERY GAME.</h1><p>Explore powerful gaming PCs, premium components and custom setups designed around your performance goals and budget.</p><div class="btns"><button class="btn" id="shopnow">BUILD YOUR PC</button><button class="btn alt" id="gear">EXPLORE GAMING GEAR</button><button class="btn alt" id="comps">BROWSE PC COMPONENTS</button><button class="btn alt" id="exdeals">Explore Deals</button></div></div><svg viewBox="0 0 400 240" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="290" cy="125" r="105" fill="#ffffff14" stroke="none"/><circle cx="110" cy="36" r="20" fill="#f2a900" stroke="none"/><rect x="102" y="54" width="16" height="10" rx="3" fill="#fff" stroke="none"/><rect x="40" y="78" width="190" height="116" rx="8" fill="#0b2f33"/><rect x="52" y="90" width="166" height="92" rx="3" fill="#f2a90033" stroke="none"/><path d="M66 106h60M66 122h100M66 138h80" stroke="#f2a900"/><path d="M20 204h230l-14 14H34z" fill="#0b2f33"/><rect x="250" y="40" width="70" height="140" rx="12" fill="#0b2f33"/><rect x="258" y="62" width="54" height="96" rx="3" fill="#2bc4a844" stroke="none"/><path d="M274 52h22"/><circle cx="285" cy="169" r="4"/><rect x="335" y="44" width="42" height="48" rx="12" fill="#0b2f33"/><path d="M345 44l4-20h20l4 20M345 92l4 20h20l4-20M356 58v10l6 4"/><path d="M318 196v-14a30 30 0 0 1 60 0v14"/><rect x="310" y="192" width="14" height="28" rx="6" fill="#f2a900"/><rect x="372" y="192" width="14" height="28" rx="6" fill="#f2a900"/></svg></div>
+    <div class="search"><input id="q" type="search" list="sug" placeholder="Search by name or SKU" aria-label="Search products"><datalist id="sug"></datalist></div>
+    <div class="tiles" id="tiles"></div>
+    <div class="row" style="margin-top:8px"><label>Sort<select id="sort"><option value="">Featured</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></label><label style="grid-auto-flow:column;align-items:center;gap:6px"><input type="checkbox" id="instock"> In stock only</label><button class="chip" id="wishbtn" aria-pressed="false">Saved items</button><button class="chip" id="cmpbtn">Compare (0)</button></div>
+  </div>
+  <section class="sec" id="deals"></section><section class="sec" id="recent"></section>
+  <div class="chips" id="chips"></div>
+  <div id="deptinfo"></div>
+  <div class="grid" id="grid"></div>
+  <div class="promos" id="promos"></div>
+  <div class="perks" id="addons"></div>
+  <div class="perks" hidden>
+    <div class="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h16v13H3zM19 13h6l4 4v4h-10"/><circle cx="9" cy="23" r="2.5"/><circle cx="23" cy="23" r="2.5"/></svg><div><b>Free delivery</b><span>On orders above ₹999</span></div></div>
+    <div class="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3l11 4v8c0 7-5 12-11 14C10 27 5 22 5 15V7z"/><path d="M11 16l4 4 7-8"/></svg><div><b>1-year warranty</b><span>On every device</span></div></div>
+    <div class="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12h14a6 6 0 0 1 0 12H10M8 12l5-5M8 12l5 5"/></svg><div><b>Easy returns</b><span>Within 7 days</span></div></div>
+    <div class="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="14" width="20" height="14" rx="3"/><path d="M11 14V10a5 5 0 0 1 10 0v4"/></svg><div><b>Secure payment</b><span>UPI, cards and cash</span></div></div>
+  </div>
+</section>
+
+<section id="mgr" class="hide">
+  <div class="sub" id="subnav"></div>
+
+  <div id="t-over">
+    <div class="stats" id="stats"></div>
+    <div class="panel"><h2 style="font-size:18px;margin-bottom:6px">Sales by category</h2><div id="bars"></div></div>
+    <div class="panel"><h2 style="font-size:18px;margin-bottom:6px">Top sellers</h2><div id="top"></div></div>
+    <div class="panel"><h2 style="font-size:18px;margin-bottom:6px">Needs restocking</h2><div id="lowlist"></div></div>
+  </div>
+
+  <div id="t-inv" class="hide">
+    <div class="panel"><h2 style="font-size:18px;margin-bottom:10px">Add a product</h2>
+      <div class="row">
+        <label>Name<input id="n-name"></label>
+        <label>Category<select id="n-cat"></select></label>
+        <label>Price (₹)<input id="n-price" type="number" min="0" style="width:100px"></label>
+        <label>Stock<input id="n-stock" type="number" min="0" style="width:80px"></label>
+        <label>Reorder at<input id="n-re" type="number" min="0" value="5" style="width:80px"></label>
+        <button class="btn" id="n-add">Add product</button>
+        <button class="btn alt" id="n-csv">Copy stock list for Excel</button>
+      </div></div>
+    <div class="panel"><h2 style="font-size:18px;margin-bottom:6px">Import products from CSV</h2><p class="sku">Columns: Name, Category, Price, Stock, Reorder at. Category can be any of the 14 departments or an existing category. Comma or tab separated; a header row is optional. Invalid rows are skipped and listed, nothing is guessed.</p><div class="row"><label>CSV file<input type="file" id="csvf" accept=".csv,.tsv,.txt"></label></div><textarea id="csvt" rows="5" style="width:100%;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)" aria-label="CSV text"></textarea><button class="btn" id="csvgo">Import</button><div id="csvr" class="sku" style="margin-top:8px" aria-live="polite"></div></div>
+    <div class="panel tbl"><table><thead><tr><th>Product</th><th>SKU</th><th>Price (₹)</th><th>Stock</th><th>Reorder at</th><th></th></tr></thead><tbody id="inv"></tbody></table></div>
+  </div>
+
+  <div id="t-bill" class="hide">
+    <div class="panel"><h2 style="font-size:18px;margin-bottom:10px">Counter billing</h2>
+      <div class="row">
+        <label>SKU (press Enter)<input id="b-sku" placeholder="Scan or type, e.g. VB-100" style="width:190px"></label>
+        <label>Product<select id="b-prod" style="min-width:240px"></select></label>
+        <label>Qty<input id="b-qty" type="number" min="1" value="1" style="width:70px"></label>
+        <button class="btn" id="b-add">Add to bill</button>
+      </div>
+      <div id="bill" style="margin-top:14px"></div>
+    </div>
+  </div>
+
+  <div id="t-cmd" class="hide"><div class="panel"><h2 style="font-size:18px;margin-bottom:6px">VoltAI Command Centre <small class="sku">Demo mode</small></h2><p class="sku" style="margin:0 0 10px">Answers come from fixed rules over the store data loaded in this page (orders, stock and repairs from the server). This is not an AI model, and nothing is published or changed from here.</p><div class="aichips" id="cmdchips" style="padding:0 0 8px"></div><div id="cmdlog" style="display:grid;gap:8px;margin-bottom:10px" aria-live="polite"></div><div class="row"><label style="flex:1">Ask a business question<input id="cmdq" style="width:100%" placeholder="e.g. Which products are low on stock?"></label><button class="btn" id="cmdsend">Ask</button></div></div></div>
+  <div id="t-sec" class="hide"><div class="panel" style="border-color:var(--amber)" role="note"><h2 style="font-size:18px;margin-bottom:6px">VoltShield AI: Demo Security Mode</h2><p style="margin:0">These checks use simple rules on the store’s recorded orders. No real traffic, bots, logins or payments are monitored, and no attack or protection statistics are shown. Live protection needs a backend.</p></div>
+  <div class="panel"><h2 style="font-size:18px;margin-bottom:6px">Order risk review</h2><div class="row"><label>Risk level<select id="secf"><option value="">All</option><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></label></div><p class="sku">Flags are for human review only. Nothing is blocked automatically.</p><div class="tbl"><table><thead><tr><th>Order</th><th>Total</th><th>Risk</th><th>Reason</th><th>Review</th></tr></thead><tbody id="secl"></tbody></table></div></div>
+  <div class="panel"><h2 style="font-size:18px;margin-bottom:6px">Password strength checker</h2><div class="row"><label>Try a password<input id="pwchk" type="password" autocomplete="off"></label></div><p id="pwres" aria-live="polite"></p><p class="sku">Checked in your browser. Nothing is stored or sent.</p></div>
+  <div class="panel tbl"><h2 style="font-size:18px;margin-bottom:6px">Security status</h2><table><tbody id="sectbl"></tbody></table></div></div>
+  <div id="t-rpr" class="hide"><div class="panel"><div class="row"><label>Search by repair ID<input id="repq" placeholder="RP-1001"></label></div></div><div class="panel tbl"><table><thead><tr><th>Request</th><th>Customer</th><th>Device</th><th>Problem</th><th>Status</th><th>Estimate (₹)</th><th>Inspection notes</th></tr></thead><tbody id="repl"></tbody></table></div></div>
+  <div id="t-act" class="hide"><div class="panel"><p class="sku">Local demo activity log. Entries are recorded in this browser when actions happen here.</p><div class="row"><label>Category<select id="actf"><option value="">All</option><option>Orders</option><option>Inventory</option><option>Repairs</option><option>Security</option></select></label><label>Search<input id="actq" placeholder="Search activity"></label><button class="btn alt" id="actr">Refresh</button></div></div><div class="panel" id="actl"></div></div>
+  <div id="t-ord" class="hide">
+    <div class="panel tbl"><table><thead><tr><th>Order</th><th>Date</th><th>Items</th><th>Total</th><th>Source</th><th>Status</th></tr></thead><tbody id="ords"></tbody></table></div>
+  </div>
+</section>
+<section id="arena" class="hide"></section>
+
+<section id="cust" class="hide"></section>
+
+<section id="files" class="hide">
+  <div class="panel"><h2 style="font-size:20px;margin-bottom:6px">VoltBay 2.0 project files</h2>
+  <p class="sku">Visible to signed-in admins only. A copy of the server, tests and catalogue this store runs on (refresh it with <code>npm run bundle</code>). The private <code>.env</code> file is never included.</p>
+  <div class="chips" id="fchips"></div>
+  <div class="row"><button class="btn" id="fcopy">Copy</button><button class="btn alt" id="fdl">Download this file</button></div></div>
+  <div class="panel"><pre id="fview" style="margin:0;overflow:auto;max-height:70vh;white-space:pre;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace" tabindex="0"></pre></div>
+</section>
+
+<section id="vb" class="hide">
+  <div class="panel"><h2 style="font-size:22px;margin-bottom:6px">VoltBuild: custom PC builder</h2>
+  <p class="sku">Demo mode. The parts and prices below are made-up samples, not real products. The compatibility rules are real, but here they run in your browser; the production version runs them on the server against your real catalogue.</p></div>
+  <div class="panel"><div class="row" id="vbsel"></div><div class="row" style="margin-top:10px"><label>Budget (₹, optional)<input id="vbbud" type="number" min="0"></label></div></div>
+  <div class="panel" id="vbrep"></div>
+  <button class="btn alt" id="vbcopy">Copy build list</button>
+</section>
+
+<section id="rep" class="hide">
+  <div class="banner" style="grid-template-columns:1fr"><div><h1 style="font-size:clamp(26px,4vw,38px)">Book a Repair</h1><p>Request a repair for laptops, phones, tablets, desktops and gaming accessories.</p></div></div>
+  <p class="panel" style="border-color:var(--amber);margin-top:16px" role="note"><b>Demo service.</b> Bookings are saved only in this browser. No real appointment is made and no technician is notified.</p>
+  <div class="panel"><h2 style="font-size:18px;margin-bottom:10px">Repair request</h2>
+  <form id="repform" novalidate><div class="row">
+   <label>Name<input id="rfn" autocomplete="name"></label><label>Mobile number<input id="rfp" inputmode="numeric" maxlength="10"></label><label>Email<input id="rfe" type="email"></label>
+   <label>Device<select id="rfc"><option>Laptop</option><option>Smartphone</option><option>Tablet</option><option>Desktop computer</option><option>Gaming accessory</option><option>Other electronics</option></select></label>
+   <label>Brand<input id="rfb"></label><label>Model<input id="rfm"></label>
+   <label>Service<select id="rfs"><option>Diagnosis</option><option>General repair</option><option>Screen replacement</option><option>Battery replacement</option><option>Software fix</option></select></label>
+   <label>Pickup or drop-off<select id="rfk"><option>Pickup from my address</option><option>I will drop it off</option></select></label>
+   <label>Preferred date<input id="rft" type="date"></label></div>
+   <label style="display:grid;gap:3px;font-size:13px;color:var(--mute);margin:10px 0">Problem description<textarea id="rfd" rows="3" style="padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit"></textarea></label>
+   <p id="reperr" role="alert" style="color:var(--red);margin:0 0 8px"></p><button class="btn" type="submit">Submit request</button></form>
+   <div id="repok" class="m b" style="margin-top:12px;max-width:none" hidden></div></div>
+  <div class="panel"><h2 style="font-size:18px;margin-bottom:10px">Track a repair</h2><div class="row"><label>Repair ID<input id="trkid" placeholder="RP-1001"></label><label>Last 4 digits of your phone<input id="trkph" maxlength="4" inputmode="numeric" placeholder="optional on the same device" style="width:150px"></label><button class="btn alt" id="trkbtn">Check status</button></div><div id="trkres" style="margin-top:10px"></div></div>
+</section>
+</main>
+
+<footer><div class="cols"><div><b style="color:var(--ink)">About VoltBay</b><p>A demo electronics store with live stock tracking. Checkout here does not take real payments.</p></div><div><b style="color:var(--ink)">Contact</b><p>support@voltbay.example<br>Mon to Sat, 10 am to 7 pm</p></div><div><b style="color:var(--ink)">Help</b><button data-pol="faq">FAQs</button><button data-pol="ship">Shipping policy</button><button data-pol="ret">Return and refund policy</button></div><div><b style="color:var(--ink)">Legal</b><button data-pol="priv">Privacy policy</button><button data-pol="terms">Terms and conditions</button></div></div>Prices are in rupees and indicative. Your cart and recently viewed items are saved to your session so you can come back to them. Orders and stock here are demo data. Product photos: Wikimedia Commons contributors, <a href="#" id="credits">licences and credits</a>.</footer>
+<aside id="drawer" aria-label="Cart">
+  <div class="ln" style="border:0"><h2 style="font-size:20px">Your cart</h2><button class="btn alt" id="close">Close</button></div>
+  <div id="cartlines"></div>
+  <div id="addlines"></div>
+  <div class="ln" style="border:0"><input id="pin" inputmode="numeric" maxlength="6" placeholder="Delivery PIN code" aria-label="PIN code" style="flex:1;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg)"><button class="btn alt" id="pinbtn">Check</button></div><div id="pinres" class="sku"></div>
+  <div id="ship"></div>
+  <div class="ln" style="border:0"><input id="cpn" placeholder="Coupon code (try VOLT10)" style="flex:1;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg)"><button class="btn alt" id="cpnbtn">Apply</button></div>
+  <div class="ln" style="font-weight:500"><span>Total</span><span id="carttotal">₹0</span></div>
+  <p style="margin:14px 0 6px"><input id="cname" placeholder="Name for the order" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)"></p>
+  <button class="btn" id="checkout" style="width:100%">Place order</button>
+</aside>
+<button class="aib" id="aibtn" aria-expanded="false">✦ Ask VoltAI</button>
+<section class="aip" id="aip" aria-label="VoltAI shopping assistant"><div class="aih"><span>VoltAI <small class="sku">Demo mode, rule-based</small></span><button class="chip" id="aix" aria-label="Close assistant">Close</button></div><div id="ailog" aria-live="polite"></div><div class="aichips" id="aichips"></div><div class="aif"><input id="aiq" placeholder="Ask about products, budget or setups" aria-label="Message VoltAI"><button class="btn" id="aisend">Send</button></div></section>
+<div id="modal" role="dialog" aria-modal="true" aria-label="Details"><div class="mbox" id="mbox"></div></div>
+<div id="toast" role="status"></div>
+
+<script>
+var CATS=["Phones","Laptops","Headsets","Audio","Wearables","Accessories","Smart home"];
+var A='<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+var ICON={"Phones":A+'<rect x="26" y="6" width="28" height="68" rx="6"/><path d="M36 13h8"/><circle cx="40" cy="65" r="3"/><path d="M32 24h16M32 32h10" opacity=".5"/></svg>',"Laptops":A+'<rect x="14" y="16" width="52" height="38" rx="4"/><path d="M6 62h68l-5 7H11z"/><path d="M24 26h20M24 34h30" opacity=".5"/></svg>',"Audio":A+'<path d="M16 50V40a24 24 0 0 1 48 0v10"/><rect x="10" y="46" width="12" height="22" rx="5"/><rect x="58" y="46" width="12" height="22" rx="5"/></svg>',"Wearables":A+'<rect x="24" y="22" width="32" height="36" rx="10"/><path d="M30 22l3-14h14l3 14M30 58l3 14h14l3-14"/><path d="M40 32v9l6 4"/></svg>',"Accessories":A+'<path d="M30 8v16M50 8v16"/><rect x="20" y="24" width="40" height="22" rx="5"/><path d="M40 46v14c0 6 4 10 10 10h10"/></svg>',"Smart home":A+'<path d="M26 50a20 20 0 1 1 28 0c-4 3-5 6-5 10H31c0-4-1-7-5-10z"/><path d="M32 67h16M35 74h10M40 28v10"/></svg>'};
+var COL={"Phones":"#0066ff","Laptops":"#008cff","Audio":"#3d8bff","Wearables":"#66b8ff","Accessories":"#2b7fff","Smart home":"#5b8def"};
+function tint(c){var h=COL[c];return "color:"+h+";background:linear-gradient(135deg,"+h+"33,"+h+"0d)"}
+var F=' fill="currentColor" fill-opacity=".16"';
+var PIC={
+ nova:A+'<rect x="24" y="6" width="32" height="68" rx="8"'+F+'/><rect x="29" y="11" width="16" height="22" rx="5"/><circle cx="34" cy="17" r="3"/><circle cx="34" cy="27" r="3"/><circle cx="40" cy="22" r="3"/><path d="M33 64h14" opacity=".6"/></svg>',
+ pulse:A+'<rect x="24" y="6" width="32" height="68" rx="6"'+F+'/><path d="M35 11h10"/><rect x="30" y="20" width="8" height="8" rx="2"/><rect x="42" y="20" width="8" height="8" rx="2"/><rect x="30" y="34" width="8" height="8" rx="2"/><rect x="42" y="34" width="8" height="8" rx="2"/><circle cx="40" cy="64" r="3"/></svg>',
+ aero:A+'<rect x="14" y="16" width="52" height="38" rx="4"'+F+'/><path d="M6 62h68l-4 6H10z"/><path d="M24 28l9 7-9 7M38 43h14" opacity=".7"/></svg>',
+ study:A+'<rect x="12" y="14" width="56" height="40" rx="3"'+F+'/><path d="M4 62h72v4a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M22 46v-8M32 46v-14M42 46v-10M52 46v-18"/></svg>',
+ wave:A+'<path d="M16 50V40a24 24 0 0 1 48 0v10"/><rect x="10" y="46" width="14" height="24" rx="6"'+F+'/><rect x="56" y="46" width="14" height="24" rx="6"'+F+'/><path d="M31 38a14 14 0 0 1 18 0M34 44a9 9 0 0 1 12 0" opacity=".6"/></svg>',
+ studio:A+'<path d="M14 46V38a26 26 0 0 1 52 0v8"/><rect x="8" y="42" width="16" height="28" rx="7"'+F+'/><rect x="56" y="42" width="16" height="28" rx="7"'+F+'/><path d="M20 30a22 22 0 0 1 40 0" opacity=".5"/></svg>',
+ striker:A+'<path d="M18 46V38a22 22 0 0 1 44 0v8"/><rect x="12" y="42" width="14" height="24" rx="6"'+F+'/><rect x="54" y="42" width="14" height="24" rx="6"'+F+'/><path d="M19 66c0 8 8 10 16 10"/><circle cx="38" cy="76" r="3" fill="currentColor"/></svg>',
+ call:A+'<path d="M20 36v-4a20 20 0 0 1 40 0v4"/><rect x="14" y="34" width="12" height="22" rx="5"'+F+'/><rect x="54" y="34" width="12" height="22" rx="5"'+F+'/><path d="M20 56c0 8 6 10 12 10"/><rect x="30" y="62" width="14" height="8" rx="3"/><path d="M60 56v10M54 70h12" opacity=".6"/></svg>',
+ bass:A+'<path d="M18 40a22 22 0 0 1 44 0"/><rect x="12" y="38" width="12" height="18" rx="5"'+F+'/><rect x="56" y="38" width="12" height="18" rx="5"'+F+'/><path d="M18 56c0 14 14 8 14 20"/></svg>',
+ speaker:A+'<rect x="22" y="12" width="36" height="56" rx="10"'+F+'/><circle cx="40" cy="30" r="6"/><circle cx="40" cy="50" r="9"/><circle cx="40" cy="50" r="3"/></svg>',
+ buds:A+'<circle cx="26" cy="24" r="9"'+F+'/><path d="M26 33v14a4 4 0 0 0 4 4"/><circle cx="54" cy="24" r="9"'+F+'/><path d="M54 33v14a4 4 0 0 1-4 4"/><rect x="18" y="58" width="44" height="14" rx="7"'+F+'/></svg>',
+ neck:A+'<path d="M20 20c-6 20 0 44 20 44s26-24 20-44"/><circle cx="20" cy="18" r="5"'+F+'/><circle cx="60" cy="18" r="5"'+F+'/></svg>',
+ band:A+'<rect x="32" y="22" width="16" height="36" rx="6"'+F+'/><path d="M34 22V6h12v16M34 58v16h12V58"/><path d="M36 34h8M36 40h8M36 46h5" opacity=".7"/></svg>',
+ watch:A+'<circle cx="40" cy="40" r="19"'+F+'/><path d="M32 21l2-13h12l2 13M32 59l2 13h12l2-13"/><path d="M40 28v12l8 5"/></svg>',
+ charger:A+'<rect x="22" y="22" width="36" height="40" rx="6"'+F+'/><path d="M32 22V10M48 22V10M42 33l-6 10h8l-4 10"/></svg>',
+ cable:A+'<rect x="4" y="34" width="14" height="12" rx="3"'+F+'/><path d="M18 40h12c14 0 8-20 20-20s6 40 20 40"/><rect x="66" y="54" width="10" height="12" rx="3"'+F+'/></svg>',
+ bank:A+'<rect x="20" y="12" width="40" height="56" rx="8"'+F+'/><path d="M30 24h20M30 32h20" opacity=".7"/><rect x="30" y="44" width="20" height="10" rx="2"/><path d="M40 12V7"/></svg>',
+ bulbs:A+'<path d="M20 42a11 11 0 1 1 16 0c-2 2-3 3-3 6H23c0-3-1-4-3-6zM44 42a11 11 0 1 1 16 0c-2 2-3 3-3 6H47c0-3-1-4-3-6z"'+F+'/><path d="M24 54h8M48 54h8M30 18a14 14 0 0 1 20 0M34 23a8 8 0 0 1 12 0"/></svg>',
+ cam:A+'<rect x="12" y="22" width="44" height="26" rx="6"'+F+'/><circle cx="34" cy="35" r="8"/><circle cx="34" cy="35" r="3"/><path d="M56 30l12-6v22l-12-6M34 48v12M24 62h20"/></svg>'};
+ICON["Headsets"]=PIC.striker;COL["Headsets"]="#00a3ff";
+var DEPTS=[["Smartphones", "Phones", "Flagship, mid-range, budget, gaming, camera, foldable, 5G and refurbished phones."], ["Laptops and Computers", "Laptops", "Gaming, student, business and 2-in-1 laptops, MacBooks, desktops, mini PCs and all-in-ones."], ["Monitors and Displays", null, "Gaming, 4K, ultrawide, curved, professional, portable and touchscreen monitors."], ["Gaming", null, "Consoles, controllers, gaming keyboards and mice, headsets, chairs, capture cards and VR."], ["Tablets and E-readers", null, "iPads, Android tablets, drawing tablets, e-readers, kids tablets and accessories."], ["TVs and Home Entertainment", null, "LED, QLED, OLED and Mini-LED TVs, projectors, soundbars and streaming devices."], ["Cameras and Photography", null, "DSLR, mirrorless, compact, instant and action cameras, drones, lenses and tripods."], ["Audio and Headphones", "Headsets", "Earbuds, headphones, noise-cancelling and gaming headsets, speakers and microphones."], ["Wearables", "Wearables", "Smartwatches, fitness bands, smart rings, GPS watches, straps and chargers."], ["PC Components and Storage", null, "Processors, motherboards, graphics cards, RAM, SSDs, HDDs, cases, cooling and power supplies."], ["Smart Home and Security", "Smart home", "Smart bulbs, plugs, speakers, security cameras, doorbells, locks and Wi-Fi mesh."], ["Accessories and Connectivity", "Accessories", "Keyboards, mice, webcams, printers, routers, hubs, chargers, cables and power banks."], ["Home Appliances", null, "Refrigerators, washing machines, air conditioners, purifiers, vacuums, microwaves and air fryers."], ["Power and Networking", null, "UPS, inverters, power stations, solar panels, batteries, switches and access points."]],DEPT={},ICO8={"Monitors and Displays": "<rect x=\"10\" y=\"14\" width=\"60\" height=\"38\" rx=\"4\"/><path d=\"M32 66h16M40 52v14\"/>", "Gaming": "<rect x=\"8\" y=\"26\" width=\"64\" height=\"30\" rx=\"14\"/><path d=\"M24 34v14M17 41h14\"/><circle cx=\"52\" cy=\"38\" r=\"3\"/><circle cx=\"60\" cy=\"46\" r=\"3\"/>", "Tablets and E-readers": "<rect x=\"14\" y=\"8\" width=\"52\" height=\"64\" rx=\"6\"/><circle cx=\"40\" cy=\"64\" r=\"2\"/><path d=\"M24 22h32M24 30h22\" opacity=\".5\"/>", "TVs and Home Entertainment": "<rect x=\"6\" y=\"14\" width=\"68\" height=\"42\" rx=\"4\"/><path d=\"M28 66h24M40 56v10\"/>", "Cameras and Photography": "<rect x=\"8\" y=\"22\" width=\"64\" height=\"40\" rx=\"6\"/><circle cx=\"40\" cy=\"42\" r=\"12\"/><circle cx=\"40\" cy=\"42\" r=\"5\"/><path d=\"M26 22l4-8h20l4 8\"/>", "PC Components and Storage": "<rect x=\"12\" y=\"12\" width=\"56\" height=\"56\" rx=\"5\"/><rect x=\"28\" y=\"28\" width=\"24\" height=\"24\" rx=\"3\"/><path d=\"M34 12v-6M46 12v-6M34 68v6M46 68v6M12 34H6M12 46H6M68 34h6M68 46h6\"/>", "Home Appliances": "<rect x=\"18\" y=\"6\" width=\"44\" height=\"68\" rx=\"5\"/><path d=\"M18 30h44M26 14v10M26 38v14\"/>", "Power and Networking": "<path d=\"M44 6L22 44h16l-4 30 24-40H42z\"/>"};
+DEPTS.forEach(function(d,i){var l=d[1];if(l){DEPT[l]=d[0];ICON[d[0]]=ICON[l];COL[d[0]]=COL[l]}else{ICON[d[0]]=A+ICO8[d[0]]+'</svg>';COL[d[0]]=["#0066ff","#008cff","#3d8bff","#66b8ff","#2b7fff","#5b8def","#00a3ff"][i%7]}});
+DEPT["Audio"]="Audio and Headphones";
+function dept(p){return DEPT[p.cat]||p.cat}
+var DNAMES=DEPTS.map(function(d){return d[0]});
+function pic(p){return PIC[p.ic]||ICON[p.cat]}
+var SPEC={nova:"6.7-inch AMOLED display, 50 MP triple camera, 5,000 mAh battery",pulse:"6.1-inch display, 12 MP dual camera, all-day battery",aero:"14-inch screen, 16 GB RAM, 512 GB SSD, 1.3 kg",study:"15.6-inch screen, 8 GB RAM, 256 GB SSD, long battery life",wave:"Active noise cancelling, 40-hour battery, Bluetooth 5.3",studio:"Over-ear studio sound, plush cushions, wired and wireless",striker:"7.1 surround sound, detachable boom mic, RGB lighting",call:"USB headset with noise-cancelling mic, in-line mute button",bass:"3.5 mm wired headphones, deep bass, tangle-free cable",speaker:"Pocket Bluetooth speaker, 12-hour battery, splash proof",buds:"True wireless earbuds, 28 hours with the case, touch controls",neck:"Magnetic neckband earphones, 20-hour battery, fast charge",band:"Heart rate and sleep tracking, 14-day battery, water resistant",watch:"Round AMOLED display, calls on wrist, GPS, 7-day battery",charger:"65 W GaN fast charger for phones and laptops",cable:"2 m braided USB-C cable, 100 W charging",bank:"10,000 mAh power bank, dual output, fast charging",bulbs:"Four Wi-Fi colour bulbs, voice control, schedules",cam:"2K indoor camera, night vision, motion alerts"};
+function rate(p){return p.rating?p.rating.avg:0}/* ratings come only from verified-buyer reviews stored on the server */
+function stars(p){var r=p.rating;if(!r||!r.count)return '';var f=Math.round(r.avg);return '<div class="stars" title="'+r.avg+' out of 5 from '+r.count+' review'+(r.count===1?'':'s')+'"><span aria-hidden="true">'+'★'.repeat(f)+'☆'.repeat(5-f)+'</span> <b>'+r.avg+'</b> <small>('+r.count+')</small></div>'}
+function addCart(id){var p=P(id),n=(S.cart[id]||0)+1;if(n>p.stock){toast("Only "+p.stock+" in stock");return}S.cart[id]=n;renderCart();toast("Added to cart")}
+function openV(id){var p=P(id),s=status(p);S.recent=[id].concat(S.recent.filter(function(x){return x!==id})).slice(0,6);save();$("mbox").style.gridTemplateColumns="";$("mbox").innerHTML='<div class="big" style="'+tint(p.cat)+'">'+pic(p)+'</div><div><h2 style="font-size:22px">'+esc(p.name)+'</h2><div class="sku">'+p.id+', '+p.cat+'</div><p>'+esc(p.description||SPEC[p.ic]||"Genuine product with manufacturer warranty.")+'</p><div class="price" style="font-size:24px">'+inr(p.price)+'</div><div class="tag '+s[1]+'">'+s[0]+'</div><p><button class="btn" data-add="'+p.id+'"'+(p.stock<=0?" disabled":"")+'>Add to cart</button> <button class="btn alt" id="mclose">Close</button></p></div>';$("modal").classList.add("open")}
+function receipt(o){$("mbox").style.gridTemplateColumns="1fr";$("mbox").innerHTML='<div><h2 style="font-size:22px">Order '+o.no+' placed</h2><p>Thank you'+(o.who&&o.who!=="Walk-in"?", "+esc(o.who):"")+'. '+o.date+'</p>'+o.items.split(", ").map(function(l){return '<div class="ln"><span>'+esc(l)+'</span></div>'}).join("")+'<div class="ln" style="font-weight:500"><span>Total to pay on delivery</span><span>'+inr(o.total)+'</span></div><p><button class="btn" id="mclose">Done</button></p></div>';$("modal").classList.add("open")}
+var SEED=[["Nova X5 smartphone","Phones",24999,14,5,"nova"],["Pulse 12 smartphone","Phones",15999,3,5,"pulse"],["AeroBook 14 laptop","Laptops",58999,6,3,"aero"],["StudyBook 15 laptop","Laptops",38999,2,3,"study"],["Wave ANC headphones","Headsets",6499,22,6,"wave"],["Studio Pro over-ear headphones","Headsets",9999,8,4,"studio"],["Striker gaming headset","Headsets",3499,15,5,"striker"],["Call Pro office headset","Headsets",2799,4,5,"call"],["Bass Lite wired headphones","Headsets",999,35,10,"bass"],["Beat Mini speaker","Audio",2999,0,5,"speaker"],["Air Buds 2","Audio",1999,31,8,"buds"],["Neckband earphones","Audio",1299,19,6,"neck"],["FitBand 7","Wearables",2499,18,6,"band"],["Chrono smartwatch","Wearables",8999,7,4,"watch"],["65W fast charger","Accessories",1299,40,10,"charger"],["USB-C cable 2 m","Accessories",399,4,15,"cable"],["10,000 mAh power bank","Accessories",1499,12,6,"bank"],["Smart bulb pack of 4","Smart home",1799,25,8,"bulbs"],["Wi-Fi security camera","Smart home",3299,9,4,"cam"]];
+var SEED_OLD=[
+["Nova X5 smartphone","Phones",24999,14,5],["Pulse 12 smartphone","Phones",15999,3,5],
+["AeroBook 14 laptop","Laptops",58999,6,3],["StudyBook 15 laptop","Laptops",38999,2,3],
+["Wave ANC headphones","Audio",6499,22,6],["Beat Mini speaker","Audio",2999,0,5],["Air Buds 2","Audio",1999,31,8],
+["FitBand 7","Wearables",2499,18,6],["Chrono smartwatch","Wearables",8999,7,4],
+["65W fast charger","Accessories",1299,40,10],["USB-C cable 2 m","Accessories",399,4,15],["10,000 mAh power bank","Accessories",1499,12,6],
+["Smart bulb pack of 4","Smart home",1799,25,8],["Wi-Fi security camera","Smart home",3299,9,4]];
+var S={products:[],orders:[],cart:{},bill:{},seq:1001,wish:{},coupon:"",addons:{},cmp:[],recent:[],repairs:[],acts:[],risk:{}};
+try{var raw=localStorage.getItem("voltbay2");if(raw)S=Object.assign(S,JSON.parse(raw))}catch(e){}
+if(!S.products.length){S.products=SEED.map(function(p,i){return{id:"VB-"+(100+i),name:p[0],cat:p[1],price:p[2],stock:p[3],re:p[4],ic:p[5],sold:{}}});
+  S.orders=[];save()}
+function save(){try{localStorage.setItem("voltbay2",JSON.stringify(S))}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+var inr=function(n){return "₹"+Number(n).toLocaleString("en-IN")};
+var P=function(id){return S.products.filter(function(p){return p.id===id})[0]};
+function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(function(){t.classList.remove("on")},2200)}
+function status(p){return p.stock<=0?["Out of stock","out"]:p.stock<=p.re?["Only "+p.stock+" left","low"]:["In stock ("+p.stock+")","ok"]}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+/* mode switching */
+var cat="All",tab="over";
+function mode(m){$("vb").classList.toggle("hide",m!=="vb");$("m-vb").setAttribute("aria-pressed",m==="vb");$("files").classList.toggle("hide",m!=="files");$("m-files").setAttribute("aria-pressed",m==="files");$("shop").classList.toggle("hide",m!=="shop");$("mgr").classList.toggle("hide",m!=="mgr");$("rep").classList.toggle("hide",m!=="rep");$("m-rep").setAttribute("aria-pressed",m==="rep");
+  $("m-shop").setAttribute("aria-pressed",m==="shop");$("m-mgr").setAttribute("aria-pressed",m==="mgr");render()}
+$("m-shop").onclick=function(){mode("shop")};$("m-mgr").onclick=function(){mode("mgr")};
+
+/* shop */
+function renderShop(){
+  var q=$("q").value.toLowerCase();
+  renderHome();$("promos").innerHTML=[["Audio and Headphones","Headphones and headsets","Studio, gaming and office"],["Smart Home and Security","Make your home smarter","Bulbs, cameras and more"]].map(function(x){return '<button class="promo" data-c="'+x[0]+'" style="'+tint(x[0])+'"><span><b>'+x[1]+'</b><small>'+x[2]+'</small></span>'+ICON[x[0]]+'</button>'}).join("");$("promos").onclick=$("tiles").onclick;
+  $("tiles").innerHTML=DNAMES.map(function(c){return '<button class="tile" data-c="'+c+'" style="'+tint(c)+'">'+ICON[c]+'<span>'+c+'</span></button>'}).join("");$("chips").innerHTML=["All"].concat(DNAMES).map(function(c){return '<button class="chip" data-c="'+c+'" aria-pressed="'+(c===cat)+'">'+c+'</button>'}).join("");
+  var list=S.products.filter(function(p){return(cat==="All"||dept(p)===cat)&&(p.name.toLowerCase().indexOf(q)>-1||p.id.toLowerCase().indexOf(q)>-1)&&(!$("instock").checked||p.stock>0)&&(!wishOnly||S.wish[p.id])});var so=$("sort").value;if(so)list.sort(function(a,b){return so==="lo"?a.price-b.price:b.price-a.price});
+  var di=DEPTS.filter(function(d){return d[0]===cat})[0],all=S.products.filter(function(p){return dept(p)===cat});
+  $("deptinfo").innerHTML=di?'<div class="panel"><h2 style="font-size:22px;margin-bottom:4px">'+di[0]+'</h2><p class="sku" style="margin:0 0 8px">'+di[2]+'</p><p style="margin:0"><b>'+all.length+'</b> product'+(all.length===1?'':'s')+' listed'+(all.length?'':'. This department is set up and ready, but no products have been added yet. Add real products in Manage store, or import your supplier catalogue.')+'</p><div class="row" style="margin-top:10px"><button class="chip" id="deptall">All departments</button></div></div>':'';
+  $("grid").innerHTML=list.length?list.map(function(p){var s=status(p);
+    return '<div class="card"><div class="pic" data-v="'+p.id+'" style="cursor:pointer;'+tint(p.cat)+'">'+pic(p)+(p.stock>0&&p.stock<=p.re?'<span class="badge">Few left</span>':'')+'<button class="heart" data-w="'+p.id+'" aria-pressed="'+!!S.wish[p.id]+'" aria-label="Save to wishlist">'+(S.wish[p.id]?"♥":"♡")+'</button></div><h3 data-v="'+p.id+'" style="cursor:pointer">'+esc(p.name)+'</h3><div class="sum">'+esc(p.summary||"")+'</div><div class="sku">'+(p.brand?esc(p.brand)+' · ':'')+p.cat+' · '+p.id+'</div>'+stars(p)+'<div class="price">'+inr(p.price)+'</div><div class="tag '+s[1]+'">'+s[0]+'</div><button class="btn" data-add="'+p.id+'"'+(p.stock<=0?" disabled":"")+'>Add to cart</button><button class="chip" data-cmp="'+p.id+'" aria-pressed="'+(S.cmp.indexOf(p.id)>-1)+'">Compare</button></div>'}).join(""):'<p>No products match. Clear the search or pick another category.</p>'}
+var ADD={del:["Home delivery",99,"Standard 3-day delivery, free above ₹999"],war:["Extended warranty (+1 year)",499,"Covers every device in the order"],ret:["30-day return cover",149,"Return any item within 30 days"],set:["Installation and setup",199,"A technician sets everything up"]};
+var GEAR='<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="4"/><path d="M16 4v4M16 24v4M4 16h4M24 16h4M8 8l3 3M21 21l3 3M24 8l-3 3M11 21l-3 3"/></svg>';
+function addPrice(k,sub){return k==="del"&&sub>=999?0:ADD[k][1]}
+function addonTotal(sub){var t=0;Object.keys(S.addons).forEach(function(k){t+=addPrice(k,sub)});return t}
+function renderAddons(){var sub=0;Object.keys(S.cart).forEach(function(id){sub+=P(id).price*S.cart[id]});var sv=document.querySelectorAll(".perks[hidden] svg");$("addons").innerHTML=Object.keys(ADD).map(function(k,i){var on=S.addons[k],pr=addPrice(k,sub);return '<button class="perk" data-ad="'+k+'" aria-pressed="'+!!on+'" style="text-align:left;'+(on?'border-color:var(--teal);border-width:2px':'')+'">'+(i<3?sv[i].outerHTML:GEAR)+'<span><b style="color:var(--ink)">'+ADD[k][0]+'</b>'+ADD[k][2]+'. '+(pr?inr(pr):"Free")+'</span><em style="margin-left:auto;font-style:normal;font-weight:500;color:var(--teal)">'+(on?"Added":"Add")+'</em></button>'}).join("")}
+var DEALS={"VB-100":10,"VB-104":20,"VB-113":15,"VB-118":25},cdT;
+var POL={faq:["FAQs","Orders placed here are demo orders. Track them in Manage store. Stock counts update when an order is placed."],ship:["Shipping policy","Standard delivery takes 3 to 5 days. Orders of ₹999 or more ship free. Delivery times shown here are demo estimates."],ret:["Return and refund policy","Items can be returned within 7 days in original condition. Refunds go to the original payment method."],priv:["Privacy policy","To let you pick up where you left off, this store saves your cart, saved items, recently viewed products and searches against an anonymous session on its own server, and uses them to suggest products. If you create an account, they are linked to your email address. Nothing is sold or shared, and no payment details are collected."],terms:["Terms and conditions","VoltBay is a demonstration store. No real payments or deliveries take place."]};
+function dealSave(c){var t=0;Object.keys(c).forEach(function(id){if(DEALS[id]&&P(id))t+=Math.round(P(id).price*c[id]*DEALS[id]/100)});return t}
+function mini(p,off){var pr=off?'<s style="color:var(--mute)">'+inr(p.price)+'</s> '+inr(Math.round(p.price*(100-off)/100))+' <small class="off">'+off+'% off</small>':inr(p.price);return '<div class="mini"><div class="pic" data-v="'+p.id+'" style="'+tint(p.cat)+'">'+pic(p)+'</div><b style="font-weight:500">'+esc(p.name)+'</b><span class="price">'+pr+'</span><button class="btn" data-add="'+p.id+'"'+(p.stock<=0?" disabled":"")+'>Add to cart</button></div>'}
+function tick(){var n=new Date(),e=new Date(n);e.setHours(24,0,0,0);var s=Math.floor((e-n)/1000),f=function(x){return("0"+x).slice(-2)},c=$("cd");if(c)c.textContent="Ends in "+f(Math.floor(s/3600))+":"+f(Math.floor(s%3600/60))+":"+f(s%60)}
+function renderHome(){$("sug").innerHTML=S.products.map(function(p){return '<option value="'+esc(p.name)+'">'}).join("");$("cmpbtn").textContent="Compare ("+S.cmp.length+")";
+ $("deals").innerHTML='<h2>Flash deals<span class="cd" id="cd"></span></h2><div class="hrow">'+Object.keys(DEALS).filter(P).map(function(id){return mini(P(id),DEALS[id])}).join("")+'</div>';
+ var rc=S.recent.map(P).filter(Boolean),cats=rc.map(function(p){return p.cat});
+ var rec=S.products.filter(function(p){return p.stock>0&&S.recent.indexOf(p.id)<0}).sort(function(a,b){return(cats.indexOf(b.cat)>-1?1:0)-(cats.indexOf(a.cat)>-1?1:0)||rate(b)-rate(a)}).slice(0,4);
+ $("recent").innerHTML=(rc.length?'<h2>Recently viewed</h2><div class="hrow">'+rc.slice(0,4).map(function(p){return mini(p)}).join("")+'</div>':'')+'<h2 style="margin-top:22px">Recommended for you</h2><div class="hrow">'+rec.map(function(p){return mini(p)}).join("")+'</div>';
+ $("deals").onclick=$("recent").onclick=$("grid").onclick;tick();if(!cdT)cdT=setInterval(tick,1000)}
+$("shopnow").onclick=function(){$("grid").scrollIntoView({behavior:"smooth"})};$("exdeals").onclick=function(){$("deals").scrollIntoView({behavior:"smooth"})};
+$("pinbtn").onclick=function(){var v=$("pin").value.trim();$("pinres").textContent=!/^[1-9][0-9]{5}$/.test(v)?"Enter a valid 6-digit PIN code.":(v.slice(0,2)==="50"?"Delivery in 1 to 2 days (demo estimate).":"Delivery in 3 to 5 days (demo estimate).")};
+$("cmpbtn").onclick=function(){var l=S.cmp.map(P).filter(Boolean);if(l.length<2){toast("Pick at least 2 products to compare");return}$("mbox").style.gridTemplateColumns="1fr";$("mbox").innerHTML='<div style="overflow-x:auto"><h2 style="font-size:22px;margin-bottom:10px">Compare products</h2><table style="min-width:420px"><tr><th></th>'+l.map(function(p){return '<th>'+esc(p.name)+'</th>'}).join("")+'</tr>'+[["Price",function(p){return inr(p.price)}],["Brand",function(p){return esc(p.brand||"")}],["Stock",function(p){return status(p)[0]}],["Key features",function(p){return SPEC[p.ic]||"Genuine product"}]].map(function(r){return '<tr><th>'+r[0]+'</th>'+l.map(function(p){return '<td>'+r[1](p)+'</td>'}).join("")+'</tr>'}).join("")+'</table><p><button class="btn" id="mclose">Close</button> <button class="btn alt" id="cmpclear">Clear list</button></p></div>';$("modal").classList.add("open")};
+$("mbox").addEventListener("click",function(e){if(e.target.id==="cmpclear"){S.cmp=[];save();renderShop();$("modal").classList.remove("open")}});
+document.querySelector("footer").onclick=function(e){var k=e.target.dataset.pol;if(!k)return;$("mbox").style.gridTemplateColumns="1fr";$("mbox").innerHTML='<div><h2 style="font-size:22px;margin-bottom:8px">'+POL[k][0]+'</h2><p>'+POL[k][1]+'</p><p><button class="btn" id="mclose">Close</button></p></div>';$("modal").classList.add("open")};
+var BUN={gaming:["Gaming setup",["VB-120","VB-105","VB-114"]],office:["Office setup",["VB-107","VB-103","VB-116"]],student:["Student setup",["VB-103","VB-110","VB-116"]]};
+var ACC={"Phones":["VB-114","VB-115","VB-116"],"Laptops":["VB-114","VB-116","VB-107"],"Headsets":["VB-116","VB-115"],"Audio":["VB-116","VB-115"],"Wearables":["VB-115","VB-116"],"Smart home":["VB-117","VB-118"],"Accessories":["VB-116","VB-115"]};
+var KEYS=[[/\bphones?\b|mobile/,"Phones"],[/laptop|notebook/,"Laptops"],[/headphone|headset|earphone/,"Headsets"],[/speaker|earbud|buds|audio/,"Audio"],[/watch|band|wearable/,"Wearables"],[/charger|cable|power ?bank|accessor/,"Accessories"],[/bulb|camera|smart home/,"Smart home"]];
+function aiAdd(t,who){var d=document.createElement("div");d.className="m "+who;d.innerHTML=t;$("ailog").appendChild(d);$("ailog").scrollTop=1e9}
+function pl(p){return '<div class="pl"><span>'+esc(p.name)+'<br><small class="sku">'+inr(p.price)+', '+status(p)[0]+'</small></span><span><button class="chip" data-v="'+p.id+'">View</button> <button class="btn" data-add="'+p.id+'"'+(p.stock<=0?" disabled":"")+'>Add</button></span></div>'}
+function aiReply(q){var s=q.toLowerCase(),nm=s.replace(/,/g,"").match(/(\d+)\s*(k\b)?/),bud=nm&&/under|below|within|budget|upto|up to|less than|around|\u20b9|rs|inr/.test(s)?+nm[1]*(nm[2]?1000:1):0;if(bud<100)bud=0;
+ var found=S.products.filter(function(p){var w=p.name.toLowerCase().split(" "),k=w.slice(0,w[0]==="smart"?2:1).join(" ").replace(/[^a-z0-9 ]/g,".");return new RegExp("\\b"+k+"\\b").test(s)});
+ var bn=/gaming|gamer|game/.test(s)?"gaming":/office|wfh|work from home/.test(s)?"office":/student|college/.test(s)?"student":"";
+ if(bn){var b=BUN[bn],l=b[1].map(P).filter(Boolean),t=l.reduce(function(a,p){return a+p.price},0);return '<b>'+b[0]+'</b>'+l.map(pl).join("")+'<div class="pl"><span>Bundle total '+inr(t)+'</span><button class="btn" data-bun="'+bn+'">Add all to cart</button></div>'}
+ if(found.length>1){var lo=found.slice().sort(function(a,b){return a.price-b.price})[0],hi=found.slice().sort(function(a,b){return rate(b)-rate(a)})[0];return '<b>Comparison</b>'+found.map(function(p){return pl(p)+'<small class="sku">'+esc(SPEC[p.ic]||"")+'</small>'}).join("")+'<p>Lowest price: '+esc(lo.name)+'.</p>'}
+ if(found.length===1&&/accessor|go with|goes with|pair/.test(s)){var a=(ACC[found[0].cat]||[]).map(P).filter(Boolean);return 'Pairs well with '+esc(found[0].name)+':'+a.map(pl).join("")}
+ if(found.length===1){var p=found[0];return '<b>'+esc(p.name)+'</b><br>'+esc(SPEC[p.ic]||"Genuine product with warranty")+'.'+pl(p)}
+ var cat="";KEYS.forEach(function(k){if(!cat&&k[0].test(s))cat=k[1]});
+ if(cat||bud){var l2=S.products.filter(function(p){return(!cat||p.cat===cat)&&p.stock>0&&(!bud||p.price<=bud)}).sort(function(a,b){return rate(b)-rate(a)||a.price-b.price}).slice(0,3);return l2.length?'Top picks'+(cat?" in "+cat:"")+(bud?" under "+inr(bud):"")+':'+l2.map(pl).join(""):"I couldn’t find an in-stock match for that. Try a higher budget or another category."}
+ return "I can suggest products by budget, compare products, build a gaming, office or student setup, and suggest accessories. Try: \u201cBest headphones under 5000\u201d."}
+function aiSend(q){q=q.trim();if(!q)return;aiAdd(esc(q),"u");$("aiq").value="";var t=document.createElement("div");t.className="m b typing";t.textContent="VoltAI is thinking...";$("ailog").appendChild(t);setTimeout(function(){t.remove();aiAdd(aiReply(q),"b")},450)}
+$("aisend").onclick=function(){aiSend($("aiq").value)};$("aiq").onkeydown=function(e){if(e.key==="Enter")aiSend(this.value)};
+$("aichips").innerHTML=["Best phone under 25000","Recommend something for me","Compare iPhone 15 and Galaxy S24 Ultra","Student setup","Headphones for travel"].map(function(c){return '<button class="chip" data-qq="'+esc(c)+'">'+esc(c)+'</button>'}).join("");
+$("aichips").onclick=function(e){if(e.target.dataset.qq)aiSend(e.target.dataset.qq)};
+$("ailog").onclick=function(e){var b=e.target.dataset.bun;if(b){BUN[b][1].forEach(function(id){if(P(id)&&P(id).stock>0)addCart(id)});return}$("grid").onclick(e)};
+$("aibtn").onclick=function(){var o=$("aip").classList.toggle("open");this.setAttribute("aria-expanded",o);if(o&&!$("ailog").children.length)aiAdd("Hi, I’m VoltAI. I can suggest products by budget, compare them and put together setups. I work from this store’s catalogue and learn from what you look at to suggest better products.","b");if(o)$("aiq").focus()};
+$("aix").onclick=function(){$("aip").classList.remove("open")};
+var RST=["Request received","Inspection pending","Under diagnosis","Estimate provided","Repair approved","Repair in progress","Ready for collection","Completed","Cancelled"],ICN={Orders:"🛒",Inventory:"📦",Repairs:"🔧",Security:"🛡"};
+function act(c,x,id){S.acts.unshift({t:Date.now(),c:c,x:x,id:id||""});S.acts=S.acts.slice(0,200);save()}
+function renderAct(){var f=$("actf").value,q=$("actq").value.toLowerCase(),l=S.acts.filter(function(a){return(!f||a.c===f)&&(a.x+a.id).toLowerCase().indexOf(q)>-1});$("actl").innerHTML=l.length?l.map(function(a){var d=new Date(a.t);return '<div class="ln"><span><span aria-hidden="true">'+ICN[a.c]+'</span> <b>'+a.c+'</b> '+esc(a.x)+(a.id?' <small class="sku">'+esc(a.id)+'</small>':'')+'</span><small class="sku">'+d.toLocaleDateString("en-IN")+' '+d.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"})+'</small></div>'}).join(""):'<p>No activity yet. Place an order, edit stock or book a repair and it will appear here.</p>'}
+function renderRep(){var q=$("repq").value.trim().toLowerCase(),l=S.repairs.filter(function(r){return r.id.toLowerCase().indexOf(q)>-1});$("repl").innerHTML=l.length?l.map(function(r){var ix=S.repairs.indexOf(r);return '<tr><td>'+r.id+'<br><small class="sku">'+r.date+'</small></td><td>'+esc(r.name)+'<br><small class="sku">'+esc(r.phone)+'</small></td><td>'+esc(r.brand+" "+r.model)+'<br><small class="sku">'+esc(r.cat)+', '+esc(r.svc)+'</small></td><td>'+esc(r.prob)+'</td><td><select data-rs="'+ix+'" aria-label="Repair status">'+RST.map(function(s){return"<option"+(s===r.status?" selected":"")+">"+s+"</option>"}).join("")+'</select></td><td><input type="number" min="0" value="'+(r.est||"")+'" data-re2="'+ix+'" aria-label="Estimated cost"></td><td><input data-rn="'+ix+'" value="'+esc(r.note||"")+'" aria-label="Inspection notes" style="width:150px"></td></tr>'}).join(""):'<tr><td colspan="7">No repair requests yet. Book one from the Book a Repair page.</td></tr>'}
+$("repq").oninput=renderRep;$("actf").onchange=$("actq").oninput=$("actr").onclick=renderAct;
+$("repl").onchange=function(e){var t=e.target;if(t.dataset.rs!==undefined){S.repairs[+t.dataset.rs].status=t.value;act("Repairs","Repair status set to "+t.value,S.repairs[+t.dataset.rs].id)}else if(t.dataset.re2!==undefined){S.repairs[+t.dataset.re2].est=Math.max(0,Number(t.value)||0);save()}else if(t.dataset.rn!==undefined){S.repairs[+t.dataset.rn].note=t.value;save()}renderRep()};
+$("m-rep").onclick=function(){mode("rep")};$("rft").min=new Date().toISOString().slice(0,10);
+$("repform").onsubmit=function(e){e.preventDefault();var g=function(i){return $(i).value.trim()},m="";
+ if(g("rfn").length<2)m="Enter your name.";else if(!/^[6-9]\d{9}$/.test(g("rfp")))m="Enter a valid 10-digit mobile number.";else if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(g("rfe")))m="Enter a valid email address.";else if(!g("rfb")||!g("rfm"))m="Enter the brand and model.";else if(g("rfd").length<10)m="Describe the problem in at least 10 characters.";else if(!g("rft")||g("rft")<new Date().toISOString().slice(0,10))m="Choose a service date from today onwards.";
+ $("reperr").textContent=m;if(m)return;
+ var r={id:"RP-"+(1001+S.repairs.length),date:new Date().toLocaleDateString("en-IN"),name:g("rfn"),phone:g("rfp"),email:g("rfe"),cat:$("rfc").value,brand:g("rfb"),model:g("rfm"),prob:g("rfd"),pref:g("rft"),svc:$("rfs").value,pick:$("rfk").value,status:RST[0],est:0,note:""};
+ S.repairs.push(r);act("Repairs","Repair booking received for "+r.brand+" "+r.model,r.id);$("repform").reset();$("repok").hidden=false;$("repok").innerHTML='<b>Booking received. Your repair ID is '+r.id+'.</b><br>Preferred date '+esc(r.pref)+', '+esc(r.pick)+'. This is a demo booking, not a real service appointment.';renderRep();toast("Repair "+r.id+" booked (demo)")};
+$("trkbtn").onclick=function(){var id=$("trkid").value.trim().toUpperCase(),r=S.repairs.filter(function(x){return x.id===id})[0];$("trkres").innerHTML=r?'<b>'+r.id+': '+esc(r.status)+'</b> (step '+(RST.indexOf(r.status)+1)+' of '+RST.length+')<div class="prog"><i style="width:'+((RST.indexOf(r.status)+1)/RST.length*100)+'%"></i></div>'+esc(r.brand+" "+r.model)+(r.est?'<br>Estimate: '+inr(r.est):"")+(r.note?'<br>Notes: '+esc(r.note):""):"No request with that ID was found in this browser."};
+function riskList(){var n=S.orders.length,avg=n?S.orders.reduce(function(a,o){return a+o.total},0)/n:0;return S.orders.map(function(o){var lv="Low",why="No risk indicators found";if(n>=3&&o.total>=3*avg){lv="High";why="Order value is at least 3 times the average ("+inr(Math.round(avg))+")"}else if(o.who!=="Walk-in"&&S.orders.some(function(x){return x!==o&&x.who===o.who&&x.items===o.items})){lv="Medium";why="Same customer and same items as another order"}else if(/\u00d7([5-9]|\d\d)\b/.test(o.items)){lv="Medium";why="Large quantity of a single item"}return{o:o,lv:lv,why:why}})}
+function renderSec(){var f=$("secf").value,l=riskList().filter(function(r){return!f||r.lv===f});$("secl").innerHTML=l.length?l.map(function(r){var st=S.risk[r.o.no]||"Not reviewed";return '<tr><td>'+r.o.no+'<br><small class="sku">'+esc(r.o.who)+'</small></td><td>'+inr(r.o.total)+'</td><td><b class="'+(r.lv==="High"?"out":r.lv==="Medium"?"low":"ok")+'">'+r.lv+'</b></td><td>'+esc(r.why)+'</td><td><select data-sr="'+r.o.no+'" aria-label="Review status">'+["Not reviewed","Cleared","Escalated"].map(function(s){return"<option"+(s===st?" selected":"")+">"+s+"</option>"}).join("")+'</select></td></tr>'}).join(""):'<tr><td colspan="5">No orders at this risk level.</td></tr>';
+ $("sectbl").innerHTML=[["Page served over HTTPS",location.protocol==="https:"?"Yes":"No"],["Customer text escaped before display","Yes, in this page"],["Multi-factor authentication and OTP","Needs a backend"],["Session management and logout from all devices","Needs a backend"],["Bot detection, rate limiting and brute-force protection","Needs a backend"],["Payment security","Checkout is a demo. No card data is collected or stored. A real payment gateway is required."],["VoltAI protection","VoltAI is rule-based and holds no keys or secrets in this page"],["Audit log","Local activity log only, not tamper-resistant"]].map(function(r){return '<tr><th>'+r[0]+'</th><td>'+r[1]+'</td></tr>'}).join("")}
+$("secf").onchange=renderSec;
+$("secl").onchange=function(e){var n=e.target.dataset.sr;if(n){S.risk[n]=e.target.value;act("Security","Risk review: "+n+" marked "+e.target.value,n);renderSec()}};
+$("pwchk").oninput=function(){var v=this.value,sc=0;[v.length>=12,/[a-z]/.test(v),/[A-Z]/.test(v),/\d/.test(v),/[^A-Za-z0-9]/.test(v)].forEach(function(b){if(b)sc++});$("pwres").textContent=!v?"":sc<=2?"Weak. Use at least 12 characters with upper and lower case letters, numbers and symbols.":sc<5?"Fair. Add the missing character types or more length.":"Strong."};
+function cmdAdd(t,w){var d=document.createElement("div");d.className="m "+w;d.style.maxWidth="100%";d.innerHTML=t;$("cmdlog").appendChild(d)}
+function cnt(a,k){var c={};a.forEach(function(x){c[x[k]]=(c[x[k]]||0)+1});var ks=Object.keys(c);return ks.length?ks.map(function(s){return '<div class="ln"><span>'+esc(s)+'</span><b>'+c[s]+'</b></div>'}).join(""):""}
+function cmdReply(q){var s=q.toLowerCase(),O=S.orders,rev=O.reduce(function(a,o){return a+o.total},0);
+ if(/low|reorder|running out|restock/.test(s)){var l=S.products.filter(function(p){return p.stock<=p.re});return l.length?'<b>Low stock ('+l.length+')</b>'+l.map(function(p){return '<div class="ln"><span>'+esc(p.name)+'</span><b>'+p.stock+' left, reorder at '+p.re+'</b></div>'}).join(""):"No product is at or below its reorder level."}
+ if(/profit|margin/.test(s))return "I can\u2019t calculate profit yet. VoltBay doesn\u2019t store purchase costs, so only revenue is known: "+inr(rev)+" from "+O.length+" orders. Add cost prices to enable profit analysis.";
+ if(/forecast|predict|demand|declin|trend/.test(s)){var dd={};O.forEach(function(o){dd[o.date]=1});return "There is not enough history for a forecast. The store has "+O.length+" orders on "+Object.keys(dd).length+" distinct day(s). Trends and demand estimates need several weeks of sales."}
+ if(/categor/.test(s)){var by={};O.forEach(function(o){o.cats.forEach(function(c){by[c[0]]=(by[c[0]]||0)+c[1]})});var k=Object.keys(by).sort(function(a,b){return by[b]-by[a]});return k.length?'<b>Revenue by category</b> <small class="sku">item amounts before discounts and add-ons</small>'+k.map(function(c){return '<div class="ln"><span>'+c+'</span><b>'+inr(by[c])+'</b></div>'}).join(""):"No sales recorded yet."}
+ if(/best|top|sell/.test(s)){var t=S.products.filter(function(p){return p.units}).sort(function(a,b){return b.units-a.units}).slice(0,5);return t.length?'<b>Best sellers by units</b>'+t.map(function(p){return '<div class="ln"><span>'+esc(p.name)+'</span><b>'+p.units+' sold</b></div>'}).join(""):"No sales recorded yet."}
+ if(/inventory|valuation|stock value/.test(s)){var v=S.products.reduce(function(a,p){return a+p.price*p.stock},0);return "Stock value at selling prices: "+inr(v)+" across "+S.products.length+" products. This is retail value, not purchase cost."}
+ if(/revenue|sales|analy|summary|report|average|total/.test(s))return O.length?'<b>Sales summary</b><div class="ln"><span>Revenue</span><b>'+inr(rev)+'</b></div><div class="ln"><span>Orders</span><b>'+O.length+'</b></div><div class="ln"><span>Average order value</span><b>'+inr(Math.round(rev/O.length))+'</b></div><div class="ln"><span>Pending orders</span><b>'+O.filter(function(o){return o.status==="Pending"}).length+'</b></div>':"No orders yet, so there is nothing to analyse.";
+ if(/pending|status|order/.test(s))return O.length?'<b>Orders by status</b>'+cnt(O,"status"):"No orders yet.";
+ if(/repair/.test(s))return S.repairs.length?'<b>Repair requests by status</b>'+cnt(S.repairs,"status"):"No repair requests yet.";
+ if(/campaign|promo|caption|advert|announce|write/.test(s)){var cat="";KEYS.forEach(function(x){if(!cat&&x[0].test(s))cat=x[1]});var l2=cat?S.products.filter(function(p){return p.cat===cat&&p.stock>0}):[];return l2.length?'<b>Draft for your approval. Nothing is published.</b><p>Upgrade your '+cat.toLowerCase()+' with VoltBay. '+l2.length+' products in stock, starting at '+inr(Math.min.apply(null,l2.map(function(p){return p.price})))+'. Shop now.</p>':"Tell me the category, for example \u201cwrite a promotion for headsets\u201d."}
+ return "I can answer questions about low stock, sales, best sellers, category revenue, inventory value, order and repair status, and draft a promotion. I can\u2019t do profit, forecasts or fraud checks beyond the VoltShield tab, because the data isn\u2019t stored yet."}
+function cmdSend(q){q=q.trim();if(!q)return;cmdAdd(esc(q),"u");$("cmdq").value="";cmdAdd(cmdReply(q),"b")}
+$("cmdsend").onclick=function(){cmdSend($("cmdq").value)};$("cmdq").onkeydown=function(e){if(e.key==="Enter")cmdSend(this.value)};
+$("cmdchips").innerHTML=["Which products are low on stock?","Analyse sales","Which category has the highest revenue?","Best sellers","Which product has the highest profit?","Write a promotion for headsets"].map(function(c){return '<button class="chip" data-qq="'+esc(c)+'">'+esc(c)+'</button>'}).join("");
+$("cmdchips").onclick=function(e){if(e.target.dataset.qq)cmdSend(e.target.dataset.qq)};
+var wishOnly=false;
+$("addons").onclick=function(e){var b=e.target.closest("[data-ad]");if(!b)return;var k=b.dataset.ad;if(S.addons[k]){delete S.addons[k];toast(ADD[k][0]+" removed")}else{S.addons[k]=1;toast(ADD[k][0]+" added to your cart")}save();renderCart()};
+$("addlines").onclick=function(e){var k=e.target.dataset.ra;if(k){delete S.addons[k];save();renderCart()}};
+
+$("modal").onclick=function(e){var id=e.target.dataset.add;if(id)addCart(id);if(e.target.id==="modal"||e.target.id==="mclose")$("modal").classList.remove("open")};
+document.onkeydown=function(e){if(e.key==="Escape")$("modal").classList.remove("open")};
+$("q").oninput=renderShop;$("sort").onchange=renderShop;$("instock").onchange=renderShop;
+$("wishbtn").onclick=function(){wishOnly=!wishOnly;this.setAttribute("aria-pressed",wishOnly);renderShop()};
+$("tiles").onclick=function(e){var b=e.target.closest("[data-c]");if(b){cat=b.dataset.c;renderShop();$("grid").scrollIntoView()}};
+$("cpnbtn").onclick=function(){var v=$("cpn").value.trim().toUpperCase();if(v==="VOLT10"){S.coupon=v;save();renderCart();toast("10% off applied")}else toast("That code isn’t valid")};
+$("n-csv").onclick=function(){var t="SKU\tName\tCategory\tPrice\tStock\n"+S.products.map(function(p){return[p.id,p.name,p.cat,p.price,p.stock].join("\t")}).join("\n");try{navigator.clipboard.writeText(t).then(function(){toast("Stock list copied. Paste it into Excel.")},function(){toast("The browser blocked copying")})}catch(e){toast("Copying isn’t available here")}};
+$("b-sku").onkeydown=function(e){if(e.key!=="Enter")return;var p=P(this.value.trim().toUpperCase());if(!p){toast("No product with that SKU");return}if((S.bill[p.id]||0)+1>p.stock){toast("Out of stock");return}S.bill[p.id]=(S.bill[p.id]||0)+1;this.value="";renderMgr();$("b-sku").focus()};
+$("deptinfo").onclick=function(e){if(e.target.id==="deptall"){cat="All";renderShop()}};
+$("chips").onclick=function(e){if(e.target.dataset.c){cat=e.target.dataset.c;renderShop()}};
+$("grid").onclick=function(e){var cp=e.target.dataset.cmp;if(cp){var ci=S.cmp.indexOf(cp);if(ci>-1)S.cmp.splice(ci,1);else if(S.cmp.length<3)S.cmp.push(cp);else toast("Compare up to 3 products");save();renderShop();return}var w=e.target.dataset.w;if(w){if(S.wish[w])delete S.wish[w];else S.wish[w]=1;save();renderShop();return}var v=e.target.closest("[data-v]");if(v){openV(v.dataset.v);return}var id=e.target.dataset.add;if(!id)return;var p=P(id),n=(S.cart[id]||0)+1;
+  if(n>p.stock){toast("Only "+p.stock+" in stock");return}S.cart[id]=n;renderCart();toast("Added to cart")};
+
+/* cart */
+function renderCart(){
+  var ids=Object.keys(S.cart),total=0,count=0;
+  $("cartlines").innerHTML=ids.length?ids.map(function(id){var p=P(id),n=S.cart[id];total+=p.price*n;count+=n;
+    return '<div class="ln"><span class="lw"><i class="th" style="'+tint(p.cat)+'">'+pic(p)+'</i><span>'+esc(p.name)+'<br><small class="sku">'+inr(p.price)+' each</small></span></span><span class="q"><button data-d="'+id+'" aria-label="Remove one">−</button> '+n+' <button data-u="'+id+'" aria-label="Add one">+</button></span></div>'}).join(""):'<p>Your cart is empty. Add a product from the shop.</p>';
+  var disc=(S.coupon==="VOLT10"?Math.round(total*.1):0)+dealSave(S.cart);var ak=Object.keys(S.addons),at=0;ak.forEach(function(k){at+=addPrice(k,total)});$("addlines").innerHTML=count?ak.map(function(k){var pr=addPrice(k,total);return '<div class="ln"><span>'+ADD[k][0]+'</span><span>'+(pr?inr(pr):"Free")+' <button class="btn alt" data-ra="'+k+'">Remove</button></span></div>'}).join(""):"";$("carttotal").textContent=inr(total-disc+at)+(disc?" (saved "+inr(disc)+")":"");renderAddons();var left=999-total;$("ship").innerHTML=count?(left>0?'Add '+inr(left)+' more for free delivery<div class="prog"><i style="width:'+Math.min(100,total/9.99)+'%"></i></div>':'You get free delivery<div class="prog"><i style="width:100%"></i></div>'):'';$("cartbtn").textContent="Cart ("+count+")"}
+$("cartbtn").onclick=function(){$("drawer").classList.add("open")};
+$("close").onclick=function(){$("drawer").classList.remove("open")};
+$("cartlines").onclick=function(e){var d=e.target.dataset.d,u=e.target.dataset.u;
+  if(d){S.cart[d]--;if(S.cart[d]<=0)delete S.cart[d]}
+  if(u){if(S.cart[u]+1>P(u).stock){toast("No more stock");return}S.cart[u]++}
+  renderCart()};
+function placeOrder(cart,who,src){
+  var items=[],total=0;Object.keys(cart).forEach(function(id){var p=P(id),n=cart[id];p.stock-=n;p.sold[p.cat]=(p.sold[p.cat]||0)+n;p.units=(p.units||0)+n;total+=p.price*n;items.push(p.name+" ×"+n)});
+  S.orders.unshift({no:"#"+(S.seq++),date:new Date().toLocaleDateString("en-IN"),who:who||"Walk-in",items:items.concat(src==="Online"?Object.keys(S.addons).map(function(k){return ADD[k][0]}):[]).join(", "),total:total-(src==="Online"?(S.coupon==="VOLT10"?Math.round(total*.1):0)+dealSave(cart):0)+(src==="Online"?addonTotal(total):0),src:src,status:src==="Counter"?"Completed":"Pending",cats:Object.keys(cart).map(function(id){return[P(id).cat,P(id).price*cart[id]]})});
+  act("Orders","New "+src.toLowerCase()+" order received, total "+inr(S.orders[0].total),S.orders[0].no);return S.orders[0]}
+$("checkout").onclick=function(){if(!Object.keys(S.cart).length){toast("Cart is empty");return}
+  var o=placeOrder(S.cart,$("cname").value.trim(),"Online");S.cart={};S.addons={};S.coupon="";$("cpn").value="";$("cname").value="";renderCart();renderShop();$("drawer").classList.remove("open");receipt(o)};
+
+/* manager */
+var SUBS=[["over","Overview"],["inv","Inventory"],["bill","Counter billing"],["ord","Orders"],["rpr","Repairs"],["act","Activity feed"],["cmd","VoltAI Command"],["sec","VoltShield"]];
+function renderMgr(){
+  $("subnav").innerHTML=SUBS.map(function(s){return '<button class="chip" data-t="'+s[0]+'" aria-pressed="'+(s[0]===tab)+'">'+s[1]+'</button>'}).join("");
+  SUBS.forEach(function(s){$("t-"+s[0]).classList.toggle("hide",s[0]!==tab)});
+  var low=S.products.filter(function(p){return p.stock<=p.re}),
+      rev=S.orders.reduce(function(a,o){return a+o.total},0),
+      val=S.products.reduce(function(a,p){return a+p.price*p.stock},0),
+      pend=S.orders.filter(function(o){return o.status==="Pending"}).length;
+  var ts=S.products.filter(function(p){return p.units}).sort(function(a,b){return b.units-a.units}).slice(0,5);$("top").innerHTML=ts.length?ts.map(function(p){return '<div class="ln"><span class="lw"><i class="th" style="'+tint(p.cat)+'">'+pic(p)+'</i>'+esc(p.name)+'</span><b>'+p.units+' sold</b></div>'}).join(""):'<p>Nothing sold yet. Complete a sale to see your best sellers.</p>';
+  renderRep();renderAct();renderSec();$("m-mgr").textContent="Manage store"+(low.length?" ("+low.length+" alerts)":"");$("stats").innerHTML='<div class="stat"><b>'+inr(rev)+'</b><span>Revenue</span></div><div class="stat"><b>'+S.orders.length+'</b><span>Orders ('+pend+' pending)</span></div><div class="stat"><b>'+inr(val)+'</b><span>Stock value</span></div><div class="stat'+(low.length?" warn":"")+'"><b>'+low.length+'</b><span>Items to restock</span></div>';
+  var by={};S.orders.forEach(function(o){o.cats.forEach(function(c){by[c[0]]=(by[c[0]]||0)+c[1]})});
+  var mx=Math.max.apply(null,CATS.map(function(c){return by[c]||0}).concat([1]));
+  $("bars").innerHTML=S.orders.length?CATS.map(function(c){var v=by[c]||0;return '<div class="bar"><span>'+c+'</span><i style="width:'+(v/mx*100)+'%"></i><span>'+inr(v)+'</span></div>'}).join(""):'<p>No sales yet. Place an order in the shop or at the counter.</p>';
+  $("lowlist").innerHTML=low.length?low.map(function(p){return '<div class="ln"><span>'+esc(p.name)+' <small class="sku">'+p.id+'</small></span><span><b class="'+status(p)[1]+'">'+p.stock+' left</b> <button class="btn alt" data-re="'+p.id+'">Restock +10</button></span></div>'}).join(""):'<p>Every product is above its reorder level.</p>';
+  $("inv").innerHTML=S.products.map(function(p){return '<tr><td><span class="lw"><i class="th" style="'+tint(p.cat)+'">'+pic(p)+'</i><span>'+esc(p.name)+'<br><small class="sku">'+p.cat+'</small></span></span></td><td>'+p.id+'</td><td><input type="number" min="0" value="'+p.price+'" data-f="price" data-id="'+p.id+'" aria-label="Price"></td><td><input type="number" min="0" value="'+p.stock+'" data-f="stock" data-id="'+p.id+'" aria-label="Stock"></td><td><input type="number" min="0" value="'+p.re+'" data-f="re" data-id="'+p.id+'" aria-label="Reorder level"></td><td><button class="btn alt" data-del="'+p.id+'">Delete</button></td></tr>'}).join("");
+  $("n-cat").innerHTML=CATS.map(function(c){return "<option>"+c+"</option>"}).join("");
+  $("b-prod").innerHTML=S.products.filter(function(p){return p.stock>0}).map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+' – '+inr(p.price)+' ('+p.stock+' left)</option>'}).join("");
+  var ids=Object.keys(S.bill),bt=0;
+  $("bill").innerHTML=ids.length?ids.map(function(id){var p=P(id);bt+=p.price*S.bill[id];return '<div class="ln"><span>'+esc(p.name)+' ×'+S.bill[id]+'</span><span>'+inr(p.price*S.bill[id])+' <button class="btn alt" data-bd="'+id+'">Remove</button></span></div>'}).join("")+'<div class="ln" style="font-weight:500"><span>Bill total</span><span>'+inr(bt)+'</span></div><p><button class="btn" id="b-pay">Complete sale</button></p>':'<p>The bill is empty. Choose a product and add it.</p>';
+  $("ords").innerHTML=S.orders.length?S.orders.map(function(o,i){return '<tr><td>'+o.no+'<br><small class="sku">'+esc(o.who)+'</small></td><td>'+o.date+'</td><td>'+esc(o.items)+'</td><td>'+inr(o.total)+'</td><td>'+o.src+'</td><td><select data-os="'+i+'" aria-label="Order status">'+["Pending","Packed","Shipped","Completed"].map(function(s){return "<option"+(s===o.status?" selected":"")+">"+s+"</option>"}).join("")+'</select></td></tr>'}).join(""):'<tr><td colspan="6">No orders yet.</td></tr>'}
+$("subnav").onclick=function(e){if(e.target.dataset.t){tab=e.target.dataset.t;renderMgr()}};
+$("lowlist").onclick=function(e){var id=e.target.dataset.re;if(id){P(id).stock+=10;act("Inventory",P(id).name+": restocked by 10",id);renderMgr();toast("Restocked 10 units")}};
+$("inv").onchange=function(e){var t=e.target,p=P(t.dataset.id);if(!p)return;p[t.dataset.f]=Math.max(0,Number(t.value)||0);act("Inventory",p.name+": "+t.dataset.f+" changed to "+p[t.dataset.f],p.id);renderMgr();toast("Saved")};
+$("inv").onclick=function(e){var id=e.target.dataset.del;if(id&&confirm("Delete this product?")){S.products=S.products.filter(function(p){return p.id!==id});act("Inventory","Product deleted",id);renderMgr()}};
+$("n-add").onclick=function(){var n=$("n-name").value.trim(),pr=Number($("n-price").value);
+  if(!n||!(pr>=0)||$("n-price").value===""){toast("Enter a name and a price");return}
+  var max=S.products.reduce(function(a,p){return Math.max(a,parseInt(p.id.slice(3),10))},99);
+  S.products.push({id:"VB-"+(max+1),name:n,cat:$("n-cat").value,price:pr,stock:Number($("n-stock").value)||0,re:Number($("n-re").value)||0,sold:{}});
+  act("Inventory","Product added: "+n,"VB-"+(max+1));["n-name","n-price","n-stock"].forEach(function(i){$(i).value=""});renderMgr();toast("Product added")};
+$("b-add").onclick=function(){var id=$("b-prod").value;if(!id){toast("No product in stock");return}var n=Math.max(1,parseInt($("b-qty").value,10)||1),p=P(id);
+  if((S.bill[id]||0)+n>p.stock){toast("Only "+p.stock+" in stock");return}S.bill[id]=(S.bill[id]||0)+n;renderMgr()};
+$("bill").onclick=function(e){var id=e.target.dataset.bd;if(id){delete S.bill[id];renderMgr()}
+  if(e.target.id==="b-pay"){var o=placeOrder(S.bill,"Walk-in","Counter");S.bill={};renderMgr();toast("Sale "+o.no+" completed")}};
+$("ords").onchange=function(e){var i=e.target.dataset.os;if(i!==undefined){S.orders[i].status=e.target.value;act("Orders","Order status set to "+e.target.value,S.orders[i].no);renderMgr();toast("Status updated")}};
+
+function render(){renderShop();renderCart();renderMgr()}
+
+render();
+var PF={},pfCur="README.md";
+function pfRender(){$("fchips").innerHTML=Object.keys(PF).map(function(n){return '<button class="chip" data-f="'+n+'" aria-pressed="'+(n===pfCur)+'">'+n+'</button>'}).join("");$("fview").textContent=PF[pfCur]}
+$("fchips").onclick=function(e){var f=e.target.dataset.f;if(f){pfCur=f;pfRender()}};
+$("fcopy").onclick=function(){try{navigator.clipboard.writeText(PF[pfCur]).then(function(){toast("Copied "+pfCur)},function(){toast("The browser blocked copying")})}catch(e){toast("Copying isn\u2019t available here")}};
+$("fdl").onclick=function(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([PF[pfCur]],{type:"text/plain"}));a.download=pfCur.split("/").pop();document.body.appendChild(a);a.click();a.remove();toast("Downloading "+pfCur.split("/").pop())};
+$("m-files").onclick=function(){mode("files")};pfRender();
+
+DEPTS.forEach(function(d){if(!d[1]&&CATS.indexOf(d[0])<0)CATS.push(d[0])});
+function csvParse(t){var rows=[],r=[],f="",q=false,d=(t.indexOf("\t")>-1&&t.indexOf(",")<0)?"\t":",";for(var i=0;i<t.length;i++){var c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}else if(c==='"')q=true;else if(c===d){r.push(f);f=""}else if(c==="\n"||c==="\r"){if(c==="\r"&&t[i+1]==="\n")i++;r.push(f);f="";rows.push(r);r=[]}else f+=c}r.push(f);rows.push(r);return rows.filter(function(r){return r.join("").trim()})}
+function catOf(s){s=String(s).trim().toLowerCase();var out="";DEPTS.forEach(function(d){if(d[0].toLowerCase()===s)out=d[1]||d[0]});if(out)return out;CATS.forEach(function(c){if(c.toLowerCase()===s)out=c});return out}
+$("csvf").onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){$("csvt").value=r.result};r.readAsText(f)};
+$("csvgo").onclick=function(){var rows=csvParse($("csvt").value);if(!rows.length){toast("Paste or choose a CSV first");return}
+ if(rows[0].length>=3&&isNaN(Number(rows[0][2])))rows.shift();rows=rows.slice(0,2000);
+ var max=S.products.reduce(function(a,p){return Math.max(a,parseInt(p.id.slice(3),10))},99),ok=0,bad=[];
+ rows.forEach(function(r,i){var n=(r[0]||"").trim(),c=catOf(r[1]||""),pr=Number(String(r[2]||"").replace(/[₹,\s]/g,"")),st=Number(r[3]||0),re=Number(r[4]||0),why="";
+  if(!n)why="no name";else if(!c)why="unknown category";else if(String(r[2]||"").trim()===""||!(pr>=0))why="invalid price";else if(!(st>=0)||st%1)why="invalid stock";else if(!(re>=0)||re%1)why="invalid reorder level";
+  else if(S.products.some(function(p){return p.name.toLowerCase()===n.toLowerCase()&&p.cat===c}))why="already exists";
+  if(why){bad.push("Row "+(i+1)+" ("+esc(n||"?")+"): "+why);return}
+  S.products.push({id:"VB-"+(++max),name:n,cat:c,price:pr,stock:st,re:re,sold:{}});ok++});
+ save();render();$("csvr").innerHTML="<b>"+ok+" imported</b>, "+bad.length+" skipped"+(bad.length?"<br>"+bad.slice(0,20).join("<br>")+(bad.length>20?"<br>and "+(bad.length-20)+" more":""):"");toast(ok+" products imported")};
+
+var VBL={cpu:"Processor",mb:"Motherboard",gpu:"Graphics card",ram:"RAM",sto:"Storage",cas:"PC case",psu:"Power supply"};
+var VBP={
+cpu:[{id:"c1",name:"Demo CPU A (AM5, 6-core)",price:18000,socket:"AM5",tdp:105},{id:"c2",name:"Demo CPU B (LGA1700, 6-core)",price:15000,socket:"LGA1700",tdp:65}],
+mb:[{id:"m1",name:"Demo board A (AM5, DDR5, ATX)",price:14000,socket:"AM5",ddr:"DDR5",form:"ATX",m2:2,supports:["c1"]},{id:"m2",name:"Demo board B (LGA1700, DDR4, mATX)",price:9000,socket:"LGA1700",ddr:"DDR4",form:"mATX",m2:1},{id:"m3",name:"Demo board C (AM5, DDR5, mATX)",price:11000,socket:"AM5",ddr:"DDR5",form:"mATX",m2:1,supports:[]}],
+gpu:[{id:"g1",name:"Demo GPU A (300 mm, 200 W)",price:32000,len:300,pw:200},{id:"g2",name:"Demo GPU B (240 mm, 120 W)",price:18000,len:240,pw:120}],
+ram:[{id:"r1",name:"Demo RAM 16 GB DDR5",price:5500,ddr:"DDR5"},{id:"r2",name:"Demo RAM 16 GB DDR4",price:3500,ddr:"DDR4"}],
+sto:[{id:"s1",name:"Demo NVMe SSD 1 TB",price:6000,type:"nvme"},{id:"s2",name:"Demo SATA SSD 512 GB",price:3000,type:"sata"}],
+cas:[{id:"k1",name:"Demo case A (ATX/mATX, GPU up to 330 mm)",price:5000,forms:["ATX","mATX"],maxGpu:330},{id:"k2",name:"Demo case B (mATX only, GPU up to 250 mm)",price:3500,forms:["mATX"],maxGpu:250}],
+psu:[{id:"p1",name:"Demo PSU 650 W",price:5000,w:650},{id:"p2",name:"Demo PSU 450 W",price:3200,w:450}]};
+var vbSel={},VBS={ok:["Compatible","var(--teal)"],warn:["Potential issue","var(--amber)"],bad:["Incompatible","var(--red)"],info:["More information required","var(--mute)"]};
+function vbG(k){return VBP[k].filter(function(p){return p.id===vbSel[k]})[0]}
+function vbRender(){var ks=Object.keys(VBL),g={};ks.forEach(function(k){g[k]=vbG(k)});var R=[],tot=0,pw=0;
+ ks.forEach(function(k){if(g[k])tot+=g[k].price});
+ if(g.cpu)pw+=g.cpu.tdp;if(g.gpu)pw+=g.gpu.pw;if(g.cpu||g.gpu||g.mb)pw+=80;
+ if(g.cpu&&g.mb){if(g.cpu.socket!==g.mb.socket)R.push(["bad","Processor socket "+g.cpu.socket+" does not fit board socket "+g.mb.socket]);
+  else if(!g.mb.supports)R.push(["info","Socket matches, but this board's exact CPU support list and BIOS version are not in the data. Verify with the manufacturer."]);
+  else if(g.mb.supports.indexOf(g.cpu.id)<0)R.push(["bad","Socket matches, but this CPU is not on the board's supported list"]);
+  else R.push(["ok","Processor is on the board's supported CPU list (confirm the BIOS version before buying)"])}
+ if(g.mb&&g.ram)R.push(g.mb.ddr===g.ram.ddr?["ok","RAM generation "+g.ram.ddr+" matches the board"]:["bad","RAM is "+g.ram.ddr+" but the board takes "+g.mb.ddr]);
+ if(g.mb&&g.cas)R.push(g.cas.forms.indexOf(g.mb.form)>-1?["ok","Board size "+g.mb.form+" fits the case"]:["bad","Board size "+g.mb.form+" does not fit this case"]);
+ if(g.gpu&&g.cas)R.push(g.gpu.len<=g.cas.maxGpu?["ok","Graphics card ("+g.gpu.len+" mm) fits the case limit of "+g.cas.maxGpu+" mm"]:["bad","Graphics card ("+g.gpu.len+" mm) is longer than the case limit of "+g.cas.maxGpu+" mm"]);
+ if(g.sto&&g.mb&&g.sto.type==="nvme")R.push(g.mb.m2>0?["ok","Board has an M.2 slot for the NVMe drive"]:["bad","Board has no M.2 slot"]);
+ var hd="";
+ if(g.psu&&pw){var need=Math.ceil(pw*1.3);hd=g.psu.w-pw;R.push(g.psu.w>=need?["ok","Power supply has "+hd+" W of headroom over the estimated "+pw+" W"]:g.psu.w>=pw?["warn","Power supply covers the estimated "+pw+" W but with little headroom (about "+need+" W is recommended)"]:["bad","Power supply ("+g.psu.w+" W) is below the estimated "+pw+" W"]);R.push(["info","Power connectors, cooler height and cable fit are not in the demo data and need manual verification"])}
+ var miss=ks.filter(function(k){return !g[k]}).map(function(k){return VBL[k]});
+ if(!R.length)R.push(["info","Pick parts to see compatibility checks"]);
+ var anyBad=R.some(function(r){return r[0]==="bad"}),bud=Number($("vbbud").value)||0;
+ $("vbsel").innerHTML=ks.map(function(k){return '<label>'+VBL[k]+'<select data-k="'+k+'"><option value="">None</option>'+VBP[k].map(function(p){return '<option value="'+p.id+'"'+(vbSel[k]===p.id?" selected":"")+'>'+esc(p.name)+' · '+inr(p.price)+'</option>'}).join("")+'</select></label>'}).join("");
+ $("vbrep").innerHTML='<div class="ln"><b>Total</b><b>'+inr(tot)+'</b></div>'+(bud?'<div class="ln"><span>Remaining budget</span><b style="color:'+(bud-tot<0?"var(--red)":"inherit")+'">'+(bud-tot<0?"−":"")+inr(Math.abs(bud-tot))+'</b></div>':'')+'<div class="ln"><span>Estimated power draw</span><span>'+(pw?pw+" W (estimate)":"–")+'</span></div>'+(miss.length?'<div class="ln"><span>Missing</span><span>'+miss.join(", ")+'</span></div>':'')+'<h3 style="font-size:16px;margin:12px 0 4px">Compatibility report'+(anyBad?' <span style="color:var(--red)">: problems found</span>':'')+'</h3>'+R.map(function(r){return '<div class="ln"><span>'+esc(r[1])+'</span><b style="color:'+VBS[r[0]][1]+';white-space:nowrap">'+VBS[r[0]][0]+'</b></div>'}).join("")}
+$("vbsel").onchange=function(e){var k=e.target.dataset.k;if(k){vbSel[k]=e.target.value;vbRender()}};
+$("vbbud").oninput=vbRender;
+$("vbcopy").onclick=function(){var t="VoltBuild (demo parts)\n"+Object.keys(VBL).map(function(k){var p=vbG(k);return VBL[k]+": "+(p?p.name+" "+p.price:"none")}).join("\n");try{navigator.clipboard.writeText(t).then(function(){toast("Build list copied")},function(){toast("The browser blocked copying")})}catch(e){toast("Copying isn’t available here")}};
+$("m-vb").onclick=function(){mode("vb")};vbRender();
+</script>
+
+<script>
+(function(){
+var XC={k1:{maxCool:165,rad:[240,280]},k2:{maxCool:150,rad:[]}};
+VBL.cool="CPU cooler";VBP.cool=[{id:"o1",name:"Demo air cooler (AM5/LGA1700, 155 mm, 150 W)",price:2500,type:"air",socks:["AM5","LGA1700"],h:155,tdpMax:150},{id:"o2",name:"Demo 240 mm AIO liquid cooler (AM5/LGA1700)",price:7000,type:"aio",socks:["AM5","LGA1700"],rad:240,tdpMax:250}];
+if(!S.products.some(function(p){return p.vb})){Object.keys(VBP).forEach(function(k){VBP[k].forEach(function(x){var sp=Object.assign({slot:k},x,XC[x.id]||{});delete sp.id;delete sp.name;delete sp.price;if(sp.supports)sp.supports=sp.supports.map(function(i){return"VB-"+i.toUpperCase()});S.products.push({id:"VB-"+x.id.toUpperCase(),name:x.name,cat:"PC Components and Storage",price:x.price,stock:5,re:2,ic:"",sold:{},vb:sp})})});save()}
+function sync(){Object.keys(VBL).forEach(function(k){VBP[k]=S.products.filter(function(p){return p.vb&&p.vb.slot===k}).map(function(p){return Object.assign({},p.vb,{id:p.id,name:p.name,price:p.price,stock:p.stock})})});Object.keys(vbSel).forEach(function(k){if(vbSel[k]&&!vbG(k))vbSel[k]=""})}
+S.builds=S.builds||[];
+var box=document.createElement("div");box.id="vbx";$("vbrep").parentNode.insertBefore(box,$("vbrep").nextSibling);
+function ids(){return Object.keys(VBL).map(function(k){return vbSel[k]}).filter(Boolean)}
+function txt(){var t=0,l=Object.keys(VBL).map(function(k){var p=vbG(k);if(p)t+=p.price;return VBL[k]+": "+(p?p.name+" ("+p.id+") "+inr(p.price):"none")});return"VoltBuild summary (demo parts, not real products)\n"+l.join("\n")+"\nTotal: "+inr(t)}
+function extra(){var g={},R=[];Object.keys(VBL).forEach(function(k){g[k]=vbG(k)});var c=g.cool;
+ if(c){if(g.cpu){R.push(c.socks.indexOf(g.cpu.socket)>-1?["ok","Cooler lists support for socket "+g.cpu.socket]:["bad","Cooler does not list socket "+g.cpu.socket]);R.push(c.tdpMax>=g.cpu.tdp?["ok","Cooler rating ("+c.tdpMax+" W) covers the CPU's "+g.cpu.tdp+" W"]:["warn","Cooler rating is below the CPU's "+g.cpu.tdp+" W"])}
+  if(g.cas)R.push(c.type==="air"?(c.h<=g.cas.maxCool?["ok","Cooler height "+c.h+" mm fits the case limit of "+g.cas.maxCool+" mm"]:["bad","Cooler height "+c.h+" mm exceeds the case limit of "+g.cas.maxCool+" mm"]):(g.cas.rad&&g.cas.rad.indexOf(c.rad)>-1?["ok","Case lists support for a "+c.rad+" mm radiator"]:["bad","Case does not list support for a "+c.rad+" mm radiator"]))}
+ else if(g.cpu)R.push(["info","No CPU cooler selected yet"]);
+ Object.keys(VBL).forEach(function(k){if(g[k]&&g[k].stock<=0)R.push(["warn",g[k].name+" is out of stock"])});
+ var H=[];if(g.sto&&g.sto.type==="sata"&&g.mb&&g.mb.m2>0)H.push("The board has an M.2 slot, so an NVMe SSD is an option instead of SATA.");if(g.cpu&&!c)H.push("Add a cooler to complete the build.");
+ var sv=S.builds.map(function(b,i){return'<div class="ln"><span>'+esc(b.name)+' <small class="sku">'+inr(b.total)+'</small></span><span><button class="chip" data-bl="'+i+'">Load</button> <button class="chip" data-bd="'+i+'">Duplicate</button> <button class="chip" data-bx="'+i+'">Delete</button></span></div>'}).join("");
+ box.innerHTML='<h3 style="font-size:16px;margin:12px 0 4px">Cooling, stock and extra checks</h3>'+(R.length?R.map(function(r){return'<div class="ln" style="color:'+VBS[r[0]][1]+'"><span>'+VBS[r[0]][0]+': '+esc(r[1])+'</span></div>'}).join(""):"<p class='sku'>Pick parts to see these checks.</p>")+(H.length?'<h3 style="font-size:16px;margin:12px 0 4px">Upgrade ideas</h3><p class="sku">'+H.join(" ")+'</p>':'')+'<p class="row"><button class="btn" id="vbcart">Add build to cart</button><button class="btn alt" id="vbsave">Save build</button><button class="btn alt" id="vbshare">Copy share link</button><button class="btn alt" id="vbdl">Download summary</button></p>'+(sv?'<h3 style="font-size:16px;margin:12px 0 4px">Saved builds</h3>'+sv:'')+'<p class="sku">Parts are demo data stored in the catalogue. Edit prices and stock in Manage store. Share links work on this device only.</p>'}
+var _r=vbRender;vbRender=function(){sync();_r();extra()};$("vbbud").oninput=vbRender;
+function total(){return ids().reduce(function(a,i){return a+P(i).price},0)}
+box.addEventListener("click",function(e){var t=e.target,d=t.dataset;
+ if(t.id==="vbcart"){var l=ids();if(!l.length){toast("Pick parts first");return}var o=l.filter(function(i){return P(i).stock<=0});if(o.length){toast("Out of stock: "+o.map(function(i){return P(i).name}).join(", "));return}if(/Incompatible/.test($("vbrep").textContent+box.textContent)&&!confirm("This build has incompatible parts. Add it to the cart anyway?"))return;l.forEach(addCart)}
+ else if(t.id==="vbsave"){if(!ids().length){toast("Pick parts first");return}S.builds.unshift({name:"Build "+(S.builds.length+1),sel:JSON.parse(JSON.stringify(vbSel)),total:total()});save();vbRender();toast("Build saved")}
+ else if(t.id==="vbshare"){var u=location.href.split("#")[0]+"#build="+btoa(JSON.stringify(vbSel));try{navigator.clipboard.writeText(u);toast("Link copied")}catch(x){prompt("Copy this link",u)}}
+ else if(t.id==="vbdl"){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt()],{type:"text/plain"}));a.download="voltbuild-summary.txt";a.click()}
+ else if(d.bl!==undefined){vbSel=Object.assign({},S.builds[d.bl].sel);vbRender()}
+ else if(d.bd!==undefined){var b=S.builds[d.bd];S.builds.splice(+d.bd+1,0,{name:b.name+" copy",sel:Object.assign({},b.sel),total:b.total});save();vbRender()}
+ else if(d.bx!==undefined){S.builds.splice(d.bx,1);save();vbRender()}});
+var h=location.hash.match(/^#build=(.+)/);if(h){try{vbSel=JSON.parse(atob(h[1]))}catch(e){}}
+vbRender();
+if(h)setTimeout(function(){mode("vb")},0);
+})();
+</script>
+<script>
+(function(){
+var TH={"Cyber Blue":["#0066ff","#00a3ff","#0b1530"],"Neon Purple":["#9b5cff","#e040fb","#1a0b2e"],"Blood Red":["#e11d2e","#ff6b7d","#2a0a0e"],"Arctic White":["#c9d1de","#8fb4ff","#e8edf5"],"Stealth Black":["#2a2f3a","#5a6475","#0a0b0e"],"RGB Rainbow":["#ff3b3b","#3b8bff","#101015"],"Cyberpunk":["#fcee0a","#ff2a6d","#14061f"],"Minimalist":["#cfd4dc","#ffffff","#16181d"],"Anime-inspired":["#ff7eb6","#7ad7ff","#1b1030"],"Custom User Design":null};
+var IT={kb:"Custom mechanical keyboard",ms:"Custom gaming mouse",mat:"Mousepad / deskmat",cab:"Custom keyboard cable",hs:"Headset",wr:"Wrist rest",grip:"Mouse grips and skins",desk:"Desk accessory"};
+var PRE={"Budget Gaming":{t:"Stealth Black",l:"60",m:"amb",s:"std",inc:"kb,ms,mat"},"Competitive FPS":{t:"Cyber Blue",l:"tkl",m:"amb",s:"ext",inc:"kb,ms,mat,grip"},"RGB Gaming":{t:"RGB Rainbow",l:"full",m:"erg",s:"ext",inc:"kb,ms,mat,cab",rgb:"rainbow"},"Minimalist Setup":{t:"Minimalist",l:"60",m:"amb",s:"std",inc:"kb,ms,mat,wr"},"Wireless Gaming":{t:"Arctic White",l:"tkl",m:"amb",s:"std",inc:"kb,ms,mat"},"Premium Gaming":{t:"Neon Purple",l:"full",m:"erg",s:"ext",inc:"kb,ms,mat,cab,hs,wr,grip,desk"},"Anime Gaming":{t:"Anime-inspired",l:"tkl",m:"erg",s:"ext",inc:"kb,ms,mat,grip"}};
+var C={t:"Cyber Blue",a:"#0066ff",b:"#00a3ff",bg:"#0b1530",tag:"",l:"tkl",m:"amb",s:"std",pat:"grid",rgb:"static",inc:{kb:1,ms:1,mat:1}};
+S.cprices=S.cprices||{};S.cfees=S.cfees||{};S.combos=S.combos||[];S.creqs=S.creqs||[];
+var root=document.getElementById("cust");
+function hs(){return S.products.filter(function(p){return p.ic==="striker"})[0]}
+function price(k){if(k==="hs"&&hs()&&S.cprices.hs===undefined)return hs().price;var v=S.cprices[k];return v===""||v===undefined?null:+v}
+function theme(n){C.t=n;if(TH[n]){C.a=TH[n][0];C.b=TH[n][1];C.bg=TH[n][2]}if(n==="RGB Rainbow")C.rgb="rainbow"}
+function pv(){
+ var W=C.s==="ext"?540:400,H=C.s==="ext"?250:210,mx=300-W/2,cols=C.l==="full"?22:C.l==="tkl"?17:14,kw=cols*13+4,kx=300-kw/2-(C.s==="ext"?30:20),ky=150;
+ var o='<svg viewBox="0 0 600 340" role="img" aria-label="Preview mockup of your gaming combo"><defs><pattern id="pg" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="'+C.b+'" stroke-opacity=".35"/></pattern><pattern id="ps" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="14" fill="'+C.b+'" fill-opacity=".3"/></pattern><pattern id="ph" width="24" height="21" patternUnits="userSpaceOnUse"><path d="M6 0l6 3v7l-6 3-6-3V3z" fill="none" stroke="'+C.b+'" stroke-opacity=".35"/></pattern></defs><rect width="600" height="340" fill="#07090d"/>';
+ if(C.inc.mat)o+='<rect x="'+mx+'" y="50" width="'+W+'" height="'+H+'" rx="14" fill="'+C.bg+'" stroke="'+C.a+'"/>'+(C.pat!=="none"?'<rect x="'+mx+'" y="50" width="'+W+'" height="'+H+'" rx="14" fill="url(#'+(C.pat==="grid"?"pg":C.pat==="stripes"?"ps":"ph")+')"/>':'')+'<text x="'+(mx+W-16)+'" y="'+(50+H-14)+'" text-anchor="end" font-family="Sora,sans-serif" font-weight="700" font-size="20" fill="'+C.b+'">'+esc(C.tag||"")+'</text>';
+ var g='';
+ if(C.inc.kb){if(C.inc.wr)g+='<rect x="'+kx+'" y="'+(ky+78)+'" width="'+kw+'" height="18" rx="6" fill="'+C.bg+'" stroke="'+C.b+'"/>';
+  g+='<rect x="'+kx+'" y="'+ky+'" width="'+kw+'" height="72" rx="6" fill="#0d1016" stroke="'+C.b+'" stroke-width="2"/>';
+  for(var r=0;r<5;r++)for(var c=0;c<cols;c++)g+='<rect x="'+(kx+4+c*13)+'" y="'+(ky+4+r*13)+'" width="10" height="10" rx="2" fill="'+((c+r)%5===0?C.b:C.a)+'"/>';
+  if(C.inc.cab)g+='<path d="M'+(kx+kw/2)+' '+ky+'C'+(kx+kw/2)+' 90 '+(kx+kw/2+40)+' 70 '+(kx+kw/2+40)+' 30" fill="none" stroke="'+C.b+'" stroke-width="4" stroke-linecap="round"/>'}
+ if(C.inc.ms){var mxp=C.s==="ext"?480:430;g+=(C.m==="amb"?'<rect x="'+mxp+'" y="150" width="34" height="58" rx="17"':'<path d="M'+mxp+' 190c0-30 8-44 22-44s16 14 14 40-8 24-18 24-18-8-18-20z"')+' fill="#0d1016" stroke="'+C.b+'" stroke-width="2"/><path d="M'+(mxp+17)+' 152v18" stroke="'+C.a+'" stroke-width="3"/>'+(C.inc.grip?'<path d="M'+(mxp+3)+' 175v20M'+(mxp+31)+' 175v20" stroke="'+C.a+'" stroke-width="3"/>':'')}
+ if(C.inc.hs)g+='<path d="M64 70a30 30 0 0 1 60 0" fill="none" stroke="'+C.b+'" stroke-width="4"/><rect x="56" y="66" width="14" height="24" rx="5" fill="'+C.a+'"/><rect x="118" y="66" width="14" height="24" rx="5" fill="'+C.a+'"/>';
+ if(C.inc.desk)g+='<rect x="24" y="290" width="40" height="28" rx="6" fill="'+C.bg+'" stroke="'+C.a+'"/>';
+ return o+'<g class="'+(C.rgb==="rainbow"?"cu-rb":C.rgb==="breathing"?"cu-br":"")+'">'+g+'</g></svg>'}
+function fees(){var it=0,miss=[];Object.keys(IT).forEach(function(k){if(C.inc[k]){var p=price(k);if(p===null)miss.push(IT[k]);else it+=p}});var d=+S.cfees.disc||0,ds=Math.round(it*d/100),cu=+S.cfees.custom||0,dl=+S.cfees.deliv||0;return{it:it,miss:miss,d:d,ds:ds,cu:cu,dl:dl,tot:it-ds+cu+dl}}
+function render(){var f=fees(),h=hs();
+ var th=Object.keys(TH).map(function(n){return'<button class="chip" data-t="'+n+'" aria-pressed="'+(C.t===n)+'">'+n+'</button>'}).join("");
+ var pre=Object.keys(PRE).map(function(n){return'<button class="chip" data-p="'+n+'">'+n+'</button>'}).join("");
+ var items=Object.keys(IT).map(function(k){var real=k==="hs"&&h,p=price(k);return'<div class="ln"><label><input type="checkbox" data-i="'+k+'"'+(C.inc[k]?" checked":"")+'> '+IT[k]+' <small class="sku">'+(real?"Real catalogue product: "+esc(h.name):"Custom-made, store sets price")+'</small></label><span>'+(real&&S.cprices.hs===undefined?inr(p):'<input type="number" min="0" data-pr="'+k+'" value="'+(S.cprices[k]===undefined?"":S.cprices[k])+'" placeholder="Set price" aria-label="Price for '+IT[k]+'" style="width:110px">')+'</span></div>'}).join("");
+ root.innerHTML='<div class="cu"><div><h2>VoltCustom: Build Your Gaming Gear Combo</h2><p class="sku">The preview is a 2D illustrated mockup, not a 3D model or a product photo. Real catalogue products and custom-made items are labelled separately.</p><div class="cuv">'+pv()+'</div><p class="row">Theme: '+th+'</p><p class="row">Ready-made: '+pre+'</p></div><div><h3>Design</h3><div class="row"><label>Gamer tag<input id="cutag" maxlength="16" value="'+esc(C.tag)+'"></label><label>Keyboard layout<select id="cul"><option value="full">Full size</option><option value="tkl">TKL</option><option value="60">60%</option></select></label><label>Mouse shell<select id="cum"><option value="amb">Ambidextrous</option><option value="erg">Ergonomic</option></select></label><label>Mat size<select id="cus"><option value="std">Standard</option><option value="ext">Extended deskmat</option></select></label><label>Artwork<select id="cup"><option>grid</option><option>stripes</option><option>hex</option><option>none</option></select></label><label>RGB preview<select id="cur"><option>static</option><option>breathing</option><option>rainbow</option></select></label><label>Switch type<select id="cuw"><option>Linear</option><option>Tactile</option><option>Clicky</option><option>Hall Effect (magnetic)</option></select></label><label>Keycap profile<select id="cuk"><option>Cherry</option><option>OEM</option><option>XDA</option></select></label>'+(TH[C.t]?"":'<label>Colour A<input type="color" id="cca" value="'+C.a+'"></label><label>Colour B<input type="color" id="ccb" value="'+C.b+'"></label>')+'</div><h3>Items and prices</h3>'+items+'<h3>Charges set by the store</h3><div class="row"><label>Customisation fee<input type="number" min="0" data-f="custom" value="'+(S.cfees.custom||"")+'" placeholder="Not set"></label><label>Delivery<input type="number" min="0" data-f="deliv" value="'+(S.cfees.deliv||"")+'" placeholder="Not set"></label><label>Bundle discount %<input type="number" min="0" max="50" data-f="disc" value="'+(S.cfees.disc||"")+'" placeholder="None"></label></div><div class="ln"><span>Items</span><b>'+inr(f.it)+'</b></div>'+(f.ds?'<div class="ln"><span>Store-set bundle discount ('+f.d+'%)</span><b>-'+inr(f.ds)+'</b></div>':"")+'<div class="ln"><span>Customisation</span><b>'+(S.cfees.custom?inr(f.cu):"Not set")+'</b></div><div class="ln"><span>Delivery</span><b>'+(S.cfees.deliv?inr(f.dl):"Not set")+'</b></div><div class="ln" style="font-weight:600"><span>Total</span><span>'+inr(f.tot)+'</span></div>'+(f.miss.length?'<p class="low">No price set for: '+f.miss.map(esc).join(", ")+'. The total excludes them.</p>':"")+'<p class="sku">Keyboard: '+C.l+' layout, '+(C.sw||"Linear")+' switches, '+(C.kc||"Cherry")+' keycaps. Switch and keycap choices are saved with your combo and request. They do not change the preview or the price.</p><p class="row"><button class="btn" id="cusave">Save combo</button><button class="btn alt" id="cushare">Copy share link</button><button class="btn" id="cucart"'+(C.inc.hs&&h?"":" disabled")+'>Add catalogue items to cart</button><button class="btn alt" id="cureq">Request custom-made design</button></p><p class="sku">Custom-made items cannot go in the cart because they are not catalogue products. Use Request, and the store quotes and produces them.</p></div></div><div class="cu2"><h3>Saved combos</h3>'+(S.combos.length?S.combos.map(function(c,i){return'<div class="ln"><span>'+esc(c.name)+' <small class="sku">'+c.c.t+'</small></span><span><button class="chip" data-ld="'+i+'">Load</button> <button class="chip" data-dl="'+i+'">Delete</button></span></div>'}).join(""):"<p>Nothing saved yet.</p>")+'<h3>Custom design requests</h3>'+(S.creqs.length?S.creqs.map(function(r,i){return'<div class="ln"><span>'+r.no+' '+esc(r.name)+' <small class="sku">'+r.date+'</small></span><select data-rs2="'+i+'" aria-label="Production status">'+["Requested","In design","In production","Shipped"].map(function(s){return"<option"+(s===r.st?" selected":"")+">"+s+"</option>"}).join("")+'</select></div>'}).join(""):"<p>No requests yet.</p>")+'</div>';
+ ["l","m","s","p","r","w","k"].forEach(function(k){var e=$("cu"+k),key={l:"l",m:"m",s:"s",p:"pat",r:"rgb",w:"sw",k:"kc"}[k];if(C[key])e.value=C[key]})}
+function persist(){save()}
+root.addEventListener("click",function(e){var d=e.target.dataset;
+ if(d.t){theme(d.t);render()}
+ else if(d.p){var p=PRE[d.p];theme(p.t);C.l=p.l;C.m=p.m;C.s=p.s;C.rgb=p.rgb||"static";C.inc={};p.inc.split(",").forEach(function(k){C.inc[k]=1});render()}
+ else if(e.target.id==="cusave"){S.combos.unshift({name:C.tag||"Combo "+(S.combos.length+1),c:JSON.parse(JSON.stringify(C))});persist();render();toast("Combo saved")}
+ else if(e.target.id==="cushare"){var u=location.href.split("#")[0]+"#combo="+btoa(unescape(encodeURIComponent(JSON.stringify(C))));try{navigator.clipboard.writeText(u);toast("Link copied")}catch(x){prompt("Copy this link",u)}}
+ else if(e.target.id==="cucart"){if(hs()){addCart(hs().id)}}
+ else if(e.target.id==="cureq"){var n="CR-"+S.seq++;S.creqs.unshift({no:n,name:C.tag||"Combo",c:JSON.parse(JSON.stringify(C)),st:"Requested",date:new Date().toLocaleDateString("en-IN")});persist();render();toast("Request "+n+" sent to the store")}
+ else if(d.ld!==undefined){C=JSON.parse(JSON.stringify(S.combos[d.ld].c));render()}
+ else if(d.dl!==undefined){S.combos.splice(d.dl,1);persist();render()}});
+root.addEventListener("change",function(e){var t=e.target,d=t.dataset,id=t.id;
+ if(d.i){t.checked?C.inc[d.i]=1:delete C.inc[d.i];render()}
+ else if(d.pr){S.cprices[d.pr]=t.value;persist();render()}
+ else if(d.f){S.cfees[d.f]=t.value;persist();render()}
+ else if(d.rs2!==undefined){S.creqs[d.rs2].st=t.value;persist()}
+ else if(id==="cuw"){C.sw=t.value;render()}else if(id==="cuk"){C.kc=t.value;render()}else if(id==="cul"){C.l=t.value;render()}else if(id==="cum"){C.m=t.value;render()}else if(id==="cus"){C.s=t.value;render()}else if(id==="cup"){C.pat=t.value;render()}else if(id==="cur"){C.rgb=t.value;render()}
+ else if(id==="cca"||id==="ccb"){C[id==="cca"?"a":"b"]=t.value;render()}});
+root.addEventListener("input",function(e){if(e.target.id==="cutag"){C.tag=e.target.value;root.querySelector(".cuv").innerHTML=pv()}});
+var _m=mode;mode=function(m){_m(m);root.classList.toggle("hide",m!=="cust");$("m-cust").setAttribute("aria-pressed",m==="cust");if(m==="cust")render()};
+$("m-cust").onclick=function(){mode("cust")};
+var h=location.hash.match(/^#combo=(.+)/);if(h){try{C=Object.assign(C,JSON.parse(decodeURIComponent(escape(atob(h[1])))));mode("cust")}catch(e){}}
+})();
+</script>
+<script>
+(function(){
+var TH={"Electric Blue":["#0066ff","#008cff","#00a3ff"],"Purple":["#7c3aed","#9b5cff","#b388ff"],"Red":["#e11d2e","#ff3b4a","#ff6b7d"],"Green":["#16a34a","#22c55e","#4ade80"],"Cyan":["#0891b2","#06b6d4","#22d3ee"],"White":["#9aa4b5","#c9d1de","#ffffff"]};
+var box=document.querySelector(".themes");
+function apply(n){var t=TH[n]||TH["Electric Blue"],r=document.documentElement.style;r.setProperty("--acc",t[0]);r.setProperty("--acc2",t[1]);r.setProperty("--acc3",t[2]);r.setProperty("--teal",t[0]);
+ box.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",b.title===n)});try{localStorage.setItem("voltbay_theme",n)}catch(e){}}
+Object.keys(TH).forEach(function(n){var b=document.createElement("button");b.title=n;b.setAttribute("aria-label",n+" theme");b.style.background=TH[n][1];b.onclick=function(){apply(n)};box.appendChild(b)});
+var saved="Electric Blue";try{saved=localStorage.getItem("voltbay_theme")||saved}catch(e){}apply(saved);
+function go(id){var e=document.getElementById(id);if(e)e.scrollIntoView({behavior:"smooth"})}
+function home(){document.getElementById("m-shop").click()}
+document.getElementById("shopnow").onclick=function(){document.getElementById("m-vb").click()};
+document.getElementById("comps").onclick=function(){document.getElementById("m-vb").click()};
+document.getElementById("gear").onclick=function(){var c=[].slice.call(document.querySelectorAll("#chips button")).filter(function(b){return/headset|gaming/i.test(b.textContent)})[0];if(c)c.click();go("grid")};
+document.getElementById("m-gear").onclick=function(){home();document.getElementById("gear").click()};
+document.getElementById("m-deals").onclick=function(){home();setTimeout(function(){go("deals")},50)};
+document.querySelectorAll(".adm button").forEach(function(b){b.addEventListener("click",function(){b.closest("details").open=false})});
+})();
+</script>
+<script>
+(function(){
+var root=document.getElementById("arena"),sel="";
+var G=[["Consoles","Consoles","PlayStation, Xbox and Nintendo"],["Controllers","Controllers","Gamepads for console and PC"],["VR","VR","Standalone virtual reality"],["Keyboards","Keyboards","Mechanical and RGB keyboards"],["Mice","Mice","Precision gaming mice"],["Headsets","Audio","Gaming headsets with microphone"],["Displays","Displays","High refresh-rate monitors"],["Chairs","Chairs","Ergonomic gaming chairs"],["Streaming","Streaming","Capture and streaming gear"],["PC parts and laptops","PC parts|Gaming laptops","Graphics cards and gaming laptops"]];
+function isG(p){return (p.tags||[]).indexOf("gaming-gear")>-1||p.cat==="Gaming"}
+function gp(){return S.products.filter(isG)}
+function inSub(p,g){return g[1].split("|").some(function(s){return (p.tags||[]).indexOf("sub:"+s)>-1})}
+function setupCard(title,note,picks){picks=picks.filter(Boolean);if(!picks.length)return"";var tot=picks.reduce(function(t,p){return t+p.price},0);return'<div class="panel ar-setup"><b>'+title+'</b><span class="sku">'+note+'</span><ul>'+picks.map(function(p){return'<li><a href="#" data-v="'+p.id+'">'+esc(p.name)+'</a> <span class="sku">'+inr(p.price)+'</span></li>'}).join("")+'</ul><p><b>'+inr(tot)+'</b> <button class="btn" data-setup="'+picks.map(function(p){return p.id}).join(",")+'">Add all to cart</button></p></div>'}
+function firstSub(sub,max){return gp().filter(function(p){return p.stock>0&&(p.tags||[]).indexOf("sub:"+sub)>-1&&(!max||p.price<=max)}).sort(function(a,b){return a.price-b.price})[0]}
+function view(){
+ var all=gp(),shown=sel===""?all:all.filter(function(p){return inSub(p,G[+sel])});
+ shown=shown.slice().sort(function(a,b){return (b.stock>0)-(a.stock>0)||a.price-b.price});
+ var feat=all.filter(function(p){return p.stock>0&&p.featured}).concat(all.filter(function(p){return p.stock>0}))[0],deals=all.filter(function(p){return DEALS[p.id]});
+ var sets=[setupCard("Console starter","A console, a second controller and a headset",[firstSub("Consoles",50000),firstSub("Controllers"),firstSub("Audio")]),
+  setupCard("Budget PC desk","Monitor, keyboard, mouse and headset",[firstSub("Displays"),firstSub("Keyboards"),firstSub("Mice"),firstSub("Audio")]),
+  setupCard("Streamer kit","Capture adapter, headset and mouse",[firstSub("Streaming"),firstSub("Audio"),firstSub("Mice")])].join("");
+ root.innerHTML='<div class="ar-hero"><small class="eyebrow">VOLT GAMING ARENA</small><h1>LEVEL UP YOUR GAME.</h1><p>Consoles, controllers, VR, keyboards, mice, monitors, chairs, streaming gear, graphics cards and gaming laptops. Prices and stock are live from the store.</p><div class="btns"><button class="btn" data-go="gear">Explore Gaming Gear</button><button class="btn" data-go="cust">Build Your Gaming Setup</button><button class="btn" data-go="vb">Explore Gaming PCs</button><button class="chip" data-ai="Which is better for me, a console or a gaming PC?">Ask VoltAI</button></div></div>'+
+ (feat?'<h2>Featured gaming product</h2><div class="panel ar-feat"><div class="pic" data-v="'+feat.id+'" style="'+tint(feat.cat)+'">'+pic(feat)+'</div><div><h3>'+esc(feat.name)+'</h3><p class="sku">'+esc(feat.summary||"")+'</p><p class="sku">'+feat.id+' · '+status(feat)[0]+'</p><div class="price" style="font-size:24px">'+inr(feat.price)+'</div><p><button class="btn" data-add="'+feat.id+'">Add to cart</button> <button class="chip" data-v="'+feat.id+'">Details</button></p></div></div>':'')+
+ '<h2 id="aGear">Gaming categories</h2><div class="ar-cats">'+G.map(function(g,i){var n=all.filter(function(p){return inSub(p,g)}).length;return'<button class="panel ar-cat" data-cat="'+i+'" aria-pressed="'+(sel===""+i)+'"><b>'+g[0]+'</b><span class="sku">'+g[2]+'</span><em>'+(n?n+" product"+(n===1?"":"s"):"Coming soon")+'</em></button>'}).join("")+'</div>'+
+ '<h2>'+(sel===""?"All gaming products ("+all.length+")":G[+sel][0])+'</h2>'+(sel!==""?'<p><button class="chip" data-cat="'+sel+'">Show all gaming products</button></p>':'')+(shown.length?'<div class="grid">'+shown.map(function(p){return mini(p,DEALS[p.id]||0)}).join("")+'</div>':'<div class="panel"><p style="margin:0">Nothing in this category yet. New gear is added through Manage store (department "Gaming").</p></div>')+
+ (sets?'<h2>Ready-made setups</h2><div class="ar-cats">'+sets+'</div>':'')+
+ '<h2>Gaming deals</h2><div class="panel"><p style="margin:0">'+(deals.length?deals.length+" gaming product(s) have a store-set discount (shown on the cards above).":"No gaming products have a discount right now.")+'</p></div>'+
+ '<h2>Tools</h2><div class="ar-cats"><button class="panel ar-cat" data-go="cust"><b>VoltCustom combo builder</b><span class="sku">Matching keyboard, mouse and mousepad preview</span><em>Open</em></button><button class="panel ar-cat" data-go="vb"><b>VoltBuild PC builder</b><span class="sku">Pick PC parts and see the total</span><em>Open</em></button><button class="panel ar-cat" data-ai="Suggest a gaming setup under 60000"><b>Ask VoltAI for a setup</b><span class="sku">Tell it your budget</span><em>Open</em></button></div>'}
+root.addEventListener("click",function(e){var d=e.target.closest("[data-go],[data-cat],[data-add],[data-v],[data-setup],[data-ai]");if(!d)return;var k=d.dataset;if(d.tagName==="A")e.preventDefault();
+ if(k.go==="gear"){document.getElementById("aGear").scrollIntoView({behavior:"smooth"})}else if(k.go)mode(k.go);
+ else if(k.cat!==undefined){sel=sel===k.cat?"":k.cat;view()}
+ else if(k.setup)k.setup.split(",").forEach(function(id){addCart(id)});
+ else if(k.ai){if($("aibtn").getAttribute("aria-expanded")!=="true")$("aibtn").click();aiSend(k.ai)}
+ else if(k.add)addCart(k.add);else if(k.v)openV(k.v)});
+var _m=mode;mode=function(m){_m(m);root.classList.toggle("hide",m!=="arena");$("m-gear").setAttribute("aria-pressed",m==="arena");if(m==="arena")view()};
+$("m-gear").onclick=function(){mode("arena")};var g=$("gear");if(g)g.onclick=function(){mode("arena")};
+root.classList.add("hide");
+})();
+</script>
+<script src="/app.js"></script>
+</body>
+</html>

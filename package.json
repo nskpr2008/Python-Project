@@ -1,0 +1,15 @@
+{
+  "name": "voltbay",
+  "version": "2.0.0",
+  "private": true,
+  "description": "VoltBay electronics store with persistent shopper sessions, personalised recommendations and the VoltAI assistant",
+  "type": "module",
+  "engines": { "node": ">=22.5.0" },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test \"tests/*.test.mjs\"",
+    "test:e2e": "node --test tests/e2e.mjs",
+    "images": "node scripts/fetch-images.mjs",
+    "bundle": "node scripts/embed-files.mjs"
+  }
+}

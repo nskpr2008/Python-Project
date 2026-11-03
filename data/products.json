@@ -1,0 +1,2311 @@
+{
+  "_note": "Catalogue of real, well-known products. Specifications are the manufacturers' published headline figures; prices are INDICATIVE INR figures for a demo store and stock counts are demo values. Verify before selling. Images are from Wikimedia Commons (see data/image-credits.json for author and licence).",
+  "products": [
+    {
+      "id": "VB-100",
+      "name": "Nothing Phone (2a)",
+      "brand": "Nothing",
+      "cat": "Phones",
+      "price": 23999,
+      "stock": 14,
+      "reorderLevel": 5,
+      "featured": true,
+      "summary": "6.7-inch 120 Hz AMOLED, Dimensity 7200 Pro, 50 MP dual camera, 5,000 mAh, 45 W charging",
+      "description": "A mid-range 5G phone with the see-through Glyph Interface on the back, a smooth 120 Hz AMOLED display and a clean Nothing OS experience on Android.",
+      "highlights": [
+        "Glyph Interface lights for calls, notifications and timers",
+        "Two 50 MP rear cameras",
+        "Full-day 5,000 mAh battery with 45 W wired charging"
+      ],
+      "specs": {
+        "Display": "6.7-inch AMOLED, 120 Hz",
+        "Processor": "MediaTek Dimensity 7200 Pro",
+        "Memory": "8 GB RAM, 128 GB storage (base)",
+        "Rear camera": "50 MP main + 50 MP ultra-wide",
+        "Front camera": "32 MP",
+        "Battery": "5,000 mAh, 45 W wired charging",
+        "Network": "5G",
+        "Software": "Android with Nothing OS"
+      },
+      "tags": [
+        "android",
+        "5g",
+        "amoled",
+        "camera",
+        "midrange",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:Nothing phone (2a).jpg"
+      }
+    },
+    {
+      "id": "VB-101",
+      "name": "Redmi Note 11",
+      "brand": "Xiaomi",
+      "cat": "Phones",
+      "price": 13999,
+      "stock": 3,
+      "reorderLevel": 5,
+      "summary": "6.43-inch 90 Hz AMOLED, Snapdragon 680, 50 MP quad camera, 5,000 mAh, 33 W charging",
+      "description": "A budget phone with an AMOLED screen, a 50 MP main camera and a big battery. A sensible first smartphone or a backup device.",
+      "highlights": [
+        "AMOLED display at this price",
+        "50 MP main camera",
+        "5,000 mAh battery with 33 W fast charging"
+      ],
+      "specs": {
+        "Display": "6.43-inch AMOLED, 90 Hz",
+        "Processor": "Qualcomm Snapdragon 680",
+        "Rear camera": "50 MP main + 8 MP ultra-wide + 2 MP macro + 2 MP depth",
+        "Front camera": "13 MP",
+        "Battery": "5,000 mAh, 33 W wired charging",
+        "Network": "4G",
+        "Software": "Android with MIUI"
+      },
+      "tags": [
+        "android",
+        "budget",
+        "amoled",
+        "battery",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:Redmi Note 11 front.jpg"
+      }
+    },
+    {
+      "id": "VB-119",
+      "name": "Apple iPhone 15",
+      "brand": "Apple",
+      "cat": "Phones",
+      "price": 69900,
+      "stock": 10,
+      "reorderLevel": 4,
+      "featured": true,
+      "summary": "6.1-inch Super Retina XDR OLED, A16 Bionic, 48 MP main camera, USB-C, Dynamic Island",
+      "description": "Apple's mainstream iPhone with a 48 MP main camera, the A16 Bionic chip, Dynamic Island and USB-C charging.",
+      "highlights": [
+        "48 MP main camera with 2x optical-quality zoom crop",
+        "Dynamic Island",
+        "USB-C connector",
+        "Up to 20 hours of video playback (Apple figure)"
+      ],
+      "specs": {
+        "Display": "6.1-inch Super Retina XDR OLED",
+        "Processor": "Apple A16 Bionic",
+        "Storage": "128 GB / 256 GB / 512 GB",
+        "Rear camera": "48 MP main + 12 MP ultra-wide",
+        "Front camera": "12 MP TrueDepth",
+        "Battery": "Up to 20 hours video playback",
+        "Connector": "USB-C",
+        "Network": "5G",
+        "Software": "iOS"
+      },
+      "tags": [
+        "ios",
+        "5g",
+        "oled",
+        "camera",
+        "premium",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:Apple iPhone 15.jpg"
+      }
+    },
+    {
+      "id": "VB-120",
+      "name": "Samsung Galaxy S24 Ultra",
+      "brand": "Samsung",
+      "cat": "Phones",
+      "price": 129999,
+      "stock": 5,
+      "reorderLevel": 2,
+      "summary": "6.8-inch Dynamic AMOLED 2X, Snapdragon 8 Gen 3, 200 MP camera, built-in S Pen, titanium frame",
+      "description": "Samsung's top phone: a 200 MP main camera, 5x telephoto, the S Pen built in and a titanium frame, with seven years of OS and security updates.",
+      "highlights": [
+        "200 MP main camera plus 3x and 5x telephoto",
+        "Built-in S Pen",
+        "Titanium frame",
+        "7 years of OS and security updates"
+      ],
+      "specs": {
+        "Display": "6.8-inch QHD+ Dynamic AMOLED 2X, 120 Hz",
+        "Processor": "Snapdragon 8 Gen 3 for Galaxy",
+        "Memory": "12 GB RAM",
+        "Rear camera": "200 MP main + 12 MP ultra-wide + 10 MP 3x + 50 MP 5x telephoto",
+        "Front camera": "12 MP",
+        "Battery": "5,000 mAh, 45 W wired charging",
+        "Network": "5G",
+        "Software": "Android with One UI"
+      },
+      "tags": [
+        "android",
+        "5g",
+        "amoled",
+        "camera",
+        "premium",
+        "gaming",
+        "stylus",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:SAMSUNG Galaxy S24 Ultra.jpg"
+      }
+    },
+    {
+      "id": "VB-102",
+      "name": "Apple MacBook Air (M1)",
+      "brand": "Apple",
+      "cat": "Laptops",
+      "price": 58999,
+      "stock": 6,
+      "reorderLevel": 3,
+      "featured": true,
+      "summary": "13.3-inch Retina, Apple M1, 8 GB memory, 256 GB SSD, fanless, up to 18 hours battery",
+      "description": "A thin, silent, fanless laptop powered by Apple's M1 chip. Fast enough for coding, editing and study, with all-day battery life.",
+      "highlights": [
+        "Apple M1 chip",
+        "Fanless and silent",
+        "Up to 18 hours video playback (Apple figure)",
+        "Touch ID"
+      ],
+      "specs": {
+        "Display": "13.3-inch Retina (2560 x 1600)",
+        "Processor": "Apple M1, 8-core CPU",
+        "Memory": "8 GB unified memory",
+        "Storage": "256 GB SSD",
+        "Battery": "Up to 18 hours video playback",
+        "Ports": "2 x Thunderbolt / USB 4, headphone jack",
+        "Weight": "1.29 kg",
+        "Software": "macOS"
+      },
+      "tags": [
+        "macos",
+        "student",
+        "office",
+        "coding",
+        "lightweight",
+        "battery",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:Macbook Air 2020 (M1) - 1.jpg"
+      }
+    },
+    {
+      "id": "VB-103",
+      "name": "Lenovo IdeaPad Flex 14",
+      "brand": "Lenovo",
+      "cat": "Laptops",
+      "price": 38999,
+      "stock": 2,
+      "reorderLevel": 3,
+      "summary": "14-inch touchscreen 2-in-1 with a 360-degree hinge, Windows",
+      "description": "A 14-inch convertible laptop that folds into tablet or tent mode, good for notes, study and light office work. Processor, memory and storage vary by configuration, so confirm the exact variant before ordering.",
+      "highlights": [
+        "Touchscreen",
+        "360-degree hinge for laptop, tent, stand and tablet modes",
+        "Compact 14-inch size"
+      ],
+      "specs": {
+        "Display": "14-inch touchscreen",
+        "Form factor": "2-in-1 convertible, 360-degree hinge",
+        "Software": "Windows",
+        "Configuration": "Processor, memory and storage vary by variant"
+      },
+      "tags": [
+        "windows",
+        "student",
+        "office",
+        "touchscreen",
+        "2-in-1"
+      ],
+      "image": {
+        "commons": "File:Lenovo IdeaPad Flex14 laptop.jpg"
+      }
+    },
+    {
+      "id": "VB-104",
+      "name": "Bose QuietComfort 25",
+      "brand": "Bose",
+      "cat": "Headsets",
+      "price": 6499,
+      "stock": 22,
+      "reorderLevel": 6,
+      "summary": "Wired active noise-cancelling headphones powered by a single AAA battery",
+      "description": "Classic Bose noise-cancelling headphones for travel and focus. They are wired (3.5 mm) and use a replaceable AAA battery for the noise cancelling, and still play if the battery runs out.",
+      "highlights": [
+        "Active noise cancelling",
+        "Plays even when the battery is empty",
+        "Comes with a carry case"
+      ],
+      "specs": {
+        "Type": "Over-ear, wired",
+        "Noise cancelling": "Active (acoustic)",
+        "Connection": "3.5 mm",
+        "Power": "1 x AAA battery, up to about 35 hours"
+      },
+      "tags": [
+        "anc",
+        "wired",
+        "travel",
+        "focus"
+      ],
+      "image": {
+        "commons": "File:Bose QuietComfort 25 Acoustic Noise Cancelling Headphones.jpg"
+      }
+    },
+    {
+      "id": "VB-105",
+      "name": "Apple AirPods Max",
+      "brand": "Apple",
+      "cat": "Headsets",
+      "price": 59900,
+      "stock": 8,
+      "reorderLevel": 4,
+      "summary": "Wireless over-ear with active noise cancelling, spatial audio and up to 20 hours of listening",
+      "description": "Premium wireless over-ear headphones with Apple's H1 chip, active noise cancelling, Transparency mode and spatial audio with head tracking.",
+      "highlights": [
+        "Active noise cancelling and Transparency mode",
+        "Spatial audio with dynamic head tracking",
+        "Up to 20 hours of listening (Apple figure)"
+      ],
+      "specs": {
+        "Type": "Over-ear, wireless",
+        "Chip": "Apple H1 in each ear cup",
+        "Noise cancelling": "Active, with Transparency mode",
+        "Battery": "Up to 20 hours with noise cancelling on",
+        "Controls": "Digital Crown and noise control button"
+      },
+      "tags": [
+        "anc",
+        "wireless",
+        "premium",
+        "ios",
+        "spatial-audio"
+      ],
+      "image": {
+        "commons": "File:Apple AirPods Max.jpg"
+      }
+    },
+    {
+      "id": "VB-106",
+      "name": "Sennheiser HD 25",
+      "brand": "Sennheiser",
+      "cat": "Headsets",
+      "price": 12990,
+      "stock": 15,
+      "reorderLevel": 5,
+      "summary": "Closed-back on-ear monitoring headphones, 70 ohm, detachable cable",
+      "description": "A long-standing DJ and studio monitoring headphone. Closed-back, loud and clear, with swivelling ear cups and a detachable cable.",
+      "highlights": [
+        "Closed-back isolation for monitoring and DJing",
+        "Swivelling ear cups for one-ear listening",
+        "Detachable cable"
+      ],
+      "specs": {
+        "Type": "On-ear, closed-back, wired",
+        "Impedance": "70 ohm",
+        "Frequency response": "16 to 22,000 Hz",
+        "Maximum sound pressure": "120 dB"
+      },
+      "tags": [
+        "wired",
+        "studio",
+        "dj",
+        "closed-back"
+      ],
+      "image": {
+        "commons": "File:Sennheiser hd-25 headphones.jpg"
+      }
+    },
+    {
+      "id": "VB-107",
+      "name": "Logitech H390 USB Headset",
+      "brand": "Logitech",
+      "cat": "Headsets",
+      "price": 2799,
+      "stock": 4,
+      "reorderLevel": 5,
+      "summary": "USB headset with noise-cancelling microphone and in-line controls",
+      "description": "A plug-and-play USB headset for calls and meetings. The noise-cancelling microphone helps cut background noise, and the in-line controls handle volume and mute.",
+      "highlights": [
+        "USB plug and play",
+        "Noise-cancelling microphone",
+        "In-line volume and mute controls",
+        "Padded headband"
+      ],
+      "specs": {
+        "Type": "On-ear, wired",
+        "Connection": "USB-A",
+        "Microphone": "Noise-cancelling, adjustable boom",
+        "Controls": "In-line volume and mute"
+      },
+      "tags": [
+        "usb",
+        "office",
+        "calls",
+        "wired",
+        "mic"
+      ],
+      "image": {
+        "commons": "File:H390-A.tif"
+      }
+    },
+    {
+      "id": "VB-109",
+      "name": "JBL Flip 4",
+      "brand": "JBL",
+      "cat": "Audio",
+      "price": 7999,
+      "stock": 0,
+      "reorderLevel": 5,
+      "summary": "Waterproof (IPX7) Bluetooth speaker, 16 W, up to 12 hours playtime",
+      "description": "A portable Bluetooth speaker that survives being dropped in water, with a built-in speakerphone and JBL Connect+ to link multiple speakers.",
+      "highlights": [
+        "IPX7 waterproof",
+        "Up to 12 hours of playtime",
+        "Built-in speakerphone",
+        "JBL Connect+ pairing"
+      ],
+      "specs": {
+        "Output power": "16 W RMS",
+        "Battery": "Up to 12 hours",
+        "Water resistance": "IPX7",
+        "Bluetooth": "4.2"
+      },
+      "tags": [
+        "speaker",
+        "portable",
+        "waterproof",
+        "bluetooth",
+        "travel"
+      ],
+      "image": {
+        "commons": "File:JBL Flip 4.jpg"
+      }
+    },
+    {
+      "id": "VB-110",
+      "name": "Samsung Galaxy Buds+",
+      "brand": "Samsung",
+      "cat": "Audio",
+      "price": 9999,
+      "stock": 31,
+      "reorderLevel": 8,
+      "summary": "True wireless earbuds with dual drivers, up to 11 hours per charge, 22 hours with case",
+      "description": "True wireless earbuds with a woofer and tweeter in each bud, three microphones for calls and a USB-C charging case.",
+      "highlights": [
+        "Dual drivers (woofer and tweeter)",
+        "Up to 11 hours per charge, 22 hours with the case (Samsung figures)",
+        "USB-C charging case"
+      ],
+      "specs": {
+        "Type": "True wireless in-ear",
+        "Drivers": "Dual (woofer and tweeter)",
+        "Battery": "Up to 11 hours buds, up to 22 hours with case",
+        "Bluetooth": "5.0",
+        "Water resistance": "IPX2",
+        "Charging case": "USB-C"
+      },
+      "tags": [
+        "earbuds",
+        "wireless",
+        "android",
+        "usb-c",
+        "calls"
+      ],
+      "image": {
+        "commons": "File:SAMSUNG Galaxy Buds+ (4).jpg"
+      }
+    },
+    {
+      "id": "VB-111",
+      "name": "Wireless neckband earphones",
+      "brand": "Unbranded",
+      "cat": "Audio",
+      "price": 1299,
+      "stock": 19,
+      "reorderLevel": 6,
+      "summary": "Bluetooth neckband earphones, an affordable all-day option",
+      "description": "A neckband-style Bluetooth earphone: the band sits around the neck so the earphones never get lost. A generic, budget option; the photo is representative.",
+      "highlights": [
+        "Neckband design keeps the earphones from getting lost",
+        "Budget-friendly"
+      ],
+      "specs": {
+        "Type": "In-ear, wireless neckband",
+        "Connection": "Bluetooth",
+        "Note": "Generic product; image is representative"
+      },
+      "tags": [
+        "earphones",
+        "wireless",
+        "budget",
+        "neckband",
+        "gym"
+      ],
+      "image": {
+        "commons": "File:Wireless neckband.jpg"
+      }
+    },
+    {
+      "id": "VB-121",
+      "name": "Apple AirPods Pro (2nd generation)",
+      "brand": "Apple",
+      "cat": "Audio",
+      "price": 24900,
+      "stock": 12,
+      "reorderLevel": 5,
+      "summary": "Earbuds with active noise cancelling, Adaptive Transparency, H2 chip, up to 30 hours with case",
+      "description": "Apple's noise-cancelling earbuds with the H2 chip, Adaptive Transparency and a MagSafe charging case.",
+      "highlights": [
+        "Active noise cancelling and Adaptive Transparency",
+        "Up to 6 hours per charge, up to 30 hours with the case (Apple figures)",
+        "Dust, sweat and water resistant"
+      ],
+      "specs": {
+        "Type": "True wireless in-ear",
+        "Chip": "Apple H2",
+        "Noise cancelling": "Active, with Adaptive Transparency",
+        "Battery": "Up to 6 hours per charge, up to 30 hours with case",
+        "Case": "MagSafe charging case"
+      },
+      "tags": [
+        "earbuds",
+        "anc",
+        "wireless",
+        "ios",
+        "premium"
+      ],
+      "image": {
+        "commons": "File:AirPods Pro (2nd generation).jpg"
+      }
+    },
+    {
+      "id": "VB-112",
+      "name": "Xiaomi Smart Band 7",
+      "brand": "Xiaomi",
+      "cat": "Wearables",
+      "price": 2999,
+      "stock": 18,
+      "reorderLevel": 6,
+      "featured": true,
+      "summary": "1.62-inch AMOLED fitness band, 120+ sports modes, SpO2, up to 14 days battery",
+      "description": "An affordable fitness band with a bright always-on AMOLED display, heart-rate and SpO2 tracking, sleep tracking and 5 ATM water resistance.",
+      "highlights": [
+        "1.62-inch AMOLED always-on display",
+        "120+ sports modes",
+        "Up to 14 days battery (Xiaomi figure)",
+        "5 ATM water resistance"
+      ],
+      "specs": {
+        "Display": "1.62-inch AMOLED",
+        "Health sensors": "Heart rate, SpO2, sleep tracking",
+        "Sports": "120+ modes",
+        "Battery": "Up to 14 days typical use",
+        "Water resistance": "5 ATM"
+      },
+      "tags": [
+        "fitness",
+        "band",
+        "budget",
+        "battery",
+        "health"
+      ],
+      "image": {
+        "commons": "File:Xiaomi Smart Band 7.jpg"
+      }
+    },
+    {
+      "id": "VB-113",
+      "name": "Apple Watch Series 8",
+      "brand": "Apple",
+      "cat": "Wearables",
+      "price": 45900,
+      "stock": 7,
+      "reorderLevel": 4,
+      "summary": "Always-on Retina display, ECG, blood oxygen, temperature sensing, crash detection",
+      "description": "Apple's smartwatch with health sensing (ECG, blood oxygen, skin temperature), crash detection and an always-on display. Works with iPhone.",
+      "highlights": [
+        "ECG and blood oxygen apps",
+        "Skin temperature sensing",
+        "Crash detection",
+        "Up to 18 hours battery (Apple figure)"
+      ],
+      "specs": {
+        "Display": "Always-On Retina LTPO OLED",
+        "Health sensors": "ECG, blood oxygen, temperature",
+        "Safety": "Crash detection",
+        "Battery": "Up to 18 hours",
+        "Water resistance": "50 m",
+        "Works with": "iPhone"
+      },
+      "tags": [
+        "smartwatch",
+        "ios",
+        "health",
+        "premium",
+        "fitness"
+      ],
+      "image": {
+        "commons": "File:Apple Watch Series 8.jpg"
+      }
+    },
+    {
+      "id": "VB-114",
+      "name": "30 W GaN USB-C charger",
+      "brand": "Unbranded",
+      "cat": "Accessories",
+      "price": 1299,
+      "stock": 40,
+      "reorderLevel": 10,
+      "summary": "Compact 30 W USB-C Power Delivery charger for phones, tablets and small laptops",
+      "description": "GaN chargers run cooler and are smaller than older silicon ones at the same wattage. 30 W with USB-C Power Delivery charges most phones at full speed. The photo is representative.",
+      "highlights": [
+        "USB-C Power Delivery",
+        "GaN: smaller and cooler than silicon chargers",
+        "Charges phones, tablets and small laptops"
+      ],
+      "specs": {
+        "Output": "30 W",
+        "Port": "USB-C Power Delivery",
+        "Technology": "GaN",
+        "Note": "Generic product; image is representative"
+      },
+      "tags": [
+        "charger",
+        "usb-c",
+        "gan",
+        "fast-charging",
+        "travel"
+      ],
+      "image": {
+        "commons": "File:Silicon vs GaN 30W USB-C chargers.jpg"
+      }
+    },
+    {
+      "id": "VB-115",
+      "name": "USB-C cable",
+      "brand": "Unbranded",
+      "cat": "Accessories",
+      "price": 399,
+      "stock": 4,
+      "reorderLevel": 15,
+      "summary": "USB-C to USB-C cable for charging and data",
+      "description": "A standard USB-C cable for charging phones, tablets and laptops and for transferring data. The photo is representative.",
+      "highlights": [
+        "Charging and data",
+        "Works with USB-C phones, tablets and laptops"
+      ],
+      "specs": {
+        "Connectors": "USB-C to USB-C",
+        "Use": "Charging and data",
+        "Note": "Generic product; image is representative"
+      },
+      "tags": [
+        "cable",
+        "usb-c",
+        "charging"
+      ],
+      "image": {
+        "commons": "File:USB-C cable 2017 A.jpg"
+      }
+    },
+    {
+      "id": "VB-116",
+      "name": "Anker 4,500 mAh power bank",
+      "brand": "Anker",
+      "cat": "Accessories",
+      "price": 1299,
+      "stock": 12,
+      "reorderLevel": 6,
+      "summary": "Pocket-size Anker power bank, 4,500 mAh",
+      "description": "A small Anker power bank that fits in a pocket, good for one extra phone charge on the go.",
+      "highlights": [
+        "Pocket-size",
+        "Anker build quality",
+        "About one extra phone charge"
+      ],
+      "specs": {
+        "Type": "Portable power bank",
+        "Capacity": "4,500 mAh",
+        "Typical use": "About one extra charge for a typical phone",
+        "Note": "Check the exact model for ports and charging speed"
+      },
+      "tags": [
+        "powerbank",
+        "portable",
+        "travel",
+        "charging"
+      ],
+      "image": {
+        "commons": "File:モバイルバッテリー ANKER Power Bank 4,500mAh (9716820049).jpg"
+      }
+    },
+    {
+      "id": "VB-117",
+      "name": "Yeelight GU10 smart bulb (W1)",
+      "brand": "Yeelight",
+      "cat": "Smart home",
+      "price": 649,
+      "stock": 25,
+      "reorderLevel": 8,
+      "summary": "Dimmable 4.8 W Wi-Fi GU10 smart bulb with voice assistant support",
+      "description": "A dimmable Wi-Fi smart spotlight bulb in the GU10 fitting. Control it from the app, set schedules, or use a voice assistant.",
+      "highlights": [
+        "Dimmable",
+        "Wi-Fi, no hub needed",
+        "App control and schedules",
+        "Works with voice assistants"
+      ],
+      "specs": {
+        "Fitting": "GU10",
+        "Power": "4.8 W",
+        "Dimming": "Yes",
+        "Connectivity": "Wi-Fi"
+      },
+      "tags": [
+        "smart-home",
+        "lighting",
+        "wifi",
+        "voice"
+      ],
+      "image": {
+        "commons": "File:Yeelight gu10 smart bulb W1 dimmable YLDP004 1527 4.8w.jpg"
+      }
+    },
+    {
+      "id": "VB-118",
+      "name": "Outdoor wireless security camera",
+      "brand": "Unbranded",
+      "cat": "Smart home",
+      "price": 3299,
+      "stock": 9,
+      "reorderLevel": 4,
+      "summary": "Weather-resistant outdoor Wi-Fi IP security camera",
+      "description": "An outdoor IP camera for watching a gate, porch or driveway from your phone. A generic product; the photo is representative of an installed unit.",
+      "highlights": [
+        "Outdoor mounting",
+        "Wi-Fi connection",
+        "View from your phone"
+      ],
+      "specs": {
+        "Use": "Outdoor",
+        "Connectivity": "Wi-Fi (IP camera)",
+        "Note": "Generic product; image is representative"
+      },
+      "tags": [
+        "smart-home",
+        "security",
+        "wifi",
+        "outdoor",
+        "camera"
+      ],
+      "image": {
+        "commons": "File:Outdoor wireless security IP camera at Nuthurst, Sussex 2.jpg"
+      }
+    },
+    {
+      "id": "VB-130",
+      "name": "Sony PlayStation 5 (disc edition)",
+      "brand": "Sony",
+      "cat": "Gaming",
+      "price": 49990,
+      "stock": 6,
+      "reorderLevel": 3,
+      "featured": true,
+      "summary": "Console with 4K 120 Hz output, ultra-fast SSD, ray tracing and DualSense controller",
+      "description": "Sony's current-generation console. Games load in seconds from the custom SSD and the DualSense controller adds haptic feedback and adaptive triggers. Plays physical discs and digital games.",
+      "highlights": [
+        "Custom SSD cuts loading times dramatically",
+        "Ray-traced lighting and up to 4K at 120 Hz",
+        "DualSense haptics and adaptive triggers in the box"
+      ],
+      "specs": {
+        "Processor": "AMD Zen 2, 8 cores, custom",
+        "Graphics": "AMD RDNA 2, up to 10.28 TFLOPS",
+        "Memory": "16 GB GDDR6",
+        "Storage": "825 GB to 1 TB SSD (varies by model)",
+        "Output": "HDMI 2.1, up to 4K 120 Hz",
+        "Drive": "4K UHD Blu-ray"
+      },
+      "tags": [
+        "console",
+        "playstation",
+        "ps5",
+        "4k",
+        "sub:Consoles",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:PlayStation 5 and DualSense.jpg"
+      }
+    },
+    {
+      "id": "VB-131",
+      "name": "Microsoft Xbox Series X",
+      "brand": "Microsoft",
+      "cat": "Gaming",
+      "price": 49990,
+      "stock": 5,
+      "reorderLevel": 3,
+      "summary": "1 TB console with 12 TFLOPS graphics, 4K 120 fps and Game Pass support",
+      "description": "Microsoft's most powerful console. Strong for 4K gaming, quick resume between games and a huge library through Xbox Game Pass (subscription sold separately).",
+      "highlights": [
+        "12 teraflops of GPU power",
+        "Quick Resume switches between games instantly",
+        "Plays 4K UHD Blu-ray discs"
+      ],
+      "specs": {
+        "Processor": "AMD Zen 2, 8 cores at 3.8 GHz",
+        "Graphics": "AMD RDNA 2, 12 TFLOPS",
+        "Memory": "16 GB GDDR6",
+        "Storage": "1 TB NVMe SSD",
+        "Output": "HDMI 2.1, up to 4K 120 fps",
+        "Drive": "4K UHD Blu-ray"
+      },
+      "tags": [
+        "console",
+        "xbox",
+        "4k",
+        "sub:Consoles",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:Xbox Series X 2.jpg"
+      }
+    },
+    {
+      "id": "VB-132",
+      "name": "Nintendo Switch",
+      "brand": "Nintendo",
+      "cat": "Gaming",
+      "price": 29999,
+      "stock": 9,
+      "reorderLevel": 4,
+      "summary": "Hybrid console: play on the TV or take it with you, Joy-Con controllers included",
+      "description": "Nintendo's hybrid console works as a home console on the dock or as a handheld. Known for first-party games such as Mario, Zelda and Pokemon, and easy couch multiplayer.",
+      "highlights": [
+        "Switches between TV and handheld play",
+        "Joy-Con controllers can be shared for two players",
+        "Exclusive Nintendo games"
+      ],
+      "specs": {
+        "Display": "6.2-inch touchscreen, 1280 x 720",
+        "Storage": "32 GB, expandable with microSD",
+        "Battery": "About 4.5 to 9 hours (varies by game)",
+        "TV": "Up to 1080p when docked",
+        "Controllers": "Two Joy-Con included"
+      },
+      "tags": [
+        "console",
+        "nintendo",
+        "portable",
+        "family",
+        "sub:Consoles",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:Nintendo-Switch-Console-Docked-wJoyConRB.jpg"
+      }
+    },
+    {
+      "id": "VB-133",
+      "name": "Sony DualSense wireless controller",
+      "brand": "Sony",
+      "cat": "Gaming",
+      "price": 5990,
+      "stock": 18,
+      "reorderLevel": 6,
+      "summary": "PS5 controller with haptic feedback, adaptive triggers and built-in microphone",
+      "description": "The PlayStation 5 controller. Haptic feedback lets you feel textures and impacts, and adaptive triggers push back as you pull. Also works on PC and phones over Bluetooth.",
+      "highlights": [
+        "Haptic feedback and adaptive triggers",
+        "Built-in microphone and speaker",
+        "USB-C charging"
+      ],
+      "specs": {
+        "Connection": "Bluetooth or USB-C",
+        "Battery": "1,560 mAh rechargeable",
+        "Works with": "PlayStation 5, PC, Mac, Android, iOS",
+        "Extras": "Motion sensor, touchpad, create button"
+      },
+      "tags": [
+        "controller",
+        "playstation",
+        "wireless",
+        "sub:Controllers",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:DualSense Controller Chroma Pearl.jpg"
+      }
+    },
+    {
+      "id": "VB-134",
+      "name": "Xbox Wireless Controller (Carbon Black)",
+      "brand": "Microsoft",
+      "cat": "Gaming",
+      "price": 5590,
+      "stock": 20,
+      "reorderLevel": 6,
+      "summary": "Xbox Series controller that also works on PC, Android and iPhone",
+      "description": "A comfortable, widely compatible controller with a hybrid D-pad and a share button. Connects over Bluetooth or the USB-C cable, so it is a good all-round pick for PC players too.",
+      "highlights": [
+        "Works with Xbox, Windows, Android and iOS",
+        "Hybrid D-pad and textured grips",
+        "Share button for screenshots and clips"
+      ],
+      "specs": {
+        "Connection": "Xbox Wireless, Bluetooth or USB-C cable",
+        "Power": "2 x AA batteries (rechargeable pack sold separately)",
+        "Works with": "Xbox Series X|S, Xbox One, Windows, Android, iOS"
+      },
+      "tags": [
+        "controller",
+        "xbox",
+        "wireless",
+        "pc",
+        "sub:Controllers",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:Xbox Series Controller Carbon Black.jpg"
+      }
+    },
+    {
+      "id": "VB-135",
+      "name": "Meta Quest 3",
+      "brand": "Meta",
+      "cat": "Gaming",
+      "price": 54990,
+      "stock": 4,
+      "reorderLevel": 2,
+      "summary": "Standalone VR and mixed-reality headset, no PC needed",
+      "description": "A wireless headset with sharp pancake lenses and colour passthrough that blends virtual objects with your room. Plays standalone VR games and can connect to a gaming PC.",
+      "highlights": [
+        "No cables or PC required",
+        "Colour mixed reality",
+        "Large library of VR games and fitness apps"
+      ],
+      "specs": {
+        "Display": "About 2064 x 2208 pixels per eye, up to 120 Hz",
+        "Processor": "Snapdragon XR2 Gen 2",
+        "Memory": "8 GB RAM",
+        "Storage": "128 GB or 512 GB (varies by model)",
+        "Battery": "About 2 to 3 hours"
+      },
+      "tags": [
+        "vr",
+        "meta",
+        "quest",
+        "wireless",
+        "sub:VR",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:Meta Quest 3 front View.jpg"
+      }
+    },
+    {
+      "id": "VB-136",
+      "name": "Logitech G502 HERO gaming mouse",
+      "brand": "Logitech",
+      "cat": "Gaming",
+      "price": 3995,
+      "stock": 16,
+      "reorderLevel": 5,
+      "summary": "Wired mouse with 25,600 DPI sensor, 11 buttons and tunable weights",
+      "description": "A long-running favourite for FPS and MMO players. The HERO sensor is precise at any speed, and you can add or remove weights to match your grip.",
+      "highlights": [
+        "HERO 25K sensor, up to 25,600 DPI",
+        "11 programmable buttons",
+        "Adjustable weights and RGB lighting"
+      ],
+      "specs": {
+        "Connection": "Wired USB",
+        "Sensor": "HERO 25K, 25,600 DPI",
+        "Buttons": "11 programmable",
+        "Weight": "About 121 g (adjustable with weights)",
+        "Report rate": "1000 Hz"
+      },
+      "tags": [
+        "mouse",
+        "logitech",
+        "fps",
+        "wired",
+        "rgb",
+        "sub:Mice",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:Logitech G502 Hero.jpg"
+      }
+    },
+    {
+      "id": "VB-137",
+      "name": "Razer BlackWidow mechanical gaming keyboard",
+      "brand": "Razer",
+      "cat": "Gaming",
+      "price": 8999,
+      "stock": 7,
+      "reorderLevel": 3,
+      "summary": "Full-size mechanical keyboard with clicky switches and RGB lighting",
+      "description": "The BlackWidow line is known for tactile, clicky mechanical switches and a solid frame. The photo shows an earlier BlackWidow model and is representative of the series.",
+      "highlights": [
+        "Mechanical switches for crisp, consistent key presses",
+        "Full-size layout with number pad",
+        "Programmable keys and lighting (model dependent)"
+      ],
+      "specs": {
+        "Type": "Mechanical, full-size",
+        "Connection": "Wired USB",
+        "Switches": "Razer mechanical switches (model dependent)",
+        "Note": "Photo shows an earlier BlackWidow model; lighting varies by model"
+      },
+      "tags": [
+        "keyboard",
+        "razer",
+        "mechanical",
+        "rgb",
+        "wired",
+        "sub:Keyboards",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:Razer BlackWidow Ultimate 2014 Elite Mechanical Gaming Keyboard.jpg"
+      }
+    },
+    {
+      "id": "VB-138",
+      "name": "RGB gaming headset with microphone",
+      "brand": "Unbranded",
+      "cat": "Gaming",
+      "price": 2999,
+      "stock": 22,
+      "reorderLevel": 6,
+      "summary": "Over-ear gaming headset with detachable mic and RGB lighting",
+      "description": "A budget-friendly wired gaming headset with a boom microphone for team chat. Generic product type; the photo is representative, not an exact model.",
+      "highlights": [
+        "Boom microphone for voice chat",
+        "Padded ear cups for long sessions",
+        "Works with PC and consoles"
+      ],
+      "specs": {
+        "Type": "Over-ear, wired",
+        "Drivers": "50 mm (typical)",
+        "Connection": "3.5 mm or USB (varies)",
+        "Note": "Generic product type; the photo is representative, not an exact model"
+      },
+      "tags": [
+        "headset",
+        "headphones",
+        "wired",
+        "budget",
+        "rgb",
+        "sub:Audio",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:RGB gaming headset on desk with ambient lighting.jpg"
+      }
+    },
+    {
+      "id": "VB-139",
+      "name": "24-inch 144 Hz gaming monitor",
+      "brand": "Unbranded",
+      "cat": "Monitors and Displays",
+      "price": 11999,
+      "stock": 8,
+      "reorderLevel": 3,
+      "summary": "Full HD monitor with a 144 Hz refresh rate for smooth motion",
+      "description": "A fast 24-inch Full HD display that makes games feel much smoother than a standard 60 Hz screen. Generic product type; the photo is representative, not an exact model.",
+      "highlights": [
+        "144 Hz refresh rate",
+        "Low response time for fast games",
+        "Good first upgrade from a 60 Hz screen"
+      ],
+      "specs": {
+        "Size": "24-inch (typical)",
+        "Resolution": "1920 x 1080",
+        "Refresh rate": "144 Hz",
+        "Inputs": "HDMI and DisplayPort (typical)",
+        "Note": "Generic product type; the photo is representative, not an exact model"
+      },
+      "tags": [
+        "monitor",
+        "display",
+        "144hz",
+        "fps",
+        "sub:Displays",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:Gaming-Monitor ausgestellt 20190202 185511 Kopie.jpg"
+      }
+    },
+    {
+      "id": "VB-140",
+      "name": "Ergonomic gaming chair",
+      "brand": "Unbranded",
+      "cat": "Gaming",
+      "price": 12999,
+      "stock": 5,
+      "reorderLevel": 2,
+      "summary": "Reclining gaming chair with lumbar and head cushions",
+      "description": "A racing-style chair with adjustable armrests, reclining back and cushions for long sessions. Generic product type; the photo is representative, not an exact model.",
+      "highlights": [
+        "Reclining backrest",
+        "Lumbar and neck cushions included",
+        "Adjustable height and armrests"
+      ],
+      "specs": {
+        "Type": "Racing-style gaming chair",
+        "Adjustments": "Height, recline, armrests",
+        "Included": "Lumbar and head cushions",
+        "Note": "Generic product type; the photo is representative, not an exact model"
+      },
+      "tags": [
+        "chair",
+        "ergonomic",
+        "comfort",
+        "sub:Chairs",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:Gaming chair 1.jpg"
+      }
+    },
+    {
+      "id": "VB-141",
+      "name": "Gigabyte GeForce RTX 4070 Aero OC 12 GB",
+      "brand": "Gigabyte",
+      "cat": "Gaming",
+      "price": 58000,
+      "stock": 3,
+      "reorderLevel": 2,
+      "summary": "NVIDIA RTX 4070 graphics card with 12 GB memory and DLSS 3",
+      "description": "A strong graphics card for 1440p gaming, with ray tracing and DLSS 3 frame generation. Check that your power supply and case suit it before buying.",
+      "highlights": [
+        "Smooth 1440p gaming",
+        "Ray tracing and DLSS 3",
+        "12 GB GDDR6X memory"
+      ],
+      "specs": {
+        "GPU": "NVIDIA GeForce RTX 4070",
+        "Memory": "12 GB GDDR6X, 192-bit",
+        "Cores": "5,888 CUDA cores",
+        "Power": "About 200 W, one 16-pin (adapter included)",
+        "Interface": "PCIe 4.0 x16",
+        "Note": "Needs a suitable power supply and case space"
+      },
+      "tags": [
+        "gpu",
+        "graphics-card",
+        "nvidia",
+        "pc",
+        "sub:PC parts",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:2023 Gigabyte GeForce RTX 4070 Aero OC 12GB (1).jpg"
+      }
+    },
+    {
+      "id": "VB-142",
+      "name": "ASUS ROG Zephyrus G14 gaming laptop",
+      "brand": "ASUS",
+      "cat": "Laptops",
+      "price": 159990,
+      "stock": 3,
+      "reorderLevel": 2,
+      "summary": "Compact 14-inch gaming laptop with a dedicated NVIDIA graphics chip",
+      "description": "A portable gaming laptop that is light enough to carry daily. Processor, graphics chip, memory and display vary by configuration, so check the exact model before you buy.",
+      "highlights": [
+        "Light for a gaming laptop",
+        "Dedicated NVIDIA graphics",
+        "High refresh rate display"
+      ],
+      "specs": {
+        "Screen": "14-inch, high refresh rate (varies by model)",
+        "Processor": "AMD Ryzen 9 (varies by model)",
+        "Graphics": "NVIDIA GeForce RTX (varies by model)",
+        "Note": "Configuration varies; confirm before buying"
+      },
+      "tags": [
+        "laptop",
+        "gaming",
+        "portable",
+        "rog",
+        "sub:Gaming laptops",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:ASUS ROG Zephyrus 2026-08-15 G14.jpg"
+      }
+    },
+    {
+      "id": "VB-143",
+      "name": "Elgato Cam Link 4K",
+      "brand": "Elgato",
+      "cat": "Gaming",
+      "price": 9999,
+      "stock": 11,
+      "reorderLevel": 3,
+      "summary": "HDMI capture adapter for streaming console or camera video to a PC",
+      "description": "Plugs into a PC over USB 3.0 and turns an HDMI source into a webcam-style video feed, so you can stream or record from a console, camera or second PC.",
+      "highlights": [
+        "Works as a plug-and-play webcam source",
+        "Uncompressed video up to 4K 30 fps or 1080p 60 fps",
+        "No drivers needed"
+      ],
+      "specs": {
+        "Input": "HDMI",
+        "Output": "USB 3.0",
+        "Video": "4K at 30 fps, 1080p at 60 fps",
+        "Note": "Needs a USB 3.0 port"
+      },
+      "tags": [
+        "capture",
+        "streaming",
+        "elgato",
+        "hdmi",
+        "sub:Streaming",
+        "gaming-gear"
+      ],
+      "image": {
+        "commons": "File:Elgato Cam Link - top.jpg"
+      }
+    },
+    {
+      "id": "VB-150",
+      "name": "Google Pixel 8",
+      "brand": "Google",
+      "cat": "Phones",
+      "price": 59999,
+      "stock": 9,
+      "reorderLevel": 4,
+      "summary": "6.2-inch 120 Hz OLED, Tensor G3, 50 MP camera, 7 years of updates",
+      "description": "Google's compact flagship with a bright OLED display, strong computational photography and seven years of promised OS and security updates.",
+      "highlights": [
+        "Seven years of Android and security updates",
+        "Excellent point-and-shoot photos and video",
+        "IP68 dust and water resistance"
+      ],
+      "specs": {
+        "Display": "6.2-inch OLED, 60 to 120 Hz",
+        "Processor": "Google Tensor G3",
+        "Memory": "8 GB RAM, 128 GB storage (base)",
+        "Rear camera": "50 MP main + 12 MP ultra-wide",
+        "Battery": "4,575 mAh (typical), wired and wireless charging",
+        "Protection": "IP68"
+      },
+      "tags": [
+        "android",
+        "5g",
+        "camera",
+        "premium",
+        "oled",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:Google Pixel 8 Rose front.jpg"
+      }
+    },
+    {
+      "id": "VB-151",
+      "name": "Samsung Galaxy A54 5G",
+      "brand": "Samsung",
+      "cat": "Phones",
+      "price": 30999,
+      "stock": 14,
+      "reorderLevel": 5,
+      "summary": "6.4-inch 120 Hz AMOLED, 50 MP OIS camera, 5,000 mAh, IP67",
+      "description": "A well-rounded upper mid-range phone with a smooth AMOLED screen, stabilised main camera, big battery and water resistance.",
+      "highlights": [
+        "120 Hz Super AMOLED display",
+        "50 MP main camera with optical stabilisation",
+        "IP67 water resistance, long software support"
+      ],
+      "specs": {
+        "Display": "6.4-inch Super AMOLED, 120 Hz",
+        "Processor": "Samsung Exynos 1380",
+        "Memory": "8 GB RAM, 128 GB storage (base)",
+        "Rear camera": "50 MP main (OIS) + 12 MP ultra-wide + 5 MP macro",
+        "Front camera": "32 MP",
+        "Battery": "5,000 mAh, 25 W charging",
+        "Protection": "IP67"
+      },
+      "tags": [
+        "android",
+        "5g",
+        "amoled",
+        "camera",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:Samsung Galaxy A54 5G 2023.jpg"
+      }
+    },
+    {
+      "id": "VB-152",
+      "name": "Samsung Galaxy Z Flip5",
+      "brand": "Samsung",
+      "cat": "Phones",
+      "price": 74999,
+      "stock": 4,
+      "reorderLevel": 2,
+      "summary": "Foldable flip phone with 3.4-inch cover screen and Snapdragon 8 Gen 2",
+      "description": "A pocketable foldable. Close it to a small square, open it to a full 6.7-inch screen, and use the 3.4-inch cover screen for quick replies and widgets.",
+      "highlights": [
+        "Folds to fit in a small pocket",
+        "3.4-inch cover screen for quick tasks",
+        "Flex mode for hands-free photos and calls"
+      ],
+      "specs": {
+        "Main display": "6.7-inch foldable Dynamic AMOLED 2X, 120 Hz",
+        "Cover display": "3.4-inch Super AMOLED",
+        "Processor": "Snapdragon 8 Gen 2 for Galaxy",
+        "Memory": "8 GB RAM, 256 GB storage (base)",
+        "Camera": "12 MP main + 12 MP ultra-wide, 10 MP selfie",
+        "Battery": "3,700 mAh, 25 W charging",
+        "Protection": "IPX8 (not dust-rated)"
+      },
+      "tags": [
+        "android",
+        "5g",
+        "foldable",
+        "premium",
+        "amoled",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:Samsung-Galaxy-Z-Flip-5 predny-displej.jpg"
+      }
+    },
+    {
+      "id": "VB-153",
+      "name": "Apple MacBook Pro 14-inch (M3)",
+      "brand": "Apple",
+      "cat": "Laptops",
+      "price": 169900,
+      "stock": 3,
+      "reorderLevel": 2,
+      "summary": "14.2-inch Liquid Retina XDR, Apple M3, up to 22 hours of battery",
+      "description": "A powerful, quiet laptop for editing, coding and design, with a bright mini-LED display, a full set of ports and very long battery life.",
+      "highlights": [
+        "Liquid Retina XDR display up to 1,600 nits for HDR",
+        "HDMI, SD card slot and MagSafe charging built in",
+        "Up to 22 hours of video playback"
+      ],
+      "specs": {
+        "Display": "14.2-inch Liquid Retina XDR, 120 Hz",
+        "Chip": "Apple M3, 8-core CPU, 10-core GPU",
+        "Memory": "8 GB unified memory, 512 GB SSD (base)",
+        "Ports": "3 x Thunderbolt / USB 4, HDMI, SDXC, MagSafe 3",
+        "Battery": "Up to 22 hours video playback",
+        "Weight": "1.55 kg"
+      },
+      "tags": [
+        "laptop",
+        "mac",
+        "premium",
+        "creator",
+        "office",
+        "ios"
+      ],
+      "image": {
+        "commons": "File:M3 Macbook Pro 14 inch Space Grey model.jpg"
+      }
+    },
+    {
+      "id": "VB-154",
+      "name": "ASUS Zenbook S 14 (OLED)",
+      "brand": "ASUS",
+      "cat": "Laptops",
+      "price": 149990,
+      "stock": 4,
+      "reorderLevel": 2,
+      "summary": "Thin 14-inch 3K OLED laptop with Intel Core Ultra and 32 GB memory",
+      "description": "A light, premium Windows ultrabook with a sharp 120 Hz OLED screen and long battery life. Exact processor, memory and storage vary by configuration.",
+      "highlights": [
+        "3K OLED display at 120 Hz",
+        "Around 1.2 kg and slim for travel",
+        "Large battery for a thin laptop"
+      ],
+      "specs": {
+        "Display": "14-inch 3K (2880 x 1800) OLED, 120 Hz",
+        "Processor": "Intel Core Ultra 7 (varies by model)",
+        "Memory": "Up to 32 GB LPDDR5X (varies by model)",
+        "Battery": "72 Wh",
+        "Weight": "About 1.2 kg",
+        "Note": "Configuration varies; confirm before buying"
+      },
+      "tags": [
+        "laptop",
+        "windows",
+        "oled",
+        "premium",
+        "travel",
+        "office",
+        "student"
+      ],
+      "image": {
+        "commons": "File:ASUS Zenbook S14 2026-08-15 Copilot+ AI 01.jpg"
+      }
+    },
+    {
+      "id": "VB-155",
+      "name": "Samsung Galaxy Buds2",
+      "brand": "Samsung",
+      "cat": "Audio",
+      "price": 8999,
+      "stock": 16,
+      "reorderLevel": 5,
+      "summary": "Compact true wireless earbuds with active noise cancelling",
+      "description": "Small, light earbuds with active noise cancelling, two-way speakers and a pocketable charging case. Work with any Bluetooth phone, with extra features on Samsung phones.",
+      "highlights": [
+        "Active noise cancelling and ambient mode",
+        "Light, comfortable fit",
+        "Wireless charging case"
+      ],
+      "specs": {
+        "Type": "True wireless, in-ear",
+        "Noise cancelling": "Active (ANC)",
+        "Battery": "About 5 hours per charge with ANC on; about 20 hours with the case",
+        "Water resistance": "IPX2",
+        "Connection": "Bluetooth 5.2"
+      },
+      "tags": [
+        "earbuds",
+        "wireless",
+        "anc",
+        "travel",
+        "gym"
+      ],
+      "image": {
+        "commons": "File:Samsung Galaxy Buds2.jpg"
+      }
+    },
+    {
+      "id": "VB-156",
+      "name": "Bose SoundLink Flex",
+      "brand": "Bose",
+      "cat": "Audio",
+      "price": 13999,
+      "stock": 11,
+      "reorderLevel": 4,
+      "summary": "Rugged waterproof Bluetooth speaker with up to 12 hours of battery",
+      "description": "A portable speaker that is built to go outdoors. It is dust and waterproof, floats, and sounds clear and balanced for its size.",
+      "highlights": [
+        "IP67 waterproof and dustproof",
+        "Up to 12 hours of playback",
+        "Built-in microphone for calls"
+      ],
+      "specs": {
+        "Type": "Portable Bluetooth speaker",
+        "Battery": "Up to 12 hours",
+        "Water resistance": "IP67",
+        "Charging": "USB-C",
+        "Connection": "Bluetooth"
+      },
+      "tags": [
+        "speaker",
+        "wireless",
+        "waterproof",
+        "travel",
+        "outdoor"
+      ],
+      "image": {
+        "commons": "File:Bose SoundLink Flex Speaker.jpg"
+      }
+    },
+    {
+      "id": "VB-157",
+      "name": "Apple Watch Ultra",
+      "brand": "Apple",
+      "cat": "Wearables",
+      "price": 74900,
+      "stock": 5,
+      "reorderLevel": 2,
+      "summary": "Rugged 49 mm titanium watch with dual-frequency GPS and 100 m water resistance",
+      "description": "Apple's adventure watch. Big bright display, precise dual-frequency GPS, an Action button and long battery life for a smartwatch. Works with iPhone only.",
+      "highlights": [
+        "49 mm titanium case, 2,000-nit display",
+        "Dual-frequency GPS for accurate tracking",
+        "Water resistant to 100 m"
+      ],
+      "specs": {
+        "Case": "49 mm titanium",
+        "Display": "Always-on LTPO OLED, up to 2,000 nits",
+        "Battery": "Up to 36 hours (up to 60 hours in low-power mode)",
+        "Water resistance": "100 m",
+        "Works with": "iPhone only"
+      },
+      "tags": [
+        "smartwatch",
+        "ios",
+        "fitness",
+        "gps",
+        "premium",
+        "waterproof"
+      ],
+      "image": {
+        "commons": "File:Apple Watch Ultra - 3.jpg"
+      }
+    },
+    {
+      "id": "VB-158",
+      "name": "Garmin Forerunner 965",
+      "brand": "Garmin",
+      "cat": "Wearables",
+      "price": 62490,
+      "stock": 6,
+      "reorderLevel": 2,
+      "summary": "AMOLED running watch with multi-band GPS and weeks of battery",
+      "description": "A serious running and triathlon watch with a bright AMOLED display, multi-band GPS, training readiness insights and battery that lasts for days.",
+      "highlights": [
+        "Multi-band GPS for accurate tracks",
+        "Up to about 23 days in smartwatch mode",
+        "Detailed training and recovery metrics"
+      ],
+      "specs": {
+        "Display": "1.4-inch AMOLED touchscreen",
+        "Case": "Titanium bezel, 47 mm",
+        "Battery": "Up to about 23 days smartwatch; up to about 31 hours in GPS mode",
+        "Water resistance": "5 ATM",
+        "Works with": "Android and iPhone"
+      },
+      "tags": [
+        "smartwatch",
+        "fitness",
+        "gps",
+        "running",
+        "premium",
+        "android",
+        "ios"
+      ],
+      "image": {
+        "commons": "File:Garmin Forerunner 965 with Garmin Run Taipei Watch Face installed.jpeg"
+      }
+    },
+    {
+      "id": "VB-159",
+      "name": "Apple iPad (10th generation)",
+      "brand": "Apple",
+      "cat": "Tablets and E-readers",
+      "price": 33900,
+      "stock": 12,
+      "reorderLevel": 4,
+      "featured": true,
+      "summary": "10.9-inch Liquid Retina tablet with A14 Bionic and USB-C",
+      "description": "The all-round iPad for study, streaming, drawing and everyday use, with a modern full-screen design, USB-C and support for Apple Pencil (1st generation).",
+      "highlights": [
+        "10.9-inch Liquid Retina display",
+        "USB-C and Touch ID in the top button",
+        "12 MP front camera in landscape for video calls"
+      ],
+      "specs": {
+        "Display": "10.9-inch Liquid Retina",
+        "Chip": "A14 Bionic",
+        "Storage": "64 GB (base)",
+        "Cameras": "12 MP rear, 12 MP front",
+        "Connection": "Wi-Fi 6, USB-C",
+        "Battery": "Up to about 10 hours"
+      },
+      "tags": [
+        "tablet",
+        "ios",
+        "student",
+        "drawing",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:IPad 10th Generation 2024.jpg"
+      }
+    },
+    {
+      "id": "VB-160",
+      "name": "Samsung Galaxy Tab S9",
+      "brand": "Samsung",
+      "cat": "Tablets and E-readers",
+      "price": 69999,
+      "stock": 5,
+      "reorderLevel": 2,
+      "summary": "11-inch 120 Hz AMOLED Android tablet, IP68, S Pen included",
+      "description": "A premium Android tablet with a vivid AMOLED screen, strong performance, water resistance and an S Pen in the box for notes and sketches.",
+      "highlights": [
+        "11-inch Dynamic AMOLED 2X, 120 Hz",
+        "S Pen included, no charging needed",
+        "IP68 dust and water resistance"
+      ],
+      "specs": {
+        "Display": "11-inch Dynamic AMOLED 2X, 2560 x 1600, 120 Hz",
+        "Processor": "Snapdragon 8 Gen 2 for Galaxy",
+        "Memory": "8 GB RAM, 128 GB storage (base)",
+        "Battery": "8,400 mAh, 45 W charging",
+        "Protection": "IP68"
+      },
+      "tags": [
+        "tablet",
+        "android",
+        "amoled",
+        "student",
+        "drawing",
+        "premium"
+      ],
+      "image": {
+        "commons": "File:Samsung Galaxy Tab S9.png"
+      }
+    },
+    {
+      "id": "VB-161",
+      "name": "Amazon Kindle Paperwhite",
+      "brand": "Amazon",
+      "cat": "Tablets and E-readers",
+      "price": 14999,
+      "stock": 15,
+      "reorderLevel": 5,
+      "summary": "6.8-inch glare-free e-reader, adjustable warm light, waterproof",
+      "description": "A dedicated e-reader that is easy on the eyes. The sharp paper-like screen works in bright sun, the warm light helps at night and one charge lasts weeks.",
+      "highlights": [
+        "Glare-free 300 ppi E Ink display",
+        "Adjustable warm light",
+        "IPX8 waterproof, battery lasts weeks"
+      ],
+      "specs": {
+        "Display": "6.8-inch E Ink, 300 ppi, adjustable warm light",
+        "Water resistance": "IPX8",
+        "Battery": "Up to about 10 weeks (at 30 minutes a day)",
+        "Charging": "USB-C",
+        "Note": "Storage capacity varies by edition"
+      },
+      "tags": [
+        "ereader",
+        "kindle",
+        "reading",
+        "waterproof",
+        "student",
+        "travel"
+      ],
+      "image": {
+        "commons": "File:2023 Amazon Kindle Paperwhite (1).jpg"
+      }
+    },
+    {
+      "id": "VB-162",
+      "name": "Apple iPad Pro 12.9-inch (M2)",
+      "brand": "Apple",
+      "cat": "Tablets and E-readers",
+      "price": 112900,
+      "stock": 3,
+      "reorderLevel": 2,
+      "summary": "12.9-inch mini-LED Liquid Retina XDR tablet with Apple M2",
+      "description": "Apple's most capable tablet, with a very bright mini-LED display, desktop-class M2 performance and Apple Pencil hover for illustrators and video editors.",
+      "highlights": [
+        "Liquid Retina XDR mini-LED display, 120 Hz",
+        "Apple M2 chip",
+        "Thunderbolt / USB 4 port"
+      ],
+      "specs": {
+        "Display": "12.9-inch Liquid Retina XDR (mini-LED), 120 Hz",
+        "Chip": "Apple M2",
+        "Storage": "128 GB (base)",
+        "Cameras": "12 MP wide + 10 MP ultra-wide + LiDAR",
+        "Port": "Thunderbolt / USB 4",
+        "Pencil": "Apple Pencil (2nd generation) with hover"
+      },
+      "tags": [
+        "tablet",
+        "ios",
+        "premium",
+        "creator",
+        "drawing",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:IPad Pro M2 (12.9 inch) 6th Generation 2024.jpg"
+      }
+    },
+    {
+      "id": "VB-163",
+      "name": "Amazon Fire TV Stick (3rd generation)",
+      "brand": "Amazon",
+      "cat": "TVs and Home Entertainment",
+      "price": 3999,
+      "stock": 30,
+      "reorderLevel": 8,
+      "summary": "Full HD streaming stick with Alexa voice remote",
+      "description": "Plug it into any TV with an HDMI port to stream Netflix, Prime Video, Hotstar and more, and control the TV with the Alexa voice remote.",
+      "highlights": [
+        "Full HD with HDR support",
+        "Alexa voice remote with TV power and volume buttons",
+        "Dolby Atmos audio"
+      ],
+      "specs": {
+        "Video": "Full HD (1080p) up to 60 fps, HDR, HDR10+",
+        "Audio": "Dolby Atmos",
+        "Storage": "8 GB",
+        "Connection": "Dual-band Wi-Fi, HDMI",
+        "Remote": "Alexa Voice Remote"
+      },
+      "tags": [
+        "streaming",
+        "tv",
+        "budget",
+        "alexa"
+      ],
+      "image": {
+        "commons": "File:Amazon Fire TV Stick.jpg"
+      }
+    },
+    {
+      "id": "VB-164",
+      "name": "Apple TV 4K (3rd generation)",
+      "brand": "Apple",
+      "cat": "TVs and Home Entertainment",
+      "price": 14900,
+      "stock": 6,
+      "reorderLevel": 2,
+      "summary": "4K HDR streaming box with A15 Bionic and Dolby Vision",
+      "description": "A fast streaming box for 4K HDR, Dolby Vision and Dolby Atmos, with Siri Remote and tight integration with iPhone, AirPlay and Apple services.",
+      "highlights": [
+        "4K HDR10+ and Dolby Vision at 60 fps",
+        "A15 Bionic for smooth menus and games",
+        "Dolby Atmos and AirPlay"
+      ],
+      "specs": {
+        "Video": "4K HDR10+, Dolby Vision, up to 60 fps",
+        "Chip": "A15 Bionic",
+        "Storage": "64 GB (Wi-Fi model)",
+        "Connection": "Wi-Fi 6, HDMI 2.1",
+        "Remote": "Siri Remote"
+      },
+      "tags": [
+        "streaming",
+        "tv",
+        "4k",
+        "ios",
+        "premium"
+      ],
+      "image": {
+        "commons": "File:Apple TV 4K (3rd Generation, 2022) with Siri Remote.jpg"
+      }
+    },
+    {
+      "id": "VB-165",
+      "name": "Canon EOS 200D DSLR",
+      "brand": "Canon",
+      "cat": "Cameras and Photography",
+      "price": 49995,
+      "stock": 4,
+      "reorderLevel": 2,
+      "summary": "24.2 MP DSLR with vari-angle touchscreen and Dual Pixel autofocus",
+      "description": "A small, light beginner DSLR. The vari-angle touchscreen makes vlogging and low-angle shots easy, and Dual Pixel autofocus keeps video sharp. Usually sold with an 18-55 mm lens.",
+      "highlights": [
+        "24.2 MP APS-C sensor",
+        "Vari-angle touchscreen",
+        "Compact and light for a DSLR"
+      ],
+      "specs": {
+        "Sensor": "24.2 MP APS-C CMOS",
+        "Processor": "DIGIC 8",
+        "Screen": "3-inch vari-angle touchscreen",
+        "Video": "Full HD up to 60 fps",
+        "Burst": "About 5 frames per second",
+        "Weight": "About 450 g (body)"
+      },
+      "tags": [
+        "camera",
+        "dslr",
+        "photography",
+        "vlog",
+        "beginner"
+      ],
+      "image": {
+        "commons": "File:Canon EOS 200D 6454.jpg"
+      }
+    },
+    {
+      "id": "VB-166",
+      "name": "DJI Mini 3 drone",
+      "brand": "DJI",
+      "cat": "Cameras and Photography",
+      "price": 48990,
+      "stock": 3,
+      "reorderLevel": 2,
+      "summary": "Sub-250 g drone with 4K video and up to 38 minutes of flight",
+      "description": "A beginner-friendly drone that is small and light enough to carry anywhere. Shoots 4K video and 12 MP photos, with up to 38 minutes of flight time. Check local drone rules before flying.",
+      "highlights": [
+        "Under 249 g and foldable",
+        "4K video and 12 MP photos",
+        "Up to 38 minutes of flight per battery"
+      ],
+      "specs": {
+        "Weight": "Under 249 g",
+        "Video": "4K at up to 30 fps",
+        "Photo": "12 MP",
+        "Flight time": "Up to about 38 minutes",
+        "Sensors": "Downward vision sensors only, no forward obstacle sensing"
+      },
+      "tags": [
+        "drone",
+        "camera",
+        "photography",
+        "travel",
+        "video"
+      ],
+      "image": {
+        "commons": "File:DJI MT3PD Mini 3 (1-16-2025).jpg"
+      }
+    },
+    {
+      "id": "VB-167",
+      "name": "Fujifilm Instax Mini 11",
+      "brand": "Fujifilm",
+      "cat": "Cameras and Photography",
+      "price": 6299,
+      "stock": 18,
+      "reorderLevel": 6,
+      "summary": "Point-and-shoot instant camera that prints credit-card-sized photos",
+      "description": "An easy instant camera: point, shoot and watch the print develop. Automatic exposure, a selfie mirror and a close-up mode make it ideal for parties and gifts. Uses Instax Mini film (sold separately).",
+      "highlights": [
+        "Prints a photo in about a minute",
+        "Automatic exposure, nothing to adjust",
+        "Selfie mirror and close-up mode"
+      ],
+      "specs": {
+        "Film": "Instax Mini, 62 x 46 mm image (film sold separately)",
+        "Exposure": "Automatic",
+        "Power": "2 x AA batteries",
+        "Close up": "About 30 to 50 cm"
+      },
+      "tags": [
+        "camera",
+        "instant",
+        "gift",
+        "party",
+        "budget"
+      ],
+      "image": {
+        "commons": "File:Fujifilm Instax Mini 11 in secure packaging.jpg"
+      }
+    },
+    {
+      "id": "VB-168",
+      "name": "GoPro Hero 9 Black",
+      "brand": "GoPro",
+      "cat": "Cameras and Photography",
+      "price": 24990,
+      "stock": 5,
+      "reorderLevel": 2,
+      "summary": "Waterproof action camera with 5K video and a front display",
+      "description": "A tough action camera for biking, travel and sport. Records 5K video, with strong stabilisation, a front screen for vlogging and waterproofing to 10 m without a case.",
+      "highlights": [
+        "5K video and 20 MP photos",
+        "HyperSmooth stabilisation",
+        "Waterproof to 10 m"
+      ],
+      "specs": {
+        "Video": "5K at 30 fps, 4K at 60 fps",
+        "Photo": "20 MP",
+        "Displays": "Front colour screen and rear touchscreen",
+        "Water resistance": "10 m without a case",
+        "Battery": "Removable 1,720 mAh"
+      },
+      "tags": [
+        "camera",
+        "action",
+        "waterproof",
+        "travel",
+        "video"
+      ],
+      "image": {
+        "commons": "File:GoPro Hero 9 Black - Back.jpg"
+      }
+    },
+    {
+      "id": "VB-169",
+      "name": "AMD Ryzen 5 5600X processor",
+      "brand": "AMD",
+      "cat": "PC Components and Storage",
+      "price": 11499,
+      "stock": 8,
+      "reorderLevel": 3,
+      "summary": "6-core, 12-thread desktop CPU for AM4 with cooler included",
+      "description": "A fast, efficient gaming and productivity processor for AM4 motherboards. It has no built-in graphics, so it needs a graphics card.",
+      "highlights": [
+        "6 cores and 12 threads",
+        "Up to 4.6 GHz boost, 65 W",
+        "Wraith Stealth cooler in the box"
+      ],
+      "specs": {
+        "Cores": "6 cores, 12 threads",
+        "Clock": "3.7 GHz base, up to 4.6 GHz boost",
+        "Cache": "32 MB L3",
+        "Socket": "AM4",
+        "Power": "65 W TDP",
+        "Graphics": "None built in"
+      },
+      "tags": [
+        "cpu",
+        "processor",
+        "amd",
+        "pc",
+        "gaming"
+      ],
+      "image": {
+        "commons": "File:AMD Ryzen 5 5600X.jpg"
+      }
+    },
+    {
+      "id": "VB-170",
+      "name": "ASUS Prime X570-P motherboard",
+      "brand": "ASUS",
+      "cat": "PC Components and Storage",
+      "price": 13999,
+      "stock": 5,
+      "reorderLevel": 2,
+      "summary": "ATX AM4 motherboard with PCIe 4.0 and dual M.2 slots",
+      "description": "A solid ATX motherboard for Ryzen processors on AM4, with PCIe 4.0 for the latest graphics cards and SSDs and two M.2 slots for storage.",
+      "highlights": [
+        "PCIe 4.0 for graphics card and SSD",
+        "Two M.2 SSD slots",
+        "HDMI and DisplayPort outputs"
+      ],
+      "specs": {
+        "Socket": "AMD AM4",
+        "Chipset": "AMD X570",
+        "Form factor": "ATX",
+        "Memory": "4 x DDR4 slots, up to 128 GB",
+        "Storage": "2 x M.2 slots, 6 x SATA",
+        "Network": "Gigabit Ethernet"
+      },
+      "tags": [
+        "motherboard",
+        "amd",
+        "pc",
+        "gaming"
+      ],
+      "image": {
+        "commons": "File:ASUS Prime X570-P.jpg"
+      }
+    },
+    {
+      "id": "VB-171",
+      "name": "Samsung 970 EVO Plus NVMe SSD 1 TB",
+      "brand": "Samsung",
+      "cat": "PC Components and Storage",
+      "price": 8499,
+      "stock": 14,
+      "reorderLevel": 4,
+      "summary": "M.2 NVMe SSD with up to 3,500 MB/s reads",
+      "description": "A fast, dependable SSD that makes a PC or laptop boot and load noticeably quicker. Fits any M.2 2280 NVMe slot.",
+      "highlights": [
+        "Up to 3,500 MB/s sequential reads",
+        "M.2 2280 NVMe, PCIe 3.0 x4",
+        "5-year limited warranty"
+      ],
+      "specs": {
+        "Capacity": "1 TB",
+        "Interface": "PCIe 3.0 x4, NVMe 1.3",
+        "Form factor": "M.2 2280",
+        "Read speed": "Up to 3,500 MB/s",
+        "Write speed": "Up to 3,300 MB/s",
+        "Warranty": "5 years or 600 TBW"
+      },
+      "tags": [
+        "ssd",
+        "storage",
+        "nvme",
+        "pc",
+        "laptop"
+      ],
+      "image": {
+        "commons": "File:Samsung NVMe M.2 970 EVO Plus 18540.jpg"
+      }
+    },
+    {
+      "id": "VB-172",
+      "name": "Logitech MX Master 3S wireless mouse",
+      "brand": "Logitech",
+      "cat": "Accessories",
+      "price": 9995,
+      "stock": 10,
+      "reorderLevel": 4,
+      "summary": "Quiet-click ergonomic mouse with 8,000 DPI sensor and USB-C",
+      "description": "The go-to productivity mouse: comfortable shape, a fast and precise scroll wheel, near-silent clicks and the ability to pair with three devices.",
+      "highlights": [
+        "Quiet clicks",
+        "8,000 DPI sensor that works on glass",
+        "Pairs with up to 3 devices"
+      ],
+      "specs": {
+        "Sensor": "8,000 DPI",
+        "Connection": "Bluetooth or Logi Bolt receiver",
+        "Battery": "Up to 70 days, USB-C charging",
+        "Buttons": "7 buttons with MagSpeed scroll wheel",
+        "Works with": "Windows, macOS, Linux, iPadOS, Android"
+      },
+      "tags": [
+        "mouse",
+        "office",
+        "wireless",
+        "productivity",
+        "usb-c"
+      ],
+      "image": {
+        "commons": "File:Logitech MX Master 3S HS03.jpg"
+      }
+    },
+    {
+      "id": "VB-173",
+      "name": "Logitech K380 Bluetooth keyboard",
+      "brand": "Logitech",
+      "cat": "Accessories",
+      "price": 2995,
+      "stock": 20,
+      "reorderLevel": 6,
+      "summary": "Compact multi-device Bluetooth keyboard with 2-year battery",
+      "description": "A slim, quiet keyboard that pairs with up to three devices and switches between them at the press of a key. Good for a tablet, phone and laptop.",
+      "highlights": [
+        "Pair up to 3 devices",
+        "Slim and portable",
+        "About 2 years on 2 AAA batteries"
+      ],
+      "specs": {
+        "Connection": "Bluetooth",
+        "Devices": "Up to 3, Easy-Switch keys",
+        "Battery": "2 x AAA, about 2 years",
+        "Works with": "Windows, macOS, iPadOS, iOS, Android, ChromeOS"
+      },
+      "tags": [
+        "keyboard",
+        "wireless",
+        "office",
+        "tablet",
+        "student"
+      ],
+      "image": {
+        "commons": "File:Logitech K380 CJK Keyboard.jpg"
+      }
+    },
+    {
+      "id": "VB-174",
+      "name": "SanDisk Ultra Flair USB 3.0 flash drive 128 GB",
+      "brand": "SanDisk",
+      "cat": "Accessories",
+      "price": 1199,
+      "stock": 35,
+      "reorderLevel": 10,
+      "summary": "Fast USB 3.0 pen drive with up to 150 MB/s reads",
+      "description": "A sturdy metal-finish pen drive for carrying files between computers, with USB 3.0 speeds and password protection software.",
+      "highlights": [
+        "USB 3.0 speeds, up to 150 MB/s reads",
+        "Sturdy metal finish",
+        "5-year limited warranty"
+      ],
+      "specs": {
+        "Capacity": "128 GB",
+        "Interface": "USB 3.0 (works in USB 2.0 ports at lower speed)",
+        "Read speed": "Up to 150 MB/s",
+        "Warranty": "5 years"
+      },
+      "tags": [
+        "storage",
+        "pendrive",
+        "usb",
+        "budget"
+      ],
+      "image": {
+        "commons": "File:SanDisk Ultra Flair flash drive.jpg"
+      }
+    },
+    {
+      "id": "VB-175",
+      "name": "Apple MagSafe Charger",
+      "brand": "Apple",
+      "cat": "Accessories",
+      "price": 4500,
+      "stock": 12,
+      "reorderLevel": 4,
+      "summary": "Magnetic wireless charger for iPhone 12 and newer",
+      "description": "Snaps onto the back of an iPhone 12 or newer and charges wirelessly at up to 15 W. Needs a separate USB-C power adapter.",
+      "highlights": [
+        "Magnets align perfectly every time",
+        "Up to 15 W wireless charging",
+        "USB-C cable, 1 m"
+      ],
+      "specs": {
+        "Power": "Up to 15 W (needs a 20 W or higher USB-C adapter)",
+        "Cable": "USB-C, 1 m",
+        "Works with": "iPhone 12 and newer; AirPods with wireless charging case"
+      },
+      "tags": [
+        "charger",
+        "wireless",
+        "ios",
+        "apple"
+      ],
+      "image": {
+        "commons": "File:MagSafe and USB-C Cable Charger for iPhone.jpg"
+      }
+    },
+    {
+      "id": "VB-176",
+      "name": "1080p USB webcam",
+      "brand": "Unbranded",
+      "cat": "Accessories",
+      "price": 2499,
+      "stock": 17,
+      "reorderLevel": 5,
+      "summary": "Plug-and-play 1080p webcam with built-in microphone",
+      "description": "A simple clip-on webcam for video calls, classes and streaming. Works with Windows and macOS without drivers. Generic product type; the photo is representative, not an exact model.",
+      "highlights": [
+        "Full HD 1080p video",
+        "Built-in microphone",
+        "Plug and play over USB"
+      ],
+      "specs": {
+        "Video": "1080p (typical)",
+        "Connection": "USB",
+        "Note": "Generic product type; the photo is representative, not an exact model."
+      },
+      "tags": [
+        "webcam",
+        "office",
+        "student",
+        "wfh",
+        "budget"
+      ],
+      "image": {
+        "commons": "File:Webcam 01.jpg"
+      }
+    },
+    {
+      "id": "VB-177",
+      "name": "Google Nest Mini (2nd generation)",
+      "brand": "Google",
+      "cat": "Smart home",
+      "price": 3499,
+      "stock": 24,
+      "reorderLevel": 6,
+      "summary": "Compact smart speaker with Google Assistant",
+      "description": "A small speaker you control with your voice: play music, set timers, ask questions and control compatible smart lights and plugs.",
+      "highlights": [
+        "Hands-free Google Assistant",
+        "Fabric finish and mute switch",
+        "Controls compatible smart devices"
+      ],
+      "specs": {
+        "Speaker": "40 mm driver",
+        "Microphones": "3 far-field microphones, hardware mute switch",
+        "Connection": "Wi-Fi (802.11ac) and Bluetooth 5.0",
+        "Power": "Plug-in adapter"
+      },
+      "tags": [
+        "smart-speaker",
+        "voice",
+        "assistant",
+        "smart-home",
+        "budget"
+      ],
+      "image": {
+        "commons": "File:Google Nest Mini - 202001 - 01.jpg"
+      }
+    },
+    {
+      "id": "VB-178",
+      "name": "TP-Link Archer C54 AC1200 router",
+      "brand": "TP-Link",
+      "cat": "Power and Networking",
+      "price": 1599,
+      "stock": 22,
+      "reorderLevel": 6,
+      "summary": "Dual-band Wi-Fi router with four antennas",
+      "description": "An affordable dual-band router that covers a typical flat or small home, with separate 2.4 GHz and 5 GHz bands to keep streaming smooth.",
+      "highlights": [
+        "Dual-band AC1200 speeds",
+        "Four antennas for broad coverage",
+        "Easy setup with the Tether app"
+      ],
+      "specs": {
+        "Wi Fi": "Dual-band AC1200 (up to 300 Mbps on 2.4 GHz and 867 Mbps on 5 GHz)",
+        "Antennas": "4 fixed antennas",
+        "Ports": "4 x LAN, 1 x WAN (10/100 Mbps)"
+      },
+      "tags": [
+        "router",
+        "wifi",
+        "networking",
+        "budget",
+        "home"
+      ],
+      "image": {
+        "commons": "File:Tp-link archer c54 dual band router.jpg"
+      }
+    },
+    {
+      "id": "VB-179",
+      "name": "Dyson V8 cordless vacuum cleaner",
+      "brand": "Dyson",
+      "cat": "Home Appliances",
+      "price": 28900,
+      "stock": 4,
+      "reorderLevel": 2,
+      "summary": "Cordless stick vacuum with up to 40 minutes of run time",
+      "description": "A lightweight cordless vacuum that turns into a handheld for stairs, sofas and cars. Easy to grab for quick clean-ups.",
+      "highlights": [
+        "Up to 40 minutes of run time (standard mode)",
+        "Converts to a handheld",
+        "Wall-mounted dock for charging"
+      ],
+      "specs": {
+        "Run time": "Up to 40 minutes (standard mode)",
+        "Bin": "0.54 litre",
+        "Power modes": "Standard and Max, with a motorised head",
+        "Type": "Cordless stick, convertible to handheld"
+      },
+      "tags": [
+        "vacuum",
+        "cordless",
+        "home",
+        "cleaning",
+        "premium"
+      ],
+      "image": {
+        "commons": "File:Dyson V8 handstick vacuum.jpg"
+      }
+    },
+    {
+      "id": "VB-180",
+      "name": "Netgear Nighthawk AC1900 router (R7000)",
+      "brand": "Netgear",
+      "cat": "Power and Networking",
+      "price": 9999,
+      "stock": 6,
+      "reorderLevel": 2,
+      "summary": "Dual-band AC1900 Wi-Fi router with Gigabit ports and USB 3.0",
+      "description": "A fast router for a large home or heavy streaming and gaming. Three external antennas and a dual-core processor keep many devices running smoothly.",
+      "highlights": [
+        "AC1900 speeds across two bands",
+        "Four Gigabit LAN ports and USB 3.0 for shared storage",
+        "Beamforming for stronger signal to your devices"
+      ],
+      "specs": {
+        "Wi Fi": "Dual-band AC1900 (up to 600 Mbps on 2.4 GHz and 1,300 Mbps on 5 GHz)",
+        "Antennas": "3 external antennas",
+        "Ports": "4 x Gigabit LAN, 1 x Gigabit WAN, USB 3.0 and USB 2.0",
+        "Processor": "1 GHz dual-core"
+      },
+      "tags": [
+        "router",
+        "wifi",
+        "networking",
+        "gaming",
+        "home"
+      ],
+      "image": {
+        "commons": "File:Netgear-Nighthawk-AC1900-WiFi-Router.jpg"
+      }
+    },
+    {
+      "id": "VB-181",
+      "name": "Ubiquiti UniFi AC Lite access point",
+      "brand": "Ubiquiti",
+      "cat": "Power and Networking",
+      "price": 9500,
+      "stock": 5,
+      "reorderLevel": 2,
+      "summary": "Ceiling or wall Wi-Fi access point for offices and larger homes",
+      "description": "A compact access point that you place where you need Wi-Fi and power over an Ethernet cable. Popular for small offices, shops and multi-room homes. Managed with the free UniFi software.",
+      "highlights": [
+        "Dual-band AC1200 Wi-Fi",
+        "Powered over Ethernet (adapter included)",
+        "Managed centrally with UniFi software"
+      ],
+      "specs": {
+        "Wi Fi": "Dual-band AC (up to 300 Mbps on 2.4 GHz and 867 Mbps on 5 GHz)",
+        "Port": "1 x Gigabit Ethernet with PoE input",
+        "Power": "Passive PoE 24 V (PoE adapter included)",
+        "Use": "Ceiling or wall mount"
+      },
+      "tags": [
+        "wifi",
+        "access-point",
+        "networking",
+        "office",
+        "business"
+      ],
+      "image": {
+        "commons": "File:Unifi AC Lite Access Point.jpg"
+      }
+    },
+    {
+      "id": "VB-182",
+      "name": "Xiaomi Mi Robot Vacuum",
+      "brand": "Xiaomi",
+      "cat": "Home Appliances",
+      "price": 22999,
+      "stock": 5,
+      "reorderLevel": 2,
+      "summary": "Laser-navigating robot vacuum with app control and 5,200 mAh battery",
+      "description": "A robot vacuum that maps your home with a laser sensor and cleans in tidy rows, then returns to its dock. Control it and set schedules from your phone.",
+      "highlights": [
+        "Laser navigation maps the rooms",
+        "Up to about 2.5 hours of cleaning",
+        "Schedules and no-go zones from the app"
+      ],
+      "specs": {
+        "Navigation": "Laser distance sensor (LDS)",
+        "Suction": "About 1,800 Pa",
+        "Battery": "5,200 mAh, about 2.5 hours of cleaning",
+        "Control": "Mi Home app, Alexa and Google Assistant"
+      },
+      "tags": [
+        "vacuum",
+        "robot",
+        "smart-home",
+        "cleaning",
+        "home"
+      ],
+      "image": {
+        "commons": "File:XiaomiMiRobotVacuumCleanerRobot.jpg"
+      }
+    },
+    {
+      "id": "VB-183",
+      "name": "Digital air fryer (4 to 5 litre)",
+      "brand": "Unbranded",
+      "cat": "Home Appliances",
+      "price": 5999,
+      "stock": 15,
+      "reorderLevel": 4,
+      "summary": "Cook crispy food with little or no oil, with preset programs",
+      "description": "An air fryer circulates very hot air to cook chips, chicken and snacks with far less oil than deep frying. Typical models have a 4 to 5 litre basket and digital presets. Generic product type; the photo is representative, not an exact model.",
+      "highlights": [
+        "Crispy results with little or no oil",
+        "Digital temperature and timer",
+        "Dishwasher-safe basket on most models"
+      ],
+      "specs": {
+        "Capacity": "4 to 5 litres (typical)",
+        "Power": "1,400 to 1,500 W (typical)",
+        "Controls": "Digital presets, temperature and timer",
+        "Note": "Generic product type; the photo is representative, not an exact model."
+      },
+      "tags": [
+        "air-fryer",
+        "kitchen",
+        "home",
+        "budget"
+      ],
+      "image": {
+        "commons": "File:Airfryer Convert.jpg"
+      }
+    }
+  ]
+}
