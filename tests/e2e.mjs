@@ -27,13 +27,17 @@ async function ev(expr) {
   return r.result.value;
 }
 async function open(p = '/', { fresh = true } = {}) {
-  if (fresh) { await send('Page.navigate', { url: base + '/' }); await sleep(400); await ev(`localStorage.clear(); return 1`); }
+  if (fresh) { // let the first page finish creating its session before clearing storage, so it cannot write a token after the clear
+    await send('Page.navigate', { url: base + '/' });
+    for (let i = 0; i < 60; i++) { await sleep(150); if (await ev(`return window.VBReady===true && S.products.length>=60 && !!localStorage.getItem('voltbay_token')`).catch(() => false)) break; }
+    await ev(`localStorage.clear(); return 1`);
+  }
   await send('Page.navigate', { url: base + p });
-  for (let i = 0; i < 60; i++) { await sleep(150); if (await ev(`return document.readyState==='complete' && !!window.VBApi && document.querySelectorAll('#grid .card').length>0`).catch(() => false)) return; }
+  for (let i = 0; i < 60; i++) { await sleep(150); if (await ev(`return document.readyState==='complete' && window.VBReady===true && S.products.length>=60 && document.querySelectorAll('#grid .card').length>=60`).catch(() => false)) return; }
   throw new Error('page did not finish loading');
 }
 const click = sel => ev(`document.querySelector(${JSON.stringify(sel)}).click(); return 1`);
-const wait = async (expr, ms = 6000) => { for (let t = 0; t < ms; t += 150) { if (await ev(`return !!(${expr})`).catch(() => false)) return true; await sleep(150); } throw new Error('timed out waiting for: ' + expr); };
+const wait = async (expr, ms = 6000) => { for (let t = 0; t < ms; t += 150) { if (await ev(`return !!(${expr})`).catch(() => false)) return true; await sleep(150); } { const st = await ev(`return JSON.stringify({ acct: document.getElementById('acctbtn').textContent, mode: document.body.dataset.mode, modal: document.getElementById('modal').classList.contains('open') && document.getElementById('mbox').innerText.slice(0, 120), admin: typeof window.VBAdmin, adminMenu: getComputedStyle(document.querySelector('details.adm')).display })`).catch(() => '?'); throw new Error('timed out waiting for: ' + expr + ' | page state: ' + st); } };
 
 before(async () => {
   if (skip) return;
@@ -74,8 +78,10 @@ test('storefront loads every product with working photos, no console errors, and
 test('the cart survives a reload (server-side session) and checkout records the same order number everywhere', async t => {
   await open();
   await ev(`addCart('VB-115'); addCart('VB-119'); await new Promise(r=>setTimeout(r,1200)); return 1`);
+  const before = await ev(`const t=localStorage.getItem('voltbay_token'); const s=await fetch('/api/state',{headers:{authorization:'Bearer '+t}}).then(r=>r.json()); return { token: t && t.slice(0,6), local: Object.keys(S.cart), server: (s.cart||[]).map(i=>i.id), ready: document.body.innerText.length>0 }`);
   await open('/', { fresh: false });
-  assert.deepEqual(await ev(`return Object.keys(S.cart).sort()`), ['VB-115', 'VB-119'], 'cart restored after reload');
+  const after = await ev(`return { token: (localStorage.getItem('voltbay_token')||'').slice(0,6), cart: Object.keys(S.cart).sort() }`);
+  assert.deepEqual(after.cart, ['VB-115', 'VB-119'], 'cart restored after reload; before reload: ' + JSON.stringify(before) + ' after: ' + JSON.stringify(after));
   await ev(`document.getElementById('cartbtn').click(); document.getElementById('cpn').value='VOLT10'; document.getElementById('cpnbtn').click(); document.getElementById('cname').value='E2E Buyer'; document.getElementById('checkout').click(); return 1`);
   await wait(`document.getElementById('modal').classList.contains('open') && /Order #\\d+ placed/.test(document.getElementById('mbox').innerText)`);
   const r = await ev(`const txt=document.getElementById('mbox').innerText; const o=await fetch('/api/orders',{headers:{authorization:'Bearer '+localStorage.getItem('voltbay_token')}}).then(r=>r.json()); return { txt, server:o[0], cart:Object.keys(S.cart).length }`);
@@ -103,6 +109,11 @@ test('admin: hidden and blocked for shoppers, available after admin sign-in, gon
   // an inventory edit goes through the server
   const r = await ev(`const inp=document.querySelector('#inv input[data-f=stock][data-id=VB-115]'); const was=+inp.value; inp.value=was+3; inp.dispatchEvent(new Event('change',{bubbles:true})); await new Promise(r=>setTimeout(r,1500)); const srv=(await fetch('/api/products').then(r=>r.json())).find(p=>p.id==='VB-115').stock; return { was, srv }`);
   assert.equal(r.srv, r.was + 3);
+  // CSV import goes to the server, and a repeated row is skipped instead of creating a double
+  await ev(`document.getElementById('csvt').value='Test USB hub,Accessories,799,5,2\\nTest USB hub,Accessories,799,5,2\\nBroken row,Nowhere,10,1,1'; document.getElementById('csvgo').click(); return 1`);
+  await wait(`/1 imported, 2 skipped/.test(document.getElementById('csvr').innerText)`);
+  const hubs = await ev(`return (await fetch('/api/products').then(r=>r.json())).filter(p=>p.name==='Test USB hub').length`);
+  assert.equal(hubs, 1, 'imported once, not twice, and saved on the server');
   // sign out returns to a shopper page with no admin menu
   await ev(`document.getElementById('acctbtn').click(); return 1`); await wait(`document.getElementById('aout')`);
   await ev(`document.getElementById('aout').click(); return 1`);

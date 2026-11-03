@@ -50,6 +50,30 @@
     });
   };
 
+  // ---- CSV import: rows go to the server (the page's own importer only changed this browser's copy and was lost on reload) ----
+  $('csvgo').onclick = function () {
+    var rows = csvParse($('csvt').value); if (!rows.length) { toast('Paste or choose a CSV first'); return; }
+    if (rows[0].length >= 3 && isNaN(Number(rows[0][2]))) rows.shift();
+    var cut = rows.length > 300, ok = 0, bad = [], btn = $('csvgo'), have = {}; rows = rows.slice(0, 300); btn.disabled = true;
+    S.products.forEach(function (p) { have[p.name.toLowerCase()] = 1; }); // names already in the store, plus rows imported so far
+    function next(i) {
+      if (i >= rows.length) {
+        btn.disabled = false; toast(ok + ' products imported');
+        $('csvr').innerHTML = '<b>' + ok + ' imported</b>, ' + bad.length + ' skipped' + (cut ? ' (only the first 300 rows are read)' : '') + (bad.length ? '<br>' + bad.slice(0, 20).join('<br>') + (bad.length > 20 ? '<br>and ' + (bad.length - 20) + ' more' : '') : '');
+        return refresh().then(function () { $('csvr').scrollIntoView({ block: 'nearest' }); });
+      }
+      var r = rows[i], n = (r[0] || '').trim(), c = catOf(r[1] || ''), pr = Number(String(r[2] || '').replace(/[₹,\s]/g, '')), st = Number(r[3] || 0), re = Number(r[4] || 0), why = '';
+      if (!n) why = 'no name'; else if (!c) why = 'unknown category'; else if (String(r[2] || '').trim() === '' || !(pr >= 0)) why = 'invalid price'; else if (!(st >= 0) || st % 1) why = 'invalid stock'; else if (!(re >= 0) || re % 1) why = 'invalid reorder level';
+      if (!why && have[n.toLowerCase()]) why = 'already exists';
+      if (why) { bad.push('Row ' + (i + 1) + ' (' + esc(n || '?') + '): ' + why); return next(i + 1); }
+      return api('POST', '/api/admin/products', { name: n, cat: c, price: Math.round(pr), stock: st, reorder: re }).then(function (x) {
+        if (x && x.id) { ok++; have[n.toLowerCase()] = 1; } else bad.push('Row ' + (i + 1) + ' (' + esc(n) + '): ' + esc(String((x && x.error) || 'failed')).replace('A product with this name already exists', 'already exists'));
+        return next(i + 1);
+      });
+    }
+    next(0);
+  };
+
   // ---- counter billing and orders ----
   $('bill').onclick = function (e) {
     var id = e.target.dataset.bd; if (id) { delete S.bill[id]; renderMgr(); }

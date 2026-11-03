@@ -476,4 +476,34 @@ test('set_budget tool: validated, remembered, listed in the admin AI tools and o
   assert.equal((await a.call('GET', '/api/memory', { token: g })).json.find(m => m.k === 'budget').v, '35000', 'a switched-off tool changes nothing');
 });
 
+test('doubles are prevented: repeated events, repeated repair bookings, same-named products, idle guests', async () => {
+  const file = dbFile();
+  const a = await boot({ dbFile: file });
+  const g = (await a.guest()).token, adm = (await a.call('POST', '/api/login', { body: { email: 'admin@example.com', password: 'correct-horse-battery' } })).json.token;
+  // a double click records one event
+  for (let i = 0; i < 3; i++) await a.call('POST', '/api/events', { token: g, body: { type: 'cart', id: 'VB-101' } });
+  assert.equal(a.db.prepare("select count(*) n from events where type='cart' and product_id='VB-101'").get().n, 1);
+  // a double-submitted repair booking returns the same reference
+  const when = new Date(Date.now() + 2 * 864e5).toISOString().slice(0, 10);
+  const body = { name: 'Asha Rao', phone: '9876543210', email: 'asha@example.com', cat: 'Smartphone', brand: 'Samsung', model: 'Galaxy A54', prob: 'Screen cracked after a fall', pref: when, svc: 'Screen replacement', pick: 'Store drop-off' };
+  const r1 = await a.call('POST', '/api/repairs', { token: g, body }), r2 = await a.call('POST', '/api/repairs', { token: g, body });
+  assert.equal(r1.status, 201); assert.equal(r2.status, 200); assert.equal(r2.json.ref, r1.json.ref); assert.equal(r2.json.duplicate, true);
+  assert.equal(a.db.prepare('select count(*) n from repairs').get().n, 1);
+  // two products cannot share a name (any capitalisation), even through a double click
+  const add = name => a.call('POST', '/api/admin/products', { token: adm, body: { name, cat: 'Accessories', price: 299, stock: 3, reorder: 1 } });
+  assert.equal((await add('Test cable XL')).status, 201);
+  assert.equal((await add('test CABLE xl')).status, 409);
+  assert.equal((await add('Nothing Phone (2a)')).status, 409, 'catalogue names are protected too');
+  // idle guests are cleaned up on the next start; guests who left a cart stay
+  const idle = (await a.guest()).token, keeper = (await a.guest()).token;
+  await a.call('PUT', '/api/state', { token: keeper, body: { cart: [{ id: 'VB-115', qty: 1 }] } });
+  const before = a.db.prepare("select count(*) n from users where role='guest'").get().n;
+  a.db.prepare('update sessions set exp=0').run(); // every session has expired
+  await a.close();
+  const b = await boot({ dbFile: file });
+  const left = b.db.prepare("select count(*) n from users where role='guest'").get().n;
+  assert.ok(left < before && left >= 1, `idle guests removed (${before} -> ${left}), the one with a cart kept`);
+  assert.equal(b.db.prepare("select count(*) n from carts").get().n, 1);
+});
+
 test('cleanup', () => { try { fs.rmSync(tmp, { recursive: true, force: true }); } catch { /* temp dir; the OS clears it eventually */ } });

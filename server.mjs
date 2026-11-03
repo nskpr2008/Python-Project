@@ -59,6 +59,11 @@ export function createApp(opts = {}) {
     }
   }
   run('delete from sessions where exp < ?', Date.now());
+  // Every first visit creates an anonymous guest. Remove guests whose session has expired and who left nothing behind (no cart, order or repair).
+  for (const { id } of all("select id from users u where role='guest' and not exists(select 1 from sessions s where s.user_id=u.id) and not exists(select 1 from carts c where c.user_id=u.id) and not exists(select 1 from orders o where o.user_id=u.id) and not exists(select 1 from repairs r where r.user_id=u.id)")) {
+    for (const t of ['events', 'user_state', 'memory', 'convo']) run(`delete from ${t} where user_id=?`, id);
+    run('delete from users where id=?', id);
+  }
 
   function userFrom(req) {
     const tk = (req.headers.authorization || '').replace(/^Bearer\s+/i, '');
@@ -271,6 +276,8 @@ export function createApp(opts = {}) {
         const pid = typeof body.id === 'string' && productIds().has(body.id) ? body.id : null;
         const q = typeof body.q === 'string' ? body.q.trim().slice(0, 80) : null;
         if (!pid && !q) fail(400, 'id or q required');
+        // The same action twice within two seconds (a double click) counts once, so it cannot inflate the recommendations.
+        if (one("select 1 x from events where user_id=? and type=? and ifnull(product_id,'')=ifnull(?,'') and ifnull(q,'')=ifnull(?,'') and ts>?", u.id, type, pid, q || null, Date.now() - 2000)) return send(req, res, 200, { ok: true, duplicate: true });
         run('insert into events(user_id,type,product_id,q,ts) values(?,?,?,?,?)', u.id, type, pid, q || null, Date.now());
         run('delete from events where user_id=? and id not in (select id from events where user_id=? order by id desc limit 500)', u.id, u.id);
         return send(req, res, 201, { ok: true });
@@ -294,6 +301,9 @@ export function createApp(opts = {}) {
         if (!g('brand') || !g('model') || g('brand').length > 60 || g('model').length > 80) fail(400, 'Enter the brand and model.');
         if (g('prob').length < 10 || g('prob').length > 600) fail(400, 'Describe the problem in 10 to 600 characters.');
         if (!/^\d{4}-\d{2}-\d{2}$/.test(g('pref')) || g('pref') < new Date().toISOString().slice(0, 10)) fail(400, 'Choose a service date from today onwards.');
+        // The same booking sent twice within two minutes (a double click) returns the first reference instead of creating a second request.
+        const same = one('select id from repairs where user_id=? and phone=? and model=? and prob=? and ts>?', u.id, g('phone'), g('model'), g('prob'), Date.now() - 12e4);
+        if (same) return send(req, res, 200, { ref: 'RP-' + (1000 + same.id), duplicate: true });
         limit('rep:' + u.id, 5, 36e5, 'too many repair requests, try again later'); // only valid bookings count, so typos never lock anyone out
         const id = Number(run('insert into repairs(user_id,ts,name,phone,email,cat,brand,model,prob,pref,svc,pick) values(?,?,?,?,?,?,?,?,?,?,?,?)', u.id, Date.now(), g('name'), g('phone'), g('email'), g('cat').slice(0, 40), g('brand'), g('model'), g('prob'), g('pref'), g('svc').slice(0, 40), g('pick').slice(0, 60)).lastInsertRowid);
         return send(req, res, 201, { ref: 'RP-' + (1000 + id) });
@@ -397,6 +407,7 @@ export function createApp(opts = {}) {
         const name = typeof body.name === 'string' ? body.name.trim() : '', cat = body.cat, price = Number(body.price), stock = Number(body.stock ?? 0), re = Number(body.reorder ?? 5);
         if (name.length < 2 || name.length > 120) fail(400, 'name must be 2 to 120 characters');
         if (!all('select distinct cat from products').some(r => r.cat === cat)) fail(400, 'unknown category');
+        if (one('select 1 x from products where lower(name)=lower(?)', name)) fail(409, 'A product with this name already exists');
         if (![price, stock, re].every(Number.isInteger) || price < 0 || price > 1e7 || stock < 0 || stock > 1e5 || re < 0 || re > 1e4) fail(400, 'price, stock and reorder level must be whole numbers in range');
         const n = Math.max(900, ...all("select id from products where id like 'VB-9%'").map(r => parseInt(r.id.slice(3), 10) || 0)) + 1, id = 'VB-' + n;
         run("insert into products(id,name,brand,cat,price,stock,reorder,summary,description,highlights,specs,tags,image,image_credit,source,locked) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,'admin',1)",

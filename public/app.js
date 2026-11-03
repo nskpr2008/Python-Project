@@ -17,7 +17,8 @@
     var opt = { method: method, headers: { 'content-type': 'application/json' } };
     if (tok) opt.headers.authorization = 'Bearer ' + tok;
     if (body !== undefined) opt.body = JSON.stringify(body);
-    return fetch(path, opt).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; return j; }); });
+    var used = tok; // the token this request was sent with
+    return fetch(path, opt).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; j._stale = used !== tok; return j; }); });
   }
   window.VBApi = api; // used by the admin script, which the server only sends to a signed-in admin
   function later(name, ms, fn) { clearTimeout(timers[name]); timers[name] = setTimeout(fn, ms); }
@@ -61,7 +62,8 @@
     added.forEach(function (id) { track('wish', id); }); cmpNew.forEach(function (id) { track('compare', id); });
     var sent = JSON.stringify(S.cart);
     api('PUT', '/api/state', { cart: cartList(), wish: S.wish, recent: S.recent, cmp: S.cmp, coupon: S.coupon, addons: Object.keys(S.addons) }).then(function (st) {
-      if (st._status !== 200) { if (st._status === 401) bootSession(true); return; }
+      // A 401 for a token that has since been replaced (for example by signing in) must not start a new guest session over the new one.
+      if (st._status !== 200) { if (st._status === 401 && !st._stale) bootSession(true); return; }
       if (JSON.stringify(S.cart) !== sent) return; // the cart changed again while this was in flight; the next save reconciles
       var server = {}; st.cart.forEach(function (i) { server[i.id] = i.qty; });
       if (JSON.stringify(server) !== JSON.stringify(S.cart)) { S.cart = server; _renderCart(); toast('Your cart was adjusted to what is in stock'); }
@@ -138,7 +140,7 @@
   }
 
   /* ---------- repairs: stored on the server so the store sees every booking ---------- */
-  var repForm = $('repform'), _repSubmit = repForm.onsubmit, _trk = $('trkbtn').onclick;
+  var repForm = $('repform'), _repSubmit = repForm.onsubmit, _trk = $('trkbtn').onclick, repBusy = false;
   repForm.onsubmit = function (e) {
     if (!online || !ready) return _repSubmit.call(this, e); // offline demo behaviour
     e.preventDefault();
@@ -148,12 +150,14 @@
     else if (g('rfd').length < 10) m = 'Describe the problem in at least 10 characters.'; else if (!g('rft') || g('rft') < new Date().toISOString().slice(0, 10)) m = 'Choose a service date from today onwards.';
     $('reperr').textContent = m; if (m) return;
     var body = { name: g('rfn'), phone: g('rfp'), email: g('rfe'), cat: $('rfc').value, brand: g('rfb'), model: g('rfm'), prob: g('rfd'), pref: g('rft'), svc: $('rfs').value, pick: $('rfk').value };
+    if (repBusy) return; repBusy = true; // a double click must not book the repair twice
     api('POST', '/api/repairs', body).then(function (r) {
+      repBusy = false;
       if (!r.ref) { $('reperr').textContent = r.error || 'Could not book the repair. Please try again.'; return; }
       var pref = body.pref, pick = body.pick; repForm.reset(); $('repok').hidden = false;
       $('repok').innerHTML = '<b>Booking received. Your repair ID is ' + esc(r.ref) + '.</b><br>Preferred date ' + esc(pref) + ', ' + esc(pick) + '. Keep this ID: you can check the status below with it (and the last 4 digits of your phone from another device). This is a demo store, not a real service appointment.';
       $('trkid').value = r.ref; toast('Repair ' + r.ref + ' booked');
-    });
+    }).catch(function () { repBusy = false; $('reperr').textContent = 'The store could not be reached. Please try again.'; });
   };
   $('trkbtn').onclick = function () {
     if (!online || !ready) return _trk.call(this);
@@ -168,11 +172,12 @@
   if (qEl) qEl.addEventListener('input', function () { var v = qEl.value.trim(); if (v.length >= 3) later('q', 1200, function () { track('search', null, v); }); });
 
   /* ---------- checkout: the server owns stock ---------- */
-  var coBtn = $('checkout'), _co = coBtn.onclick;
+  var coBtn = $('checkout'), _co = coBtn.onclick, coBusy = false;
   coBtn.onclick = function () {
     var self = this;
     if (!online || !ready) return _co.call(self);
     if (!Object.keys(S.cart).length) { toast('Cart is empty'); return; }
+    if (coBusy) return; coBusy = true; // a double click must not place the order twice
     clearTimeout(timers.state);
     api('PUT', '/api/state', { cart: cartList(), coupon: S.coupon, addons: Object.keys(S.addons) }).then(function () {
       return api('POST', '/api/checkout', { name: $('cname').value.trim() });
@@ -185,7 +190,7 @@
       _co.call(self); // records the demo order and shows the receipt
       applyStock(r.stock); _save(); render();
       lastWish = Object.assign({}, S.wish); later('recs', 300, loadRecs);
-    }).catch(function () { toast('The store could not be reached. Try again.'); });
+    }).catch(function () { toast('The store could not be reached. Try again.'); }).then(function () { coBusy = false; });
   };
 
   /* ---------- VoltAI ---------- */
@@ -197,6 +202,7 @@
     var t = document.createElement('div'); t.className = 'm b typing'; t.textContent = 'VoltAI is thinking...'; $('ailog').appendChild(t);
     api('POST', '/api/ai/chat', { message: q }).then(function (r) {
       t.remove();
+      if (r._status === 401 && r._stale) { aiAdd('Please ask again.', 'b'); return; }
       if (r._status === 401) { return bootSession(true).then(function () { aiAdd('Your session was refreshed. Please ask again.', 'b'); }); }
       if (r.error) { aiAdd(esc(r.error), 'b'); return; }
       var html = esc(r.reply) + (r.products || []).map(function (p) { var lp = P(p.id); return lp ? pl(lp) : ''; }).join('') +
@@ -300,6 +306,7 @@
     b.textContent = st.mode === 'real' ? 'AI model: ' + st.model : 'Offline assistant, no AI model key set';
   }
   function bootSession(forceNew) {
+    window.VBReady = false;
     var saved = forceNew ? '' : store(TOKEN_KEY) || '';
     tok = saved;
     var step = tok ? api('GET', '/api/session') : Promise.resolve({ _status: 401 });
@@ -313,6 +320,7 @@
       return loadCatalogue().then(function () {
         if (st.empty && localHas) { ready = true; adopt({ cart: cartList(), wish: S.wish, recent: S.recent, cmp: S.cmp, coupon: S.coupon }); pushState(); } // first visit with the new server: keep what was in this browser
         else { adopt(st); ready = true; }
+        window.VBReady = true; // the session, catalogue and saved cart are all loaded (also used by the browser tests)
         loadRecs();
       });
     });
