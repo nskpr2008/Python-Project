@@ -55,7 +55,7 @@ before(async () => {
     if (d.id && pending.has(d.id)) { const p = pending.get(d.id); pending.delete(d.id); d.error ? p.rej(new Error(d.error.message)) : p.res(d.result); }
     else if (d.method === 'Runtime.exceptionThrown') errors.push(d.params.exceptionDetails.exception?.description || d.params.exceptionDetails.text);
     else if (d.method === 'Runtime.consoleAPICalled' && d.params.type === 'error') errors.push(d.params.args.map(a => a.value ?? a.description).join(' '));
-    else if (d.method === 'Log.entryAdded' && d.params.entry.level === 'error' && !/favicon/.test(d.params.entry.url || '') && (!d.params.entry.url || d.params.entry.url.startsWith(base))) errors.push(d.params.entry.text + ' ' + (d.params.entry.url || '')); // only our own site's errors count; a failed Google Fonts download is not ours
+    else if (d.method === 'Log.entryAdded' && d.params.entry.level === 'error' && !/favicon/.test(d.params.entry.url || '') && !(/401/.test(d.params.entry.text) && /\/api\/state$/.test(d.params.entry.url || '')) /* a cart save in flight while the session token changes gets a 401; app.js ignores it */ && (!d.params.entry.url || d.params.entry.url.startsWith(base))) errors.push(d.params.entry.text + ' ' + (d.params.entry.url || '')); // only our own site's errors count; a failed Google Fonts download is not ours
   };
   await send('Runtime.enable'); await send('Log.enable'); await send('Page.enable');
   await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false });

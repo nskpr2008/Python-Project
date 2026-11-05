@@ -389,11 +389,12 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;
 var cat="All",tab="over";
 function mode(m){$("vb").classList.toggle("hide",m!=="vb");$("m-vb").setAttribute("aria-pressed",m==="vb");$("files").classList.toggle("hide",m!=="files");$("m-files").setAttribute("aria-pressed",m==="files");$("shop").classList.toggle("hide",m!=="shop");$("mgr").classList.toggle("hide",m!=="mgr");$("rep").classList.toggle("hide",m!=="rep");$("m-rep").setAttribute("aria-pressed",m==="rep");
   $("m-shop").setAttribute("aria-pressed",m==="shop");$("m-mgr").setAttribute("aria-pressed",m==="mgr");render()}
-$("m-shop").onclick=function(){mode("shop")};$("m-mgr").onclick=function(){mode("mgr")};
+$("m-shop").onclick=function(){mode("shop");resetShop();scrollTo({top:0,behavior:"smooth"})};$("m-mgr").onclick=function(){mode("mgr")};
 
 /* shop */
 function renderShop(){
   var q=$("q").value.toLowerCase();
+  var act=cat!=="All"||q||$("sort").value||$("instock").checked||wishOnly;$("deals").style.display=$("recent").style.display=act?"none":"";
   renderHome();$("promos").innerHTML=[["Audio and Headphones","Headphones and headsets","Studio, gaming and office"],["Smart Home and Security","Make your home smarter","Bulbs, cameras and more"]].map(function(x){return '<button class="promo" data-c="'+x[0]+'" style="'+tint(x[0])+'"><span><b>'+x[1]+'</b><small>'+x[2]+'</small></span>'+ICON[x[0]]+'</button>'}).join("");$("promos").onclick=$("tiles").onclick;
   $("tiles").innerHTML=DNAMES.map(function(c){return '<button class="tile" data-c="'+c+'" style="'+tint(c)+'">'+ICON[c]+'<span>'+c+'</span></button>'}).join("");$("chips").innerHTML=["All"].concat(DNAMES).map(function(c){return '<button class="chip" data-c="'+c+'" aria-pressed="'+(c===cat)+'">'+c+'</button>'}).join("");
   var list=S.products.filter(function(p){return(cat==="All"||dept(p)===cat)&&(p.name.toLowerCase().indexOf(q)>-1||p.id.toLowerCase().indexOf(q)>-1)&&(!$("instock").checked||p.stock>0)&&(!wishOnly||S.wish[p.id])});var so=$("sort").value;if(so)list.sort(function(a,b){return so==="lo"?a.price-b.price:b.price-a.price});
@@ -417,7 +418,7 @@ function renderHome(){$("sug").innerHTML=S.products.map(function(p){return '<opt
  var rec=S.products.filter(function(p){return p.stock>0&&S.recent.indexOf(p.id)<0}).sort(function(a,b){return(cats.indexOf(b.cat)>-1?1:0)-(cats.indexOf(a.cat)>-1?1:0)||rate(b)-rate(a)}).slice(0,4);
  $("recent").innerHTML=(rc.length?'<h2>Recently viewed</h2><div class="hrow">'+rc.slice(0,4).map(function(p){return mini(p)}).join("")+'</div>':'')+'<h2 style="margin-top:22px">Recommended for you</h2><div class="hrow">'+rec.map(function(p){return mini(p)}).join("")+'</div>';
  $("deals").onclick=$("recent").onclick=$("grid").onclick;tick();if(!cdT)cdT=setInterval(tick,1000)}
-$("shopnow").onclick=function(){$("grid").scrollIntoView({behavior:"smooth"})};$("exdeals").onclick=function(){$("deals").scrollIntoView({behavior:"smooth"})};
+$("shopnow").onclick=function(){$("grid").scrollIntoView()};$("exdeals").onclick=function(){resetShop();$("deals").scrollIntoView()};
 $("pinbtn").onclick=function(){var v=$("pin").value.trim();$("pinres").textContent=!/^[1-9][0-9]{5}$/.test(v)?"Enter a valid 6-digit PIN code.":(v.slice(0,2)==="50"?"Delivery in 1 to 2 days (demo estimate).":"Delivery in 3 to 5 days (demo estimate).")};
 $("cmpbtn").onclick=function(){var l=S.cmp.map(P).filter(Boolean);if(l.length<2){toast("Pick at least 2 products to compare");return}$("mbox").style.gridTemplateColumns="1fr";$("mbox").innerHTML='<div style="overflow-x:auto"><h2 style="font-size:22px;margin-bottom:10px">Compare products</h2><table style="min-width:420px"><tr><th></th>'+l.map(function(p){return '<th>'+esc(p.name)+'</th>'}).join("")+'</tr>'+[["Price",function(p){return inr(p.price)}],["Brand",function(p){return esc(p.brand||"")}],["Stock",function(p){return status(p)[0]}],["Key features",function(p){return SPEC[p.ic]||"Genuine product"}]].map(function(r){return '<tr><th>'+r[0]+'</th>'+l.map(function(p){return '<td>'+r[1](p)+'</td>'}).join("")+'</tr>'}).join("")+'</table><p><button class="btn" id="mclose">Close</button> <button class="btn alt" id="cmpclear">Clear list</button></p></div>';$("modal").classList.add("open")};
 $("mbox").addEventListener("click",function(e){if(e.target.id==="cmpclear"){S.cmp=[];save();renderShop();$("modal").classList.remove("open")}});
@@ -487,14 +488,16 @@ $("addlines").onclick=function(e){var k=e.target.dataset.ra;if(k){delete S.addon
 
 $("modal").onclick=function(e){var id=e.target.dataset.add;if(id)addCart(id);if(e.target.id==="modal"||e.target.id==="mclose")$("modal").classList.remove("open")};
 document.onkeydown=function(e){if(e.key==="Escape")$("modal").classList.remove("open")};
-$("q").oninput=renderShop;$("sort").onchange=renderShop;$("instock").onchange=renderShop;
-$("wishbtn").onclick=function(){wishOnly=!wishOnly;this.setAttribute("aria-pressed",wishOnly);renderShop();var n=Object.keys(S.wish).length;toast(wishOnly?(n?"Showing your "+n+" saved item"+(n>1?"s":""):"You haven't saved anything yet. Tap the heart on a product."):"Showing all products");$("grid").scrollIntoView({behavior:"smooth"})};
+function showGrid(){var t=$("grid").getBoundingClientRect().top;if(t>innerHeight*.75||t<160)$("grid").scrollIntoView()}
+$("q").oninput=function(){renderShop();showGrid()};$("sort").onchange=function(){renderShop();showGrid()};$("instock").onchange=function(){renderShop();showGrid()};
+function resetShop(){cat="All";$("q").value="";$("sort").value="";$("instock").checked=false;wishOnly=false;$("wishbtn").setAttribute("aria-pressed",false);renderShop()}
+$("wishbtn").onclick=function(){wishOnly=!wishOnly;this.setAttribute("aria-pressed",wishOnly);renderShop();var n=Object.keys(S.wish).length;toast(wishOnly?(n?"Showing your "+n+" saved item"+(n>1?"s":""):"You haven't saved anything yet. Tap the heart on a product."):"Showing all products");$("grid").scrollIntoView()};
 $("tiles").onclick=function(e){var b=e.target.closest("[data-c]");if(b){cat=b.dataset.c;renderShop();$("grid").scrollIntoView()}};
 $("cpnbtn").onclick=function(){var v=$("cpn").value.trim().toUpperCase();if(v==="VOLT10"){S.coupon=v;save();renderCart();toast("10% off applied")}else toast("That code isn’t valid")};
 $("n-csv").onclick=function(){var t="SKU\tName\tCategory\tPrice\tStock\n"+S.products.map(function(p){return[p.id,p.name,p.cat,p.price,p.stock].join("\t")}).join("\n");try{navigator.clipboard.writeText(t).then(function(){toast("Stock list copied. Paste it into Excel.")},function(){toast("The browser blocked copying")})}catch(e){toast("Copying isn’t available here")}};
 $("b-sku").onkeydown=function(e){if(e.key!=="Enter")return;var p=P(this.value.trim().toUpperCase());if(!p){toast("No product with that SKU");return}if((S.bill[p.id]||0)+1>p.stock){toast("Out of stock");return}S.bill[p.id]=(S.bill[p.id]||0)+1;this.value="";renderMgr();$("b-sku").focus()};
 $("deptinfo").onclick=function(e){if(e.target.id==="deptall"){cat="All";renderShop()}};
-$("chips").onclick=function(e){if(e.target.dataset.c){cat=e.target.dataset.c;renderShop()}};
+$("chips").onclick=function(e){if(e.target.dataset.c){cat=e.target.dataset.c;renderShop();showGrid()}};
 $("grid").onclick=function(e){var cp=e.target.dataset.cmp;if(cp){var ci=S.cmp.indexOf(cp);if(ci>-1)S.cmp.splice(ci,1);else if(S.cmp.length<3)S.cmp.push(cp);else toast("Compare up to 3 products");save();renderShop();return}var w=e.target.dataset.w;if(w){if(S.wish[w])delete S.wish[w];else S.wish[w]=1;save();renderShop();return}var v=e.target.closest("[data-v]");if(v){openV(v.dataset.v);return}var id=e.target.dataset.add;if(!id)return;var p=P(id),n=(S.cart[id]||0)+1;
   if(n>p.stock){toast("Only "+p.stock+" in stock");return}S.cart[id]=n;renderCart();toast("Added to cart")};
 
@@ -708,13 +711,13 @@ function apply(n){var t=TH[n]||TH["Electric Blue"],r=document.documentElement.st
  box.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",b.title===n)});try{localStorage.setItem("voltbay_theme",n)}catch(e){}}
 Object.keys(TH).forEach(function(n){var b=document.createElement("button");b.title=n;b.setAttribute("aria-label",n+" theme");b.style.background=TH[n][1];b.onclick=function(){apply(n)};box.appendChild(b)});
 var saved="Electric Blue";try{saved=localStorage.getItem("voltbay_theme")||saved}catch(e){}apply(saved);
-function go(id){var e=document.getElementById(id);if(e)e.scrollIntoView({behavior:"smooth"})}
+function go(id){var e=document.getElementById(id);if(e)e.scrollIntoView()}
 function home(){document.getElementById("m-shop").click()}
 document.getElementById("shopnow").onclick=function(){document.getElementById("m-vb").click()};
 document.getElementById("comps").onclick=function(){document.getElementById("m-vb").click()};
 document.getElementById("gear").onclick=function(){var c=[].slice.call(document.querySelectorAll("#chips button")).filter(function(b){return/headset|gaming/i.test(b.textContent)})[0];if(c)c.click();go("grid")};
 document.getElementById("m-gear").onclick=function(){home();document.getElementById("gear").click()};
-document.getElementById("m-deals").onclick=function(){home();setTimeout(function(){go("deals")},50)};
+document.getElementById("m-deals").onclick=function(){home();resetShop();setTimeout(function(){go("deals")},50)};
 document.querySelectorAll(".adm button").forEach(function(b){b.addEventListener("click",function(){b.closest("details").open=false})});
 })();
 </script>
