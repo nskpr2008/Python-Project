@@ -57,6 +57,7 @@ aside{position:fixed;right:0;top:0;bottom:0;width:min(380px,100%);background:var
 aside.open{transform:none}
 .ln{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
 .q button{width:26px;height:26px;border-radius:6px;border:1px solid var(--line);background:transparent}
+#grid,#deals,#recent{scroll-margin-top:230px}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:20;opacity:0;pointer-events:none;transition:opacity .2s}
 #toast.on{opacity:1}
 .sub{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
@@ -487,7 +488,7 @@ $("addlines").onclick=function(e){var k=e.target.dataset.ra;if(k){delete S.addon
 $("modal").onclick=function(e){var id=e.target.dataset.add;if(id)addCart(id);if(e.target.id==="modal"||e.target.id==="mclose")$("modal").classList.remove("open")};
 document.onkeydown=function(e){if(e.key==="Escape")$("modal").classList.remove("open")};
 $("q").oninput=renderShop;$("sort").onchange=renderShop;$("instock").onchange=renderShop;
-$("wishbtn").onclick=function(){wishOnly=!wishOnly;this.setAttribute("aria-pressed",wishOnly);renderShop()};
+$("wishbtn").onclick=function(){wishOnly=!wishOnly;this.setAttribute("aria-pressed",wishOnly);renderShop();var n=Object.keys(S.wish).length;toast(wishOnly?(n?"Showing your "+n+" saved item"+(n>1?"s":""):"You haven't saved anything yet. Tap the heart on a product."):"Showing all products");$("grid").scrollIntoView({behavior:"smooth"})};
 $("tiles").onclick=function(e){var b=e.target.closest("[data-c]");if(b){cat=b.dataset.c;renderShop();$("grid").scrollIntoView()}};
 $("cpnbtn").onclick=function(){var v=$("cpn").value.trim().toUpperCase();if(v==="VOLT10"){S.coupon=v;save();renderCart();toast("10% off applied")}else toast("That code isn’t valid")};
 $("n-csv").onclick=function(){var t="SKU\tName\tCategory\tPrice\tStock\n"+S.products.map(function(p){return[p.id,p.name,p.cat,p.price,p.stock].join("\t")}).join("\n");try{navigator.clipboard.writeText(t).then(function(){toast("Stock list copied. Paste it into Excel.")},function(){toast("The browser blocked copying")})}catch(e){toast("Copying isn’t available here")}};
